@@ -1,14 +1,25 @@
+"use client"
 import "./Footer.css"
 import { FaFacebook } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
 export default function Footer (){
+    const sizeItens:string = "1.3rem"
 
+    const  backToTop = () => {
+
+        window.scrollTo({top:0, behavior: "smooth"})
+
+    }
 
     return (
 
         <footer>
+
+            <div className="back-to-top" onClick={ () => backToTop()}>
+                Voltar para o inicio
+            </div>
 
             <div>
 
@@ -21,7 +32,7 @@ export default function Footer (){
 
                 </div>
 
-                <div>
+                <div className="div-services">
 
                     <h3>Nossos serviços</h3>
                     <ul>
@@ -50,24 +61,24 @@ export default function Footer (){
                         <li>
 
                             <a href="https://www.facebook.com" target="_blank" >
-                                <FaFacebook className="logo"/>
+                                <FaFacebook size={sizeItens}/>
                             </a>
                         </li>
                         <li>
                             <a href="https://www.instagram.com" target="_blank">
-                                <FaSquareInstagram/>
+                                <FaSquareInstagram size={sizeItens}/>
                             </a>
                         </li>
 
                         <li>
                             <a href="https://www.twitter.com" target="_blank">
-                                <FaXTwitter/>
+                                <FaXTwitter size={sizeItens}/>
                             </a>
                         </li>
 
                         <li>
                             <a href="https://www.youtube.com" target="_blank">
-                                <FaYoutube/>
+                                <FaYoutube size={sizeItens}/>
                             </a>
                         </li>
 
@@ -75,6 +86,12 @@ export default function Footer (){
 
 
                 </div>
+
+            </div>
+
+            <div className="rights" >
+
+                <span>&copy;Caio Jhonatan Alves Pereira 2024. Todos os direiros reservados.</span>
 
             </div>
 
