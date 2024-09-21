@@ -76,12 +76,15 @@
     justify-content: start;
     display: flex;
     flex-direction: column;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 
 }
 
 .send-book h3 {
     font-weight: bold;
     font-size: 2em;
+    border-bottom: 2px solid var(--color2);
+    padding: 8px;
 
 }
 
@@ -114,12 +117,17 @@
 
 .send-book form input {
 
-    border: 1px solid var(--color2);
+    border-bottom: 3px solid var(--color2);
+    border-left: 1px solid var(--color2);
+    border-right: 1px solid var(--color2);
+    border-top: 1px solid var(--color2);
     border-radius: 10px;
     width: 40vw;
     height: 2.5rem;
     padding: 5px;
     margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    box-shadow: var(--color2) 5px 5px, var(--color3) 10px 10px, var(--color4) 15px 15px;
 }
 
 .send-book form > div > button{
@@ -135,6 +143,7 @@
     border-radius: 10px;
     width: 8rem;
     margin-left: 10px;
+    font-weight: bold;
 }
 
 .submit-button:hover {
@@ -147,13 +156,13 @@
 
     padding: 5px;
     width: 5rem;
-
+    font-weight: bold;
 }
 
 .reset-button:hover {
 
     border-radius: 10px;
-    background-color: brown;
+    background-color: rgb(218, 128, 128);
 
 
 }
