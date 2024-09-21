@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Protest+Guerrilla&display=swap');
 
 
-header {
+.header {
 
 
     background-color: var(--color1);
@@ -37,8 +37,7 @@ li{
 
 li :hover {
 
-    border-bottom: 2px #fff solid;
-    transition: all 0.5s ease-in-out;
+    border-bottom: 2px var(--color5) solid;
 
 
 }

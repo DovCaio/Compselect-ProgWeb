@@ -1,0 +1,159 @@
+
+
+.header-home {
+
+    background-image: url("../assets/pexels-minan1398-694740.jpg") ;
+    background-size: contain;
+    background-repeat: round;
+    align-content: center;
+
+}
+
+.apresentation-home {
+    margin: 0 auto;
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 2rem;
+    height: 300px;
+    background-color: white;
+    opacity: 98%;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.apresentation-home h2 {
+    font-weight: bolder;
+    font-size: 2em;
+    text-align: center;
+
+}
+
+.apresentation-home span {
+    align-self: center;
+    padding: 14px;
+    
+    font-size: 1.5em;
+    width: 20rem;
+    height: 4rem;
+    border: 2px var(--color2) solid;
+    color: var(--color5);
+    font-weight: bolder;
+
+}
+
+.apresentation-home span:hover {
+
+    background-color: var(--color2);
+    color: white;
+    cursor: pointer;
+}
+
+.emphasis {
+
+    text-align: center;
+
+}
+
+.emphasis h3 {
+
+    font-size: 2em;
+    font-weight: bold;
+
+}
+
+.send-book {
+
+    left: 15vw;
+    
+    width: 70vw;
+    height: 100%;
+    background-color: var(--color4);
+    position: fixed;
+
+    padding: 40px;
+    justify-content: start;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.send-book h3 {
+    font-weight: bold;
+    font-size: 2em;
+
+}
+
+.x {
+
+    position: absolute;
+    top: 1em;
+    right: 2em;
+
+}
+
+.send-book form {
+
+    padding: 20px;
+    
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+
+}
+
+.send-book form label {
+
+    padding: 2px;
+    margin: 4px;
+
+    border-left: 2px solid var(--color5);
+
+}
+
+.send-book form input {
+
+    border: 1px solid var(--color2);
+    border-radius: 10px;
+    width: 40vw;
+    height: 2.5rem;
+    padding: 5px;
+    margin: 10px;
+}
+
+.send-book form > div > button{
+
+    padding: 10px;
+    margin: 5px;
+
+}
+
+.submit-button {
+
+    background-color: var(--color3);
+    border-radius: 10px;
+    width: 8rem;
+    margin-left: 10px;
+}
+
+.submit-button:hover {
+
+    background-color: var(--color2);
+
+}
+
+.reset-button {
+
+    padding: 5px;
+    width: 5rem;
+
+}
+
+.reset-button:hover {
+
+    border-radius: 10px;
+    background-color: brown;
+
+
+}
