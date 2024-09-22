@@ -276,8 +276,21 @@
 }
 
 .stars {
-
+    color: var(--color5);
     display: flex;
     margin-left: 0;
 }
 
+.event h2 {
+
+    font-size: 1.7em;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 50px;
+
+}
+
+.event div {
+
+
+}
