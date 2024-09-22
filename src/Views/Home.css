@@ -228,6 +228,13 @@
     overflow: scroll;
 }
 
+.testimony {
+
+    padding: 5px;
+    margin: 10px 0;
+
+}
+
 .testimony h2 {
 
     text-align: center;
@@ -236,3 +243,41 @@
     padding: 3px;
     margin-bottom: 30px;
 }
+
+.testimony > div {
+
+    display: flex;
+    width: 100%;
+    
+}
+
+.testimony > div > div {
+    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 50px;
+    width: 33%;
+}
+
+.testimony div > div > p {
+
+    font-size: 1.5em;
+    margin-bottom: 50px;
+}
+
+.testimony div > div cite {
+    font-weight: bold;
+    text-align: start;
+}
+
+.testimony div > div > span{
+
+    display: block;
+
+}
+
+.stars {
+
+    display: flex;
+    margin-left: 0;
+}
+
