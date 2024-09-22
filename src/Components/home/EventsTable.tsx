@@ -1,4 +1,4 @@
-
+import Link from "next/link"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function EventsTable({events}: any){
@@ -19,7 +19,7 @@ export default function EventsTable({events}: any){
                         Descrição
                     </th>
                     <th>
-                        Ir para o site
+                        Ir para
                     </th>
                 </tr>
             </thead>
@@ -33,7 +33,11 @@ export default function EventsTable({events}: any){
                                 <td>{event.name}</td>
                                 <td>{event.date}</td>
                                 <td>{event.description}</td>
-                                <td>{event.link}</td>
+                                <td>
+                                    <Link href={event.link}>
+                                        Saiba mais
+                                    </Link>
+                                </td>
                             </tr>
                         )
 

@@ -4,6 +4,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
+import Link from "next/link";
 export default function Footer (){
     const sizeItens:string = "1.3rem"
 
@@ -25,29 +26,63 @@ export default function Footer (){
 
                 <div>
 
-                    <h3>About us</h3>
+                    <h3>Contato</h3>
                     <p>
-                    A Compselects é dedicada a publicar obras de qualidade que inspiram, educam e entretêm. Com uma paixão pela literatura e um compromisso com a excelência, buscamos trazer novas vozes e histórias ao mundo.
+                        Email: contact@compselects.com
+                    </p>
+                    <p>
+                        Telefone: 123 456 789
                     </p>
 
                 </div>
 
                 <div className="div-services">
 
-                    <h3>Nossos serviços</h3>
+                    <h3>Links rápidos</h3>
                     <ul>
 
                         <li>
-                            Publicação de Livros: Trabalhamos com autores para transformar manuscritos em livros publicados.
+                            <Link href="/">
+                                Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/aboutus">
+                                Sobre nós
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/publications">
+                                Publicações
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/authors">
+                                Autores
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/submissions">
+                                Submissões
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/events">
+                                Eventos
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/blog">
+                                Blogs
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/">
+                                Contato
+                            </Link>
                         </li>
 
-                        <li>
-                            Edição e Revisão: Oferecemos serviços profissionais de edição e revisão para garantir a qualidade das obras.
-                        </li>
 
-                        <li>
-                            Distribuição: Distribuímos nossos livros em várias plataformas e livrarias, tanto físicas quanto digitais
-                        </li>
 
                     </ul>
 
@@ -84,6 +119,21 @@ export default function Footer (){
 
                     </ul>
 
+
+                </div>
+
+                <div>
+                    <h3>Assine nosso newsletter.</h3>
+                    <form>
+                        <div>
+                            <label htmlFor="emailnewsletter">Email:</label>
+                            <input type="email" id="emailnewsletter"/>
+                        </div>
+                        <div>
+                            <label htmlFor="checkboxnewsletter">Deseja receber emails?</label>
+                            <input type="checkbox" id="checkboxnewsletter"/>
+                        </div>
+                    </form>
 
                 </div>
 

@@ -287,10 +287,60 @@
     text-align: center;
     font-weight: bold;
     margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.event {
+
 
 }
 
-.event div {
+.event table > thead {
+
+    background-color: var(--color1);
+    color: white;
+    height: 40px;
+}
 
 
+
+.event table tbody tr td{
+
+    padding: 2.5rem;
+
+}
+
+.event table tbody tr:nth-child(odd) {
+
+    background-color: var(--color2);
+
+}
+.event table tbody tr:nth-child(even) {
+
+    background-color: var(--color3);
+
+}
+
+.event table tbody tr:hover {
+
+    background-color: var(--color4);
+
+}
+
+.event table tbody tr td:nth-last-child(1){
+    display: flex;
+    text-align: center;
+    align-content: center;
+}
+
+.event table tbody tr a {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: var(--color1) underline ;
+    width: 100%;
+}
+
+.event table tbody tr a:hover {
+
+    color: var(--color5);
 }

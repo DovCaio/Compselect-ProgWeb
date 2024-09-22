@@ -90,3 +90,36 @@ div > div li a :hover {
     list-style: disc;
 
 }
+
+footer form * {
+
+    margin: 4px 0;
+    font-size: 0.9rem;
+
+}
+
+footer form input {
+
+    background-color: var(--color2);
+    margin: 0 5px;
+    border-bottom: 1px black solid;
+
+}
+
+footer form input[type=checkbox] {
+    
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 2px solid var(--color1);
+    appearance: none;
+    width: 1em;
+    background-color: white;
+    height: 1em;
+        
+}
+
+footer form input[type=checkbox]:checked{
+
+    background-color: var(--color5);
+
+}
