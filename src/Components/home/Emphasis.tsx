@@ -7,7 +7,7 @@ export default function Emphasis(){
 
         <section className="emphasis">
 
-                <h3>Destaque das Publicações</h3>
+                <h3>Mais vendidos</h3>
 
                 <Carrousel/>
 

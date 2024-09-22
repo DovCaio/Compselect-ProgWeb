@@ -51,7 +51,7 @@
 }
 
 .emphasis {
-
+    margin: 30px 0;
     text-align: center;
 
 }
@@ -71,7 +71,6 @@
     height: 100%;
     background-color: var(--color4);
     position: fixed;
-
     padding: 40px;
     justify-content: start;
     display: flex;
@@ -149,6 +148,7 @@
 .submit-button:hover {
 
     background-color: var(--color2);
+    color: #fff;
 
 }
 
@@ -163,6 +163,76 @@
 
     border-radius: 10px;
     background-color: rgb(218, 128, 128);
+    color: #fff;
 
 
+}
+
+.carosel-home {
+
+    margin-bottom: 60px;
+    width: 100vw;
+    height: 100%;
+       
+}
+
+.react-multi-carousel-list  {
+    
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.carosel-home *:hover {
+    border-bottom: none;
+}
+
+.carosel-home div img{
+
+    width: 100%;
+    height: 100%;
+
+}
+
+.bookbox  {
+    text-align: start;
+    justify-content: center;
+    justify-items: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+
+.bookbox h2 {
+
+    font-size: 1.7em;
+    text-align: center;
+    padding: 3px;
+    font-weight: bold;
+
+}
+
+.bookbox p {
+
+    font-size: 1.3em;
+    padding: 5px;
+
+}
+
+.bookbox div {
+    width: 100%;
+    font-style: italic;
+    max-height: 150px;
+    min-height: 150px;
+    overflow: scroll;
+}
+
+.testimony h2 {
+
+    text-align: center;
+    font-size: 1.7em;
+    font-weight: bold;
+    padding: 3px;
+    margin-bottom: 30px;
 }
