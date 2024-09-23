@@ -1,7 +1,5 @@
-.aboutus{
-
+.aboutus1{
     width: 100vw;
-
 }
 
 .aboutus > div {
@@ -65,5 +63,71 @@
     justify-content: center;
     width: 50vw;
     margin: 0 auto;
+
+}
+
+.employee img {
+
+    height: 100%;
+    width: 7rem;
+    border-radius: 4rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: 1s all ease-in-out;
+}
+
+.employee img:hover{
+
+    transform: scale(1.5,1.5);
+
+}
+
+.employee {
+    width: 10rem;
+    display: flex;
+    height: 100%;
+
+    padding: 3rem;
+    flex-direction: column;
+
+}
+
+.employee > div:nth-last-child(1) {
+
+    margin-top: 1rem;
+
+}
+
+.employee > div:last-child p {
+    width: 100%;
+    padding: 0;
+    justify-self: start;
+    text-align: start;
+    padding-left: 6px;
+}
+
+.employee div:last-child p:first-child {
+
+    font-weight: bold;
+}
+
+.function-employee {
+
+    color: var(--color2);
+}
+
+.socials-media-employee{
+    display: flex;
+    margin: 0;
+    padding-left: 6px;
+   
+}
+
+.socials-media-employee svg {
+
+    color: gray;
+}
+
+.socials-media-employee svg:hover {
+    color: rgb(87, 86, 86);
 
 }

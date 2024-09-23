@@ -4,7 +4,7 @@ export default function Story (){
 
     return (
 
-        <div >
+        <div className="aboutus">
             <div className="resume">
                 <h2>Historia e Missão</h2>
 

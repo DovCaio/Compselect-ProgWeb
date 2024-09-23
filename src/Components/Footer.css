@@ -13,6 +13,12 @@ footer {
 }
 
 
+footer h3 {
+
+    font-weight: bold;
+
+}
+
 footer > div {
 
     display: flex;
@@ -127,4 +133,20 @@ footer form input[type=checkbox]:checked{
 footer form input:focus {
 
     outline: none;
+}
+
+footer form input[type=submit] {
+
+    background-color: var(--color5);
+    border-bottom: none;
+    padding: 0.5rem;
+    font-weight: bold;
+    margin: 0 auto;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    color: #fff;
+}
+
+footer form input[type=submit]:hover {
+    text-decoration: underline #fff;
+    cursor: pointer;
 }

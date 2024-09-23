@@ -133,6 +133,8 @@ export default function Footer (){
                             <label htmlFor="checkboxnewsletter">Deseja receber emails?</label>
                             <input type="checkbox" id="checkboxnewsletter"/>
                         </div>
+
+                        <input type="submit" value="Submit" />
                     </form>
 
                 </div>
