@@ -103,7 +103,6 @@ footer form input {
     background-color: var(--color2);
     margin: 0 5px;
     border-bottom: 1px black solid;
-
 }
 
 footer form input[type=checkbox] {
@@ -122,4 +121,10 @@ footer form input[type=checkbox]:checked{
 
     background-color: var(--color5);
 
+}
+
+
+footer form input:focus {
+
+    outline: none;
 }

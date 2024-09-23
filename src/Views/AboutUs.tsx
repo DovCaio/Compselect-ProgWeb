@@ -1,12 +1,15 @@
+import "./AboutUs.css"
+import Story from "@/Components/aboutus/Story"
+
 export default function AboutUs(){
 
 
     return (
-        <>
+        <div className="aboutus">
         
-        <h2>Historia e Missão</h2>
+            <Story/>
         
-        </>
+        </div>
     )
 
 } 
