@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link";
 import { FaLinkedin } from "react-icons/fa";
-import { FaInstagramSquare } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function Employee ({img, name, function_, linkedin, instagram}: any){
 
@@ -18,12 +18,12 @@ export default function Employee ({img, name, function_, linkedin, instagram}: a
                 <p>{name}</p>
                 <p className="function-employee">{function_}</p>
                 <div className="socials-media-employee">
-                    <Link href={linkedin} target="_blank">
+                    <Link href={linkedin} target="_blank" className="linkedin">
                         <FaLinkedin size="20px"/>
 
                     </Link>
-                    <Link href={instagram} target="_blank">
-                        <FaInstagramSquare size="20px"/>
+                    <Link href={instagram} target="_blank" className="instagram">
+                        <FaInstagram size="20px"/>
                     </Link>
                 </div>
             </div>

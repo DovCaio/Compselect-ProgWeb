@@ -134,7 +134,7 @@ export default function Footer (){
                             <input type="checkbox" id="checkboxnewsletter"/>
                         </div>
 
-                        <input type="submit" value="Submit" />
+                        <input type="submit" value="Assinar" />
                     </form>
 
                 </div>

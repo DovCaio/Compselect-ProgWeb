@@ -1,6 +1,10 @@
-.aboutus1{
+.aboutus{
+    padding: 50px 0;
     width: 100vw;
+    border-bottom: 1px var(--color3) dashed;
 }
+
+
 
 .aboutus > div {
     width: 100vw;
@@ -63,7 +67,6 @@
     justify-content: center;
     width: 50vw;
     margin: 0 auto;
-
 }
 
 .employee img {
@@ -82,10 +85,10 @@
 }
 
 .employee {
-    width: 10rem;
+    width: 20vw;
     display: flex;
     height: 100%;
-
+    margin: 0 auto;
     padding: 3rem;
     flex-direction: column;
 
@@ -129,5 +132,30 @@
 
 .socials-media-employee svg:hover {
     color: rgb(87, 86, 86);
+
+}
+
+.linkedin :only-child:hover {
+
+    color: blue;
+
+}
+
+.instagram :only-child:hover {
+    border-radius: 5px;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}   
+
+.team {
+
+    display: flex;
+    justify-content: center;
+    margin: 20px 5px;
+    border-radius: 100px;
+}
+
+.partners h2 {
+
+    
 
 }

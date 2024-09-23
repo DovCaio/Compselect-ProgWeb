@@ -4,7 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 import BookBox from '../BookBox';
 import GenericBook from "@/assets/images/simplebook.webp"
 import Book1 from "@/assets/images/livroenvelhecido.webp"
-import Book2 from "@/assets/images/livro2.webp"
+import Book2 from "@/assets/images/book.webp"
 export default function Carrousel(){
 
     const responsive = {
@@ -38,7 +38,7 @@ export default function Carrousel(){
               
               <BookBox img={Book1}  name="Sombras do Amanhã" description="Em um futuro distópico onde a humanidade vive nas sombras de megacidades decadentes, um grupo de rebeldes descobre segredos sombrios sobre o governo autoritário que domina o mundo. Entre intrigas políticas e avanços tecnológicos, eles lutam por liberdade, enfrentando dilemas morais e desafios pessoais."/>
             
-              <BookBox img={GenericBook} name="O Guardião dos Segredos Perdidos" description="Quando o jovem arqueólogo Lucas desvenda uma civilização perdida, ele se vê envolvido em uma trama milenar que conecta o passado ao presente. Uma jornada por mistérios ocultos, artefatos poderosos e sociedades secretas que guardam o futuro da humanidade."/>
+              <BookBox img={Book2} name="O Guardião dos Segredos Perdidos" description="Quando o jovem arqueólogo Lucas desvenda uma civilização perdida, ele se vê envolvido em uma trama milenar que conecta o passado ao presente. Uma jornada por mistérios ocultos, artefatos poderosos e sociedades secretas que guardam o futuro da humanidade."/>
               
               <BookBox img={GenericBook} name="Horizontes Inexplorados" description="Uma nave espacial parte em uma missão de exploração para além dos limites conhecidos do universo. A tripulação, composta por cientistas e aventureiros, enfrenta perigos desconhecidos e descobre que o vazio do espaço guarda não apenas novas formas de vida, mas também enigmas que desafiam a própria realidade."/>
               
