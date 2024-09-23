@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Honk&family=Nabla&display=swap');
+
 .aboutus{
     padding: 50px 0;
     width: 100vw;
-    border-bottom: 1px var(--color3) dashed;
+    border-bottom: 1px var(--color3) solid;
 }
 
 
@@ -155,8 +158,29 @@
     border-radius: 100px;
 }
 
-.partners h2 {
 
-    
+
+.partners{
+
+
+    display: flex;
+    justify-content: center;
+}
+
+.partner h3 {
+
+    font-size: 3rem;
+
+}
+
+.editora1 {
+    font-family: "Nabla";
+
+
+}
+
+.editora2 {
+
+    font-family: "Honk";
 
 }

@@ -1,3 +1,4 @@
+import Partner from "./Partner";
 
 
 export default function Partners(){
@@ -10,10 +11,11 @@ export default function Partners(){
 
             <h2>Parceiros</h2>
 
-            <div>
+            <div className="partners">
 
-
-
+                <Partner name="Editora Nexus" classOfH3="editora1"/>
+                <Partner name="LiteraMundo" classOfH3="editora2"/>
+                <Partner name="InspiraBooks" classOfH3="editora3"/>
             </div>
 
         </div>
