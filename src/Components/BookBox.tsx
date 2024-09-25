@@ -2,7 +2,7 @@ import Image from "next/image";
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function BookBox({img, name, description}: any){
+export default function BookBox({img, name, description, author, agePublication, type}: any){
 
 
     return (
@@ -12,6 +12,9 @@ export default function BookBox({img, name, description}: any){
             <div>
                 <h2>{name}</h2>
                 <p>{description}</p>
+                <span>{author}</span>
+                <span>{agePublication}</span>
+                <span>{type}</span>
             </div>
         </div>
 
