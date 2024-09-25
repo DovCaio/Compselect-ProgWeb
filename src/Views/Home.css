@@ -195,38 +195,7 @@
 
 }
 
-.bookbox  {
-    text-align: start;
-    justify-content: center;
-    justify-items: center;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
 
-
-
-.bookbox h2 {
-
-    font-size: 1.7em;
-    text-align: center;
-    padding: 3px;
-    font-weight: bold;
-
-}
-
-.bookbox p {
-
-    font-size: 1.3em;
-    padding: 5px;
-
-}
-
-.bookbox div {
-    width: 100%;
-    font-style: italic;
-    max-height: 150px;
-    min-height: 150px;
-    overflow: scroll;
-}
 
 .testimony {
 
