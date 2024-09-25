@@ -1,0 +1,51 @@
+
+.searchfield {
+    box-shadow: var(--color1) 5px 5px;
+    border: solid 4px;
+    padding: 2rem;
+    width: 29rem;
+    height: 40px;
+    margin-bottom: 20px ;
+    padding-bottom: 4rem;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.searchfield > div {
+    width: 26%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchfield button {
+    font-weight: bold;
+    background-color: var(--color5);
+    padding: 0.3em;
+    color: white;
+    width: 4rem;
+    margin: 0 5px;
+    border-radius: 4px ;
+    box-shadow: var(--color2) 0px 0px 0px 3px;
+}
+
+
+.searchfield button:hover {
+
+    text-decoration: underline #fff;
+}
+
+.searchfield input {
+
+    width: 12rem;
+    margin: 0 3px;
+    border-radius: 1em;
+    padding: 5px; 
+    border: 1px black solid;
+
+}
+
+.searchfield label {
+    font-weight: bold;
+
+    align-self: center;
+}

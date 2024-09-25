@@ -1,12 +1,15 @@
-
+import SearchField from "./SearchField"
+import CatalogStyle from "./Catalog.module.css"
 export default function Catalog(){
 
 
     return ( 
 
-        <div>
+        <div className={CatalogStyle.catalog}>
 
             <h1>Catalogo</h1>
+
+            <SearchField></SearchField>
 
             <div>
 

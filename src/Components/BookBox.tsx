@@ -12,9 +12,9 @@ export default function BookBox({img, name, description, author, agePublication,
             <div>
                 <h2>{name}</h2>
                 <p>{description}</p>
-                <p>Autor: {author}</p>
-                <p>Ano de publicação: {agePublication}</p>
-                <p>Tipo: {type}</p>
+                <p ><span>Autor:</span> {author}</p>
+                <p><span>Ano de publicação:</span> {agePublication}</p>
+                <p><span>Tipo:</span> {type}</p>
             </div>
         </div>
 

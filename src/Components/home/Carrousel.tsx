@@ -38,13 +38,37 @@ export default function Carrousel(){
             removeArrowOnDeviceType={["tablet", "mobile"]}
             >
               
-              <BookBox img={Book1}  name="Sombras do Amanhã" description="Em um futuro distópico onde a humanidade vive nas sombras de megacidades decadentes, um grupo de rebeldes descobre segredos sombrios sobre o governo autoritário que domina o mundo. Entre intrigas políticas e avanços tecnológicos, eles lutam por liberdade, enfrentando dilemas morais e desafios pessoais."/>
+              <BookBox img={Book1}  
+                name="Mastering Data Structures: A Practical Guide"
+                description="Este livro apresenta uma abordagem prática para entender e implementar estruturas de dados essenciais, como listas encadeadas, pilhas, filas e árvores. Ao longo dos capítulos, o autor explora como otimizar algoritmos e melhorar a eficiência do código. É ideal tanto para estudantes quanto para desenvolvedores."
+                type="Algoritmos e Estruturas de Dados"
+                author="Lucas Moreira"
+                agePublication="2019"
+        />
             
-              <BookBox img={Book2} name="O Guardião dos Segredos Perdidos" description="Quando o jovem arqueólogo Lucas desvenda uma civilização perdida, ele se vê envolvido em uma trama milenar que conecta o passado ao presente. Uma jornada por mistérios ocultos, artefatos poderosos e sociedades secretas que guardam o futuro da humanidade."/>
+              <BookBox img={Book2} 
+                name="Building Secure Systems: Cybersecurity Fundamentals"
+                description="Um guia abrangente que explora os conceitos fundamentais de segurança cibernética e criptografia. Desde os métodos de autenticação e criptografia simétrica até ataques avançados e segurança de rede, o livro cobre todos os aspectos essenciais para proteger sistemas digitais."
+                type="Segurança da Informação e Criptografia"
+                author="Carla Oliveira"
+                agePublication="2004"
+                />
               
-              <BookBox img={Book3} name="Horizontes Inexplorados" description="Uma nave espacial parte em uma missão de exploração para além dos limites conhecidos do universo. A tripulação, composta por cientistas e aventureiros, enfrenta perigos desconhecidos e descobre que o vazio do espaço guarda não apenas novas formas de vida, mas também enigmas que desafiam a própria realidade."/>
+              <BookBox img={Book3} 
+                name="The Art of Java: Clean and Efficient Code"
+                description="Neste livro, Miguel Duarte ensina como escrever código Java limpo, eficiente e escalável. Com base em sua experiência no desenvolvimento de grandes sistemas de software, o autor compartilha práticas recomendadas para a refatoração de código e design orientado a objetos."
+                type="Programação"
+                author="Miguel Duarte"
+                agePublication="2000"
+                />
               
-              <BookBox img={Book4} name="As Cartas de Eveline" description="Durante a Segunda Guerra Mundial, Eveline escreve cartas para seu marido, um soldado na linha de frente. Décadas depois, suas netas encontram essas cartas e, ao lê-las, descobrem segredos sobre a vida de Eveline e as decisões difíceis que ela teve que tomar durante um dos períodos mais sombrios da história."/>
+              <BookBox img={Book4} 
+              name="Modern Web Development with Next.js"
+              description="Voltado para desenvolvedores que desejam criar aplicações web modernas, este livro apresenta um guia detalhado sobre como usar o Next.js para desenvolvimento full-stack. Júlia Santiago aborda renderização no lado do servidor, roteamento dinâmico e otimização de performance."
+              type="Desenvolvimento Web"
+              author="Júlia Santiago"
+              agePublication="2015"
+              />
               
             </Carousel>   
 

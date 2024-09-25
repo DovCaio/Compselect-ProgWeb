@@ -1,0 +1,17 @@
+
+.catalog {
+
+    padding: 20px 3rem;
+
+}
+.catalog h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.catalog h2 {
+    width: 100%;
+    font-size: 2rem;
+
+}
