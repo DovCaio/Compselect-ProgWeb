@@ -1,62 +1,31 @@
+"use client"
+
 import SearchField from "./SearchField"
 import CatalogStyle from "./Catalog.module.css"
+import BooksCatalog from "./BooksCatalog.jsx"
+import { useState } from "react"
+
+
+
+
+  
+
 export default function Catalog(){
-
-
+    const [books, setBooks] = useState({})
     return ( 
 
         <div className={CatalogStyle.catalog}>
 
-            <h1>Catalogo</h1>
+            <h1>Catálogo</h1>
 
-            <SearchField></SearchField>
+            <SearchField setBooks={setBooks}></SearchField>
 
-            <div>
-
-                <h2>Algoritmos e Estruturas de Dados</h2>
-
-            </div>
-
-            <div>
-
-                <h2>Programação</h2>
-
-            </div>
-
-            <div>
-
-                <h2>Sistemas operacionais</h2>
-
-            </div>
-
-            <div>
-
-                <h2>Redes de computadores</h2>
+            <BooksCatalog cBooks={books}/>
 
             
-            </div>
-
-            <div>
-
-                <h2>Banco de dados</h2>
-
-            </div>
-
-            <div>
-
-                <h2>Inteligência artificial</h2>
-
-            </div>
-
-            <div>
-
-
-                <h2>Engenharia de software</h2>
-
-            </div>
-
         </div>
 
+        
     )
 
 }   

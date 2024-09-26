@@ -17,22 +17,7 @@
     justify-content: space-between;
 }
 
-.searchfield button {
-    font-weight: bold;
-    background-color: var(--color5);
-    padding: 0.3em;
-    color: white;
-    width: 4rem;
-    margin: 0 5px;
-    border-radius: 4px ;
-    box-shadow: var(--color2) 0px 0px 0px 3px;
-}
 
-
-.searchfield button:hover {
-
-    text-decoration: underline #fff;
-}
 
 .searchfield input {
 
@@ -48,4 +33,10 @@
     font-weight: bold;
 
     align-self: center;
+}
+
+.searchfield svg {
+
+    margin: 0 10px;
+
 }

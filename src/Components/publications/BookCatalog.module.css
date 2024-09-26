@@ -1,0 +1,39 @@
+
+.bookCatalog {
+    width: 100%;
+    height: 100%;
+}
+
+.bookCatalog h2 {
+
+    margin: 20px 0;
+
+}
+
+.bookCatalog > div {
+
+
+    width: 100%;
+
+}
+
+.bookCatalog > div > div:last-child > div{
+    width: 100%;
+}
+
+.bookCatalog > div > div:last-child {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.bookCatalog > div > div:last-child * {
+    font-size: 1em;
+
+}
+
+.bookCatalog > div > div:last-child > div {
+    width: 20em;
+}
+

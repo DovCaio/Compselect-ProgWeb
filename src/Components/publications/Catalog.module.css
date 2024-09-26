@@ -2,6 +2,7 @@
 .catalog {
 
     padding: 20px 3rem;
+    width: 100%;
 
 }
 .catalog h1 {
@@ -13,5 +14,11 @@
 .catalog h2 {
     width: 100%;
     font-size: 2rem;
+
+}
+
+
+.catalog > div:last-child {
+    height: 100%;
 
 }
