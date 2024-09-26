@@ -1,11 +1,11 @@
 import Menu from "./Menu"
-import "./Header.css"
+import HeaderStyle from "./Header.module.css"
 import Link from "next/link"
 
 export default function Header (){
 
     return (
-        <header className="header">
+        <header className={HeaderStyle.header}>
             <Link href="/">
                 <h1 className="logo">Compselects</h1>
             </Link>
