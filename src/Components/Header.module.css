@@ -14,6 +14,12 @@
 
 }
 
+
+.header h1 {
+
+    color: #fff;
+}
+
 .header ul {
 
     display: flex;
@@ -25,13 +31,25 @@
 
     margin: 0 5px;
     transition: all 0.5s ease-in-out;
+}
+
+.header ul {
+
+    list-style-type: none;
 
 }
+
+
+.header h1:hover{
+
+    text-decoration: none;
+
+}
+
 
 .header .logo{
 
     font-family: "Protest Guerrilla";
-
 }
 
 .header li :hover {
@@ -39,6 +57,13 @@
     border-bottom: 2px var(--color5) solid;
 
 
+}
+
+.header li a {
+
+    color: #fff;
+    text-emphasis: none;
+    text-decoration: none;
 }
 
 .active{
