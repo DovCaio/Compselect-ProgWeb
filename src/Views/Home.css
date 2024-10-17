@@ -32,8 +32,8 @@
 
 .apresentation-home span {
     align-self: center;
-    padding: 14px;
-    text-align: center;
+    padding: 15px;
+    justify-items: center;
     align-content: center;
     font-size: 1.5em;
     width: 20rem;
