@@ -99,6 +99,7 @@ div > div li a :hover {
 .back-to-top {
     border-bottom: 3px solid var(--color5);
     padding: 10px;
+    padding-bottom: 0px;
     margin-bottom: 10px;
     background-color: var(--color1);
     width: 100%;

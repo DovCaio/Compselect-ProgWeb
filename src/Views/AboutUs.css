@@ -72,6 +72,12 @@
     margin: 0 auto;
 }
 
+
+    
+
+
+
+
 .employee img {
 
     height: 100%;
@@ -88,7 +94,7 @@
 }
 
 .employee {
-    width: 20vw;
+    width: 10vw;
     display: flex;
     height: 100%;
     margin: 0 auto;
@@ -125,7 +131,6 @@
     display: flex;
     margin: 0;
     padding-left: 6px;
-   
 }
 
 .socials-media-employee svg {
@@ -153,7 +158,7 @@
 .team {
 
     display: flex;
-    justify-content: center;
+    justify-content: start;
     margin: 20px 5px;
     border-radius: 100px;
 }
