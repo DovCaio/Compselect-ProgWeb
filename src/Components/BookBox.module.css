@@ -6,6 +6,12 @@
     margin: 0 5px;
 }
 
+.bookbox:hover {
+
+    cursor: pointer;
+
+}
+
 .bookbox > img {
 
     width: 100%;
@@ -27,7 +33,7 @@
 .bookbox p {
 
     font-size: 1.3em;
-    padding: 5px;
+    padding: 1px 5px;
 
 }
 

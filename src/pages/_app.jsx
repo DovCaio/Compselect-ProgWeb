@@ -5,10 +5,13 @@ import "@/style/normalize.css"
 export default function MyApp({Component, pageProps}){
 
     return (
+       
+        <body>
             
         <Layout>
-        <Component {...pageProps}/>
+            <Component {...pageProps}/>
         </Layout>
+        </body>
         
 
     )

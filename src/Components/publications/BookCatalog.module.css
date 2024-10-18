@@ -13,7 +13,8 @@
 .bookCatalog > div {
 
     overflow: scroll;
-
+    scrollbar-width: 1px;
+    scroll-behavior: smooth;
     width: 100%;
 
 }
@@ -26,7 +27,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 5px;
+    gap: 0px;
 }
 
 .bookCatalog > div > div:last-child * {
