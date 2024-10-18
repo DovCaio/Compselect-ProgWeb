@@ -6,6 +6,13 @@
     margin: 0 5px;
 }
 
+.bookbox > img {
+
+    width: 100%;
+    height: 15rem;
+
+}
+
 
 
 .bookbox h2 {

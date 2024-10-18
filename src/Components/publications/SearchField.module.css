@@ -14,7 +14,13 @@
 .searchfield > div {
     width: 26%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    margin: auto 0;
+    align-self: center;
+    justify-self: center;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
 }
 
 
