@@ -2,11 +2,12 @@
 
     display: grid;
     font-size: 1.5rem;
-    width: 100%;
+    width: 100vw;
     height: min(100vh);
     grid-template-areas: "image informations";
     grid-template-columns: 1fr 1fr;
 }
+
 
 .image {
     grid-area: "image";

@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import HeaderStyle from "./Header.module.css"
+import "@/style/active.css"
 
 export default function Menu(){
     const pathName = usePathname()
@@ -13,42 +13,42 @@ export default function Menu(){
         <nav>
             <ul>
 
-                <li className={pathName === "/" ? HeaderStyle.active : ""}>
+                <li className={pathName === "/" ? "active" : ""}>
                     <Link href="/">
                         Home
                     </Link>
                 </li>
-                <li className={pathName === "/aboutus" ? HeaderStyle.active : ""}>
+                <li className={pathName === "/aboutus" ? "active" : ""}>
                     <Link href="/aboutus">
                         Sobre Nós    
                     </Link>
                 </li>
-                <li className={pathName === "/publications" ? HeaderStyle.active : ""}>
+                <li className={pathName?.indexOf("/publications") > -1? "active" : ""}>
                     <Link href="/publications">
                         Publicações
                     </Link>
                 </li>
-                <li className={pathName === "/authors" ? HeaderStyle.active : ""}>
+                <li className={pathName === "/authors" ? "active" : ""}>
                     <Link href="/authors">
                         Autores
                     </Link>
                 </li>
-                <li className={pathName === "/submissions" ? HeaderStyle.active : ""}>
+                <li className={pathName === "/submissions" ? "active" : ""}>
                     <Link href="/submissions">
                         Submissões
                     </Link>
                 </li>
-                <li className={pathName === "/events" ? HeaderStyle.active : ""}>
+                <li className={pathName === "/events" ? "active" : ""}>
                     <Link href="/events">
                         Eventos
                     </Link>
                 </li>
-                <li className={pathName === "/blog" ? HeaderStyle.active : ""}>
+                <li className={pathName === "/blog" ? "active" : ""}>
                     <Link href="/blog">
                         Blog
                     </Link>
                 </li>
-                <li className={pathName === "/contact" ? HeaderStyle.active : ""}>
+                <li className={pathName === "/contact" ? "active" : ""}>
                     <Link href="/contact">
                         Contato
                     </Link>
