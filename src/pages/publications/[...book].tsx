@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import Image from "next/image";
 import { useEffect } from "react";
+import DinamicPublicationStyle from "@/pages/publications/dinamic_publications.module.css"
 export default function Page(){
 
     const router = useRouter()
@@ -20,20 +21,24 @@ export default function Page(){
     const render  = () =>  {
 
         return <>
-        
-            <h2>{book[0]}</h2>
-            <Image src={(`/${book[1]}`)} width={100} height={100} alt="Imagem do livro" />
-            <p>Descrição: {book[2]}</p>
-            <p>Autor: {book[3]}</p>
-            <p>Ano de publicação: {book[4]}</p>
-            <p>Tipo: {book[5]}</p>
+            <div className={DinamicPublicationStyle.image}>
+
+            </div>
+            <div className={DinamicPublicationStyle.informations}>
+
+                <h2>{book[0]}</h2>
+                <p className={DinamicPublicationStyle.description}>{book[1]}</p>
+                <p>Autor: {book[2]}</p>
+                <p>Ano de publicação: {book[3]}</p>
+                <p>Tipo: {book[4]}</p>
+            </div>
 
         </>
 
     }
 
     return (
-        <div>
+        <div className={DinamicPublicationStyle.dinamicPublication}>
             {
                 loaded ? render() : "Carregando..."
             }

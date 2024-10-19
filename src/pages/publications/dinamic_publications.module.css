@@ -1,0 +1,41 @@
+.dinamicPublication{
+
+    display: grid;
+    font-size: 1.5rem;
+    width: 100%;
+    height: min(100vh);
+    grid-template-areas: "image informations";
+    grid-template-columns: 1fr 1fr;
+}
+
+.image {
+    grid-area: "image";
+
+}
+
+.informations {
+    grid-area: "informations";
+    width: 50vw;
+    font-size: 1.3rem;
+    margin-left: 20px;
+
+}
+
+
+.dinamicPublication > * {
+
+    margin: 0 10px;
+}
+
+.dinamicPublication  h2 {
+    text-align: center;
+    margin: 20px 10px;
+    color: #313131;
+}
+
+.description {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #313131;
+}
+
+    

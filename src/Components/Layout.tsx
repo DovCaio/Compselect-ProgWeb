@@ -1,20 +1,19 @@
 import Header from "./Header";
 import Footer from "./Footer"; 
-import { Fragment } from "react";
 
 import { PropsWithChildren } from "react";
 
 export default function Layout(props: PropsWithChildren){
 
     return (
-        <Fragment>
-        <Header/>
+        <>
+            <Header/>
 
 
-        {props.children}
+                {props.children}
 
-        <Footer/>
-        </Fragment>
+            <Footer/>
+        </>
         
     )
 

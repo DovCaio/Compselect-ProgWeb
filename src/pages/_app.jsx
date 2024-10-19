@@ -1,17 +1,18 @@
 import Layout  from "@/Components/Layout"
 import "@/style/global.css"
 import "@/style/normalize.css"
+import appStyle from "@/pages/_app.module.css"
 
 export default function MyApp({Component, pageProps}){
 
     return (
        
-        <body>
-            
-        <Layout>
-            <Component {...pageProps}/>
-        </Layout>
-        </body>
+        <div className={appStyle.app}>
+            <Layout>
+                <Component {...pageProps}/>
+            </Layout>    
+        </div>
+        
         
 
     )
