@@ -8,8 +8,7 @@ export default function BookBox({img, name, description, author, agePublication,
     const router = useRouter()
 
     const changeRouter = (img, name, description, author, agePublication, type) => {
-        localStorage.setItem("imageOfBook", img)
-        router.push(`/publications/${name}/${description}/${author}/${agePublication}/${type}`)
+        router.push(`/publications/${name}/${description}/${author}/${agePublication}/${type}/${encodeURIComponent(img.src)}`)
     }
 
     return (

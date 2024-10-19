@@ -14,7 +14,6 @@ export default function Page(){
         if(router.isReady){
 
             setLoaded(true)
-
         }
     }, [router.isReady])
 
@@ -22,7 +21,7 @@ export default function Page(){
 
         return <>
             <div className={DinamicPublicationStyle.image}>
-
+                <Image src={book[5]} alt="Imagem do livro" width={1000} height={1000}/>
             </div>
             <div className={DinamicPublicationStyle.informations}>
 
@@ -31,6 +30,7 @@ export default function Page(){
                 <p>Autor: {book[2]}</p>
                 <p>Ano de publicação: {book[3]}</p>
                 <p>Tipo: {book[4]}</p>
+
             </div>
 
         </>
