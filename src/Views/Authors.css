@@ -9,3 +9,64 @@ h2{
     text-align: center;
     font-weight: bolder;
 }
+
+.be-an-author > h2:first-child {
+
+    margin: 50px 0;
+
+}
+
+.be-an-author-steps {
+    margin: 0 10rem;
+
+}
+
+#process-publication-title {
+    padding-top: 10px;
+    text-align: center;
+
+}
+
+.be-an-author-steps-ol {
+    color: white;        
+    padding: 5rem;
+    padding-top: 3rem;
+}
+
+.be-an-author-steps-ol > li {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+
+.be-an-author-steps-ol > li:nth-child(odd) {
+    background-color: var(--color1);
+}
+
+.be-an-author-steps-ol > li:nth-child(even) {
+    background-color: var(--color2);
+}
+
+.be-an-author-steps-ol > li > h3 {
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    padding: 3px;
+    background-color: var(--color3);
+}
+
+
+.be-an-author-steps-ol li h3 {
+
+    color: #000;
+}
+
+.be-an-author-steps-ol > ::marker {
+    color: var(--color1);
+    font-weight: bolder;
+}
+
+.benefits-and-requirements {
+
+    text-align: center;
+    margin: 0 10rem;
+
+}
