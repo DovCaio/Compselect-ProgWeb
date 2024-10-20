@@ -1,8 +1,10 @@
+import AuthorEmphasis from "@/Components/authors/AuthorEmphasis"
+import "./Authors.css"
 export default function Authors(){
 
 
     return (
-        <h1>Authors</h1>
+        <AuthorEmphasis/>
     )
 
 } 

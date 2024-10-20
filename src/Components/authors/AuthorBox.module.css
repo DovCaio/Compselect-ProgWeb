@@ -1,0 +1,40 @@
+.autorBox {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.autorBox h3 {
+    color: var(--color1);
+}
+.autorBox img {
+
+    border-radius: 50%;
+    width: 20vw;
+    height: 100%;
+    transition: ease-in-out 1s all;
+}
+
+.autorBox img:hover {
+    transform: scale(1.1);
+    transition: ease-in-out 1s all;
+}
+
+.autorBox p {
+    min-height: 30vh;
+    max-height: 30vh;
+}
+
+.autorBox a {
+
+    text-decoration: none;
+    color: var(--color1);
+
+}
+
+.autorBox a:hover {
+
+    color: var(--color2);
+
+}

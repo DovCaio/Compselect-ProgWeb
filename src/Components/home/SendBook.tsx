@@ -12,7 +12,7 @@ export default function SendBook({changeDisplay, setChangeDisplay}: any){
 
         <div  style={{display: changeDisplay}} className="send-book">
 
-            <button onClick={() => closeSelf()}>
+            <button className="close-button" onClick={() => closeSelf()}>
                 <IoCloseSharp className="x" size={"2.5rem"}/>
             </button>
             <h3>Envie Seu Manuscrito</h3>
