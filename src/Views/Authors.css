@@ -12,25 +12,24 @@ h2{
 
 .be-an-author > h2:first-child {
 
-    margin: 50px 0;
+    margin: 25px 0;
 
 }
 
 .be-an-author-steps {
-    margin: 0 10rem;
+    margin: 0 60px;
 
 }
 
 #process-publication-title {
-    padding-top: 10px;
+    margin-top: 5px;
     text-align: center;
 
 }
 
 .be-an-author-steps-ol {
     color: white;        
-    padding: 5rem;
-    padding-top: 3rem;
+    padding: 30px;
 }
 
 .be-an-author-steps-ol > li {
@@ -67,6 +66,11 @@ h2{
 .benefits-and-requirements {
 
     text-align: center;
-    margin: 0 10rem;
+    margin: 0 20px;
 
+}
+
+.testimonyals {
+    display: flex;
+    justify-content: center;
 }
