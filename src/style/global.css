@@ -24,6 +24,6 @@ https://pt.wix.com/website-template/view/html/2852?originUrl=https%3A%2F%2Fpt.wi
 body{
 
     display: grid;
-    grid-template-rows: 80px 100vh auto;
+    grid-template-rows: 80px 100% auto;
 
 }

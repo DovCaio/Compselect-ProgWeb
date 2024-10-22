@@ -1,0 +1,89 @@
+
+
+h2{
+
+    text-align: center;
+}
+
+
+.submission-guide {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 1em 10em;
+}
+
+.submission-guide section {
+    height: 100%;
+    display: block;
+}
+
+.submission-form {
+    margin: 5px 10em;
+}
+
+.submission-form form{
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.submission-form form *{
+    margin-top: 4px;
+}
+
+.submission-form form input[type="text"], 
+.submission-form form input[type="email"]{
+    border-radius: 10px;
+    padding: 4px;
+    border: none;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;    
+}
+
+.submission-form form > div {
+
+    display: flex;
+    width: 100%;
+}
+
+
+.submission-form form > div > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.file-div {
+
+    margin: 10px;
+    padding: 3rem;
+    align-self: center;
+    border: 3px dashed var(--color1);
+    border-radius: 20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.file-div p{
+    text-align: center;
+}
+
+.file-div p > span{
+    color: var(--color5);
+}
+
+.file-div p > span:hover{
+    color: var(--color3);
+    cursor: pointer;
+
+}
+
+.policy-submisson {
+
+    margin: 1em 10em;
+
+}
