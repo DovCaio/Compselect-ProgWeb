@@ -1,18 +1,13 @@
 "use client"
-
-import SendBook from "./SendBook"
-
-import { useState } from "react"
-
+import {useRouter} from "next/navigation"
 
 
 export default function HeaderHome(){
 
-    const [changeDisplay, setchangeDisplay] = useState("none")
+    const router = useRouter()
 
-    const showSendBook = () => {
-
-        setchangeDisplay("flex")
+    const goToSubmission = () => {
+        router.push("/submissions#submission-form")
 
     }
 
@@ -23,11 +18,10 @@ export default function HeaderHome(){
                 <div className="apresentation-home">
                     <h2>Transformando palavras em mundos: descubra o poder da leitura com a nossa editora.</h2>
 
-                    <span onClick={() => showSendBook()}>
+                    <span onClick={() => goToSubmission()}>
                         Envie Seu Manuscrito.
                     </span>
 
-                    <SendBook changeDisplay={changeDisplay} setChangeDisplay={setchangeDisplay}/>
                 </div>      
                 
             </header>

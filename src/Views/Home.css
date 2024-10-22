@@ -3,9 +3,11 @@
 .header-home {
 
     background-image: url("../assets/pexels-minan1398-694740.jpg") ;
-    background-size: auto;
+    background-size: contain;
     background-repeat: round;
     align-content: center;
+    width: 100vw;
+    height: 100vh;
 
 }
 
