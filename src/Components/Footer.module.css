@@ -1,11 +1,11 @@
 
 
-footer {
+.footer {
     
     padding-bottom: 10px;
     background-color: var(--color2);
     height: 100%;
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: column;
 
@@ -13,56 +13,56 @@ footer {
 }
 
 
-footer h3 {
+.footer h3 {
 
     font-weight: bold;
 
 }
 
-footer > div {
+.footer > div {
 
     display: flex;
 
 }
 
-footer ul {
+.footer ul {
     padding-left: 0;
     list-style: none;
 }
 
-footer ul li {
+.footer ul li {
     padding-bottom: 5px;
     padding-left: 5px;
     justify-self: start;
 
 }
 
-footer ul li a {
+.footer ul li a {
     text-decoration: none;
     color: #000;
 }
 
-footer ul li a:hover {
+.footer ul li a:hover {
 
     color: #2e2e2e;
 
 }
 
 
-div > div {
+.footer div > div {
 
     width: 20vw;
     margin: 0 10px;
 
 }
 
-div > div p, div > div li{
+.footer div > div p, .footer div > div li{
 
     font-size: 0.8em;
 
 }
 
-div > div > ul {
+.footer div > div > ul {
 
     display: flex;
     flex-direction: column;
@@ -70,22 +70,25 @@ div > div > ul {
     
 }
 
-div > div li a :hover {
+.footer div > div li a :hover {
 
     border-bottom: none;
 
 }
 
-.links {
-
-
+.socials{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
 
+.socials * {
+
+    display: inline;
 }
 
 
-.rights {
+
+.copyright {
 
     margin-top: 30px;
     padding-top: 10px;
@@ -96,46 +99,46 @@ div > div li a :hover {
 
 }
 
-.back-to-top {
+.backToTop {
     border-bottom: 3px solid var(--color5);
     padding: 10px;
     margin-bottom: 10px;
     background-color: var(--color1);
-    width: 100%;
+    width: 100vw;
     height: 100%;
     color: white;
     justify-content: center;
 
 }
 
-.back-to-top:hover{
+.backToTop:hover{
 
     color: black;
     cursor: pointer;
 
 }
 
-.div-services ul{
+.divServices ul{
 
     list-style: none;
 
 }
 
-footer form * {
+.footer form * {
 
     margin: 4px 0;
     font-size: 0.9rem;
 
 }
 
-footer form input {
+.footer form input {
     background-color: var(--color2);
     margin: 0 5px;
     border: 0;
     border-bottom: 1px black solid;
 }
 
-footer form input[type=checkbox] {
+.footer form input[type=checkbox] {
     
     border-radius: 50%;
     vertical-align: middle;
@@ -147,19 +150,19 @@ footer form input[type=checkbox] {
         
 }
 
-footer form input[type=checkbox]:checked{
+.footer form input[type=checkbox]:checked{
 
     background-color: var(--color5);
 
 }
 
 
-footer form input:focus {
+.footer form input:focus {
 
     outline: none;
 }
 
-footer form input[type=submit] {
+.footer form input[type=submit] {
 
     background-color: var(--color5);
     border-bottom: none;
@@ -170,7 +173,7 @@ footer form input[type=submit] {
     color: #fff;
 }
 
-footer form input[type=submit]:hover {
+.footer form input[type=submit]:hover {
     text-decoration: underline #fff;
     cursor: pointer;
 }

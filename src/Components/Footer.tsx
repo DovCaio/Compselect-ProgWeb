@@ -1,9 +1,9 @@
 "use client"
-import "./Footer.css"
 import { FaFacebook } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
+import footerStyle from "./Footer.module.css"
 import Link from "next/link";
 export default function Footer (){
     const sizeItens:string = "1.3rem"
@@ -16,9 +16,9 @@ export default function Footer (){
 
     return (
 
-        <footer>
+        <footer className={footerStyle.footer}>
 
-            <div className="back-to-top" onClick={ () => backToTop()}>
+            <div className={footerStyle.backToTop} onClick={ () => backToTop()}>
                 Voltar para o inicio
             </div>
 
@@ -36,7 +36,7 @@ export default function Footer (){
 
                 </div>
 
-                <div className="div-services">
+                <div className={footerStyle.divServices}>
 
                     <h3>Links rápidos</h3>
                     <ul>
@@ -91,7 +91,7 @@ export default function Footer (){
                 <div>
                     <h3>Fique conectado</h3>
 
-                    <ul className="links">
+                    <ul className={footerStyle.socials}>
 
                         <li>
 
@@ -141,7 +141,7 @@ export default function Footer (){
 
             </div>
 
-            <div className="rights" >
+            <div className={footerStyle.copyright} >
 
                 <span>&copy;Caio Jhonatan Alves Pereira 2024. Todos os direiros reservados.</span>
 

@@ -6,9 +6,6 @@ import "@/style/active.css"
 export default function Menu(){
     const pathName = usePathname()
 
-    console.log(pathName)
-
-
     return (
         <nav>
             <ul>
