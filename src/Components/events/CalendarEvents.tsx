@@ -3,6 +3,8 @@ import { Calendar, Badge } from "rsuite"
 import 'rsuite/Calendar/styles/index.css';
 import { FaMapMarker } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import transformNameInPathEvent from "@/utils/transformNameInPathEvent";
+import Link from "next/link";
 
 //A ideia na real é que precisamos de uma API para pegar os dados do calendário, então temos que ter um endpoint para isso
 //e fazermos isso da seginte maneira, nessa página os dados minimos tem que serem recuperados, como nome, data e hora.
@@ -86,10 +88,13 @@ export default function CalendarEvents(){
     
     }
 
-    const alreadyHasEvent = (event) => {
-        return eventsOfDay.some((event) => {
-            return event.name == event.name;
+    const alreadyHasEvent = (e) => {
+        let has = false
+        eventsOfDay.forEach((event) => {
+            if (e.name == event.name)
+                has = true
         })
+        return has
     }
 
     const handleEvents = (date) => {
@@ -120,7 +125,12 @@ export default function CalendarEvents(){
             <section>
                 {
                     eventsOfDay.map((event) => {
-                        return <div key={event.name}>{event.name}</div>                    })
+                        return <div key={event.name}>
+                            <span>{event.name}</span>
+                            <span>{event.hour}</span>
+                            <Link href={`/events/${transformNameInPathEvent(event.name)}`}>Ver mais</Link>
+                        </div>                    
+                        })
                 }
             </section> 
         </section>
