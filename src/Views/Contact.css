@@ -1,0 +1,69 @@
+
+
+
+.contact-form {
+
+    margin: 0 auto;
+    align-content: center;
+}
+
+.contact-form h2 {
+
+    text-align: center;
+
+}
+
+.contact-form form {
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 60vw;
+    
+}
+
+
+.contact-form form > * {
+
+    margin: 5px auto;
+
+}
+
+.contact-form form label {
+    text-align: start;
+    justify-self: start;
+}
+
+.contact-form form input {
+
+    width: 70%;
+    border: 0;
+    border-bottom: 2px var(--color1) solid;
+    border-left: 2px var(--color1) solid;
+    border-bottom-left-radius: 5px;
+}
+
+.contact-form form textarea {
+    width: 70%;
+    border: 0;
+    height: 10rem;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border-radius: 5px;
+    resize: none;
+}
+
+
+.contact-info {
+    text-align: start;
+    justify-self: center;
+}
+
+.contact-info ul {
+    width: 60%;
+
+}
+
+.mapa {
+    text-align: center;
+    justify-self: center;
+}

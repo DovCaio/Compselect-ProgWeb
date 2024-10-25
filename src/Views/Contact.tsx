@@ -1,8 +1,19 @@
+import ContactForm from "@/Components/contact/ContactForm"
+import InformacoesContato from "@/Components/contact/InformacoesContato"
+import Mapa from "@/Components/contact/Mapa"
+import "@/Views/Contact.css"
+
+
 export default function Contact(){
 
 
     return (
-        <h1>Contact</h1>
+        <>
+        
+            <ContactForm/>
+            <InformacoesContato/>
+            <Mapa/>
+        </>
     )
 
 } 
