@@ -1,8 +1,14 @@
+import CalendarEvents from "@/Components/events/CalendarEvents";
+import DetailsEvent from "@/Components/events/DetailsEvent";
+
 export default function Events(){
 
 
     return (
-        <h1>Events</h1>
+        <>
+            <CalendarEvents/>
+            <DetailsEvent/>
+        </>
     )
 
 } 
