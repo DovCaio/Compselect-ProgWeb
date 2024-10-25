@@ -1,7 +1,7 @@
 "use client"
 import { Calendar, Badge } from "rsuite"
 import 'rsuite/Calendar/styles/index.css';
-
+import { FaMapMarker } from "react-icons/fa";
 const events = [
     {
     name: "Hackathon Literário",
@@ -12,7 +12,7 @@ const events = [
       "Oficinas de escrita técnica",
       "Sessões de feedback com editores"
     ],
-    date: "2024-11-10",
+    date: "2024-10-10",
     hour: "02:00 pm"
 
   },    
@@ -25,7 +25,7 @@ const events = [
       "Workshops práticos",
       "Networking com autores renomados"
     ],
-    date: "2024-12-05",
+    date: "2024-11-5",
     hour: "08:30 am"
 
   },
@@ -38,7 +38,7 @@ const events = [
       "Entrevistas com autores",
       "Espaço interativo para leitores conhecerem os novos livros"
     ],
-    date: "2025-01-15",
+    date: "2025-0-15",
     hour: "10:00 am"
   },
   {
@@ -50,7 +50,7 @@ const events = [
       "Mentorias com autores",
       "Exposições sobre tecnologias emergentes"
     ],
-    date: "2025-02-20",
+    date: "2025-1-20",
     hour: "10:00 pm"
   }
 
@@ -59,22 +59,24 @@ const events = [
 
 export default function CalendarEvents(){
 
+
     const isEventDate = (date) => {
         return events.some((event) => {
-            const  eventDate = new Date(event.date)
-            console.log(eventDate.getDate(), date.getDate(), eventDate.getMonth(), date.getMonth(), eventDate.getFullYear(), date.getFullYear())
-            return eventDate.getDate() === date.getDate() &&
-            eventDate.getMonth() === date.getMonth() &&
-            eventDate.getFullYear() === date.getFullYear()
+            const eventDate = event.date.split("-")
+            console.log(date.getDate(),date.getMonth(),date.getFullYear())
+            console.log(eventDate[2],eventDate[1],eventDate[0])
+            return eventDate[2] == date.getDate() &&
+            eventDate[1] == date.getMonth() &&
+            eventDate[0] == date.getFullYear()
         })
     
     }
 
     return (
         <section>
-            <Calendar renderCell={date => {
+            <Calendar renderCell={ date => {
                 if(isEventDate(date)){
-                    return <Badge content="." style={{color: "var(--color5)", fontSize: "2rem"}}/>
+                    return <Badge content={<FaMapMarker/>} style={{color: "var(--color5)", fontSize: "1.3rem"}}/>
                 }
                 return null
             }} /> 
