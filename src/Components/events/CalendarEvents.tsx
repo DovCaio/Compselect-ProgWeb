@@ -2,6 +2,11 @@
 import { Calendar, Badge } from "rsuite"
 import 'rsuite/Calendar/styles/index.css';
 import { FaMapMarker } from "react-icons/fa";
+import { useEffect, useState } from "react";
+
+//A ideia na real é que precisamos de uma API para pegar os dados do calendário, então temos que ter um endpoint para isso
+//e fazermos isso da seginte maneira, nessa página os dados minimos tem que serem recuperados, como nome, data e hora.
+//Assim usaremos a rota dinamica para isso, usando esses poucos dados e um identificador para podermos recuperar mais informações.
 const events = [
     {
     name: "Hackathon Literário",
@@ -38,7 +43,7 @@ const events = [
       "Entrevistas com autores",
       "Espaço interativo para leitores conhecerem os novos livros"
     ],
-    date: "2025-0-15",
+    date: "2025-00-15",
     hour: "10:00 am"
   },
   {
@@ -50,7 +55,7 @@ const events = [
       "Mentorias com autores",
       "Exposições sobre tecnologias emergentes"
     ],
-    date: "2025-1-20",
+    date: "2025-01-20",
     hour: "10:00 pm"
   }
 
@@ -59,17 +64,47 @@ const events = [
 
 export default function CalendarEvents(){
 
+    const [eventsOfDay, setEventsOfDay] = useState([])
+    const [compact, setCompact] = useState(false)
+
+
+    useEffect(() => {
+
+        if (window.innerWidth < 768) {
+            setCompact(true)
+        }
+
+    }, [compact])
 
     const isEventDate = (date) => {
         return events.some((event) => {
             const eventDate = event.date.split("-")
-            console.log(date.getDate(),date.getMonth(),date.getFullYear())
-            console.log(eventDate[2],eventDate[1],eventDate[0])
             return eventDate[2] == date.getDate() &&
             eventDate[1] == date.getMonth() &&
             eventDate[0] == date.getFullYear()
         })
     
+    }
+
+    const alreadyHasEvent = (event) => {
+        return eventsOfDay.some((event) => {
+            return event.name == event.name;
+        })
+    }
+
+    const handleEvents = (date) => {
+
+        events.filter((event) => {
+            const eventDate = event.date.split("-")
+            console.log(eventDate[2],eventDate[1],eventDate[0])
+            return eventDate[2] == date.getDate() &&
+            eventDate[1] == date.getMonth() &&
+            eventDate[0] == date.getFullYear()
+        }).forEach((event) => {
+            if (!alreadyHasEvent(event))
+                setEventsOfDay((eventsOfDay) => [...eventsOfDay, event])
+        })
+
     }
 
     return (
@@ -79,7 +114,15 @@ export default function CalendarEvents(){
                     return <Badge content={<FaMapMarker/>} style={{color: "var(--color5)", fontSize: "1.3rem"}}/>
                 }
                 return null
-            }} /> 
+            }} 
+            onSelect={handleEvents}
+            compact={compact}/>
+            <section>
+                {
+                    eventsOfDay.map((event) => {
+                        return <div key={event.name}>{event.name}</div>                    })
+                }
+            </section> 
         </section>
     )
 }
