@@ -5,7 +5,6 @@ import { FaMapMarker } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import transformNameInPathEvent from "@/utils/transformNameInPathEvent";
 import Link from "next/link";
-
 //A ideia na real é que precisamos de uma API para pegar os dados do calendário, então temos que ter um endpoint para isso
 //e fazermos isso da seginte maneira, nessa página os dados minimos tem que serem recuperados, como nome, data e hora.
 //Assim usaremos a rota dinamica para isso, usando esses poucos dados e um identificador para podermos recuperar mais informações.
@@ -122,7 +121,7 @@ export default function CalendarEvents(){
             }} 
             onSelect={handleEvents}
             compact={compact}/>
-            <section>
+            <section className="events-details">
                 {
                     eventsOfDay.map((event) => {
                         return <div key={event.name}>

@@ -17,6 +17,6 @@ export default function Page(){
             </>
     }
     return (
-        loaded ? render() : <></>
+        loaded ? render() : <> CARREGANDO...</>
     )
 }
