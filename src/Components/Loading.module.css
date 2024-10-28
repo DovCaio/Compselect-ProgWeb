@@ -1,7 +1,7 @@
 
 .container{
 
-    height: 100vh;
+    height: calc(100vh - var(--header-heigth));
     align-items: center;
     justify-content: center; 
     margin: auto;
