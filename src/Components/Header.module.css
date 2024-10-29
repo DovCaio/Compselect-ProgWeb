@@ -15,9 +15,13 @@
 }
 
 
+
+
 .header h1 {
 
     color: #fff;
+    position: absolute;
+    left: -9999999px;
 }
 
 .header ul {
@@ -71,4 +75,43 @@
 
     color: black;
 
+}
+
+
+.menuIcon{
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .menu {
+        background-color: black;
+        display: none;
+
+    }
+
+    .header {
+
+        justify-content: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        
+    }
+
+
+
+    .menuIcon{
+        display: flex;
+        justify-self: center;
+        width: 5rem;
+        font-size: 3rem;
+    }
+    .menuIcon:hover{
+        color: var(--color5);
+        cursor: pointer;
+    }
+
+    .header ul {
+        flex-direction: column;
+    }
 }

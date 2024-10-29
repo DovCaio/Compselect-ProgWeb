@@ -273,48 +273,8 @@
 
 
 
-.event table > thead th {
+.event {
+    justify-self: center;
+    width: 50%;
 
-    border-bottom: 2px solid var(--color1);
-    border-top: 2px solid var(--color1);
-    color: #000;
-    height: 40px;
-}
-
-
-
-
-.event table tbody tr td{
-    border-bottom: 2px solid var(--color2);
-    
-    padding: 2.5rem;
-
-}
-
-
-
-.event table tbody tr:hover {
-
-    background-color: var(--color2);
-    border: 1px solid var(--color5);
-
-}
-
-.event table tbody tr td:nth-last-child(1){
-    display: flex;
-    text-align: center;
-    align-content: center;
-}
-
-.event table tbody tr a {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #000;
-    text-decoration: none ;
-    width: 100%;
-}
-
-.event table tbody tr a:hover {
-
-    color: var(--color5);
 }

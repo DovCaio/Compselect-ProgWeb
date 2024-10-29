@@ -16,6 +16,7 @@ export default function ContactForm(){
                 <input type="text" placeholder="Assunto" id="assunto" />
                 <label htmlFor="message">Mensagem</label>
                 <textarea placeholder="Mensagem" id="message"></textarea>
+                <input type="submit" value="Enviar" />
             </form>
         </section>
     )

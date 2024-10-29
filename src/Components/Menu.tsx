@@ -2,12 +2,15 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import "@/style/active.css"
-
+import HeaderStyle from "./Header.module.css"
 export default function Menu(){
     const pathName = usePathname()
 
+
+
+
     return (
-        <nav>
+        <nav className={HeaderStyle.menu}>
             <ul>
 
                 <li className={pathName === "/" ? "active" : ""}>
