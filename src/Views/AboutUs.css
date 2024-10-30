@@ -66,16 +66,29 @@
 }
 
 
+
+
 .aboutus .seenfuture {
     justify-content: center;
     width: 50vw;
     margin: 0 auto;
 }
 
+@media(max-width: 1000px) {
 
-    
+    .aboutus .storyandmission {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .aboutus .storyandmission > div{
+        width: 100%;
+    }
 
-
+    .aboutus .seenfuture {
+        width: 100%;
+    }
+}
 
 
 .employee img {
@@ -163,13 +176,51 @@
     border-radius: 100px;
 }
 
+@media (max-width: 950px) {
 
+    .team {
+        flex-direction: column;
+        align-items: center;
+    }
 
+    .employee {
+        margin: 0;
+        width: 100%;
+        align-items: center;
+        padding: 4px;
+    }
+
+    .employee img {
+        height: 100%;
+        width: 15rem;
+    }
+
+    .employee > div:last-child {
+        text-align: center;
+        align-content: center;
+        width: 15rem;
+    }
+
+    .employee > div:last-child >  * {
+        margin: 5px auto;
+        justify-content: center;
+    }
+    .employee > div:last-child p {
+        text-align: center;
+    }
+}
 .partners{
 
 
     display: flex;
     justify-content: center;
+}
+
+@media (max-width: 950px) {
+
+    .partners {
+        flex-direction: column;
+    }
 }
 
 .partner h3 {
