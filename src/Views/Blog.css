@@ -1,0 +1,15 @@
+.posts-list {
+    width: 100vw;
+}
+.posts-list h2 {
+    text-align: center;
+}
+
+.posts-section {
+    margin: 5px 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22vw, 1fr));
+    gap: 10px;
+    width: 100vw;
+
+}

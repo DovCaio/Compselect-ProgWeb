@@ -1,10 +1,11 @@
-import Loading from "@/Components/Loading";
-
+import PostsList from "@/Components/blog/PostsList"
+import "./Blog.css"
 export default function Blog(){
 
 
     return (
-        <h1>Blog</h1>
+
+        <PostsList/>
     )
 
 } 

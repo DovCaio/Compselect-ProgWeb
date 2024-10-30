@@ -25,5 +25,6 @@ body{
 
     display: grid;
     grid-template-rows: var(--header-heigth) 100% auto;
+    width: 100vw;
 
 }
