@@ -18,18 +18,16 @@ export default function Testimonyal({text, author , numberOfStars, job}: any){
     }
 
     return (
-        <div>
-            <div>
-                <p>
-                    &#34;{text}&#34;
-                </p>
-                <cite>{author}</cite>
-                <div className="stars">
+        <div className='testimonyal'>
+            <p>
+                &#34;{text}&#34;
+            </p>
+            <cite>{author}</cite>
+            <div className="stars">
 
-                    {
-                        stars
-                    }
-                </div>
+                {
+                    stars
+                }
             </div>
             <span>
                 {job}

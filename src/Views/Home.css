@@ -232,11 +232,15 @@
     
 }
 
+
+
 .testimony > div > div {
     
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 50px;
     width: 33%;
+    margin: 5px;
+
 }
 
 .testimony div > div > p {
@@ -260,6 +264,29 @@
     color: var(--color5);
     display: flex;
     margin-left: 0;
+}
+
+@media(max-width: 1177px) {
+
+    .testimony {
+        width: 100%;
+    }
+
+    .testimony > div {
+
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .testimonyal {
+        width: 400px;
+    }
+
+    .testimony > div > div {
+
+        width: 80%;
+
+    }
 }
 
 .event h2 {
