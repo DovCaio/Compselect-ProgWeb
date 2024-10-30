@@ -1,5 +1,5 @@
 import Emphasis from "./Emphasis"
-import Testimony from "./Testimony"
+import Testimonyals from "./Testimonyals"
 import Events from "./Events"
 
 export default function MainHome(){
@@ -7,7 +7,7 @@ export default function MainHome(){
     return (
         <>
             <Emphasis/>
-            <Testimony/>
+            <Testimonyals/>
             <Events/>
         </>
 
