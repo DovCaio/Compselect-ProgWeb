@@ -19,7 +19,10 @@ export default function Footer (){
         <footer className={footerStyle.footer}>
 
             <div className={footerStyle.backToTop} onClick={ () => backToTop()}>
-                Voltar para o inicio
+                <span>
+
+                    Voltar para o inicio
+                </span>
             </div>
 
             <div>
@@ -90,6 +93,7 @@ export default function Footer (){
 
                 <div>
                     <h3>Fique conectado</h3>
+
 
                     <ul className={footerStyle.socials}>
 

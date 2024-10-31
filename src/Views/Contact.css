@@ -43,6 +43,13 @@
     border-bottom-left-radius: 5px;
 }
 
+.contact-form form input:focus {
+    outline: none;
+    
+    transform: scale(1.1);
+
+}
+
 .contact-form form textarea {
     width: 70%;
     border: 0;
