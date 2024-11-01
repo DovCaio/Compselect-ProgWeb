@@ -22,8 +22,8 @@
 }
 
 .autorBox p {
-    min-height: 30vh;
-    max-height: 30vh;
+    min-height: 225px;
+    max-height: 225px;
 }
 
 .autorBox a {
