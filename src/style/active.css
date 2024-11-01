@@ -13,3 +13,30 @@
     border-bottom: solid 2px var(--color4);
 
 }
+
+@media (max-width: 768px) {
+
+    .active {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color2);
+
+    }
+
+    .active a {
+
+        box-shadow: none;
+        border: 0;
+        border-radius: 10px;
+    }
+
+
+
+    .active a:hover {
+
+        border-bottom: none;
+    
+    }
+
+}
