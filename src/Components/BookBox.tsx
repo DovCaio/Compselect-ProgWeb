@@ -1,6 +1,7 @@
 import Image from "next/image";
 import BookBoxStyle from "./BookBox.module.css"
 import { useRouter } from "next/navigation";
+import transformNameInPath from "@/utils/transformNameInPath";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function BookBox({img, name, description, author, agePublication, type}: any){
@@ -8,7 +9,7 @@ export default function BookBox({img, name, description, author, agePublication,
     const router = useRouter()
 
     const changeRouter = (img, name, description, author, agePublication, type) => {
-        router.push(`/publications/${name}/${description}/${author}/${agePublication}/${type}/${encodeURIComponent(img.src)}`)
+        router.push(`/publications/${transformNameInPath(name)}/${transformNameInPath(description)}/${author}/${agePublication}/${type}/${encodeURIComponent(img.src)}`)
     }
 
     return (

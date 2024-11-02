@@ -2,7 +2,7 @@
 import Image from "next/image"
 import PostStyle from "./Post.module.css"
 import { useRouter } from "next/navigation"
-
+import  transformNameInPath  from "@/utils/transformNameInPath";
 //No backend teriamos um texto links e os comentários que serão requisitados quando clickarmos no post
 //Assim precisamos de uma link dinâmico para blogs.
 
@@ -12,7 +12,7 @@ export default function Post({tittle, image, summary}: any) {
 
     const goToDinamicPage = () => {
 
-        router.push(`/blog/${tittle}`)
+        router.push(`/blog/${transformNameInPath(tittle)}`)
 
     }
 

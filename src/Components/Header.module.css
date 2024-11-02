@@ -153,7 +153,7 @@
 
     .menuBox li a:hover {
         border-bottom: none;
-        background-color: var(--color5);
+        background-color: var(--color2);
     }
 
     .menuBox li a {

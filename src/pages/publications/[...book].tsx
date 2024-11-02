@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { useEffect } from "react";
 import DinamicPublicationStyle from "@/pages/publications/dinamic_publications.module.css"
+import transformPathInName from "@/utils/transformPathInName";
 export default function Page(){
 
     const router = useRouter()
@@ -25,8 +26,8 @@ export default function Page(){
             </div>
             <div className={DinamicPublicationStyle.informations}>
 
-                <h2>{book[0]}</h2>
-                <p className={DinamicPublicationStyle.description}>{book[1]}</p>
+                <h2>{transformPathInName(book[0])}</h2>
+                <p className={DinamicPublicationStyle.description}>{transformPathInName(book[1])}</p>
                 <p>Autor: {book[2]}</p>
                 <p>Ano de publicação: {book[3]}</p>
                 <p>Tipo: {book[4]}</p>

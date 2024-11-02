@@ -1,5 +1,6 @@
 import { useRouter  } from "next/router";
 import { useEffect, useState } from "react";
+import transformPathInName from "@/utils/transformPathInName";
 export default function PostBlog() {
     
     const router = useRouter()
@@ -13,7 +14,7 @@ export default function PostBlog() {
 
     const render  = () =>  {
         return <>
-            <h2>{post[0]}</h2>
+            <h2>{transformPathInName(post[0])}</h2>
             </>
     }
 
