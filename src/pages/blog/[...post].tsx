@@ -6,6 +6,8 @@ import Link from "next/link";
 import GenericImagePost from "@/assets/images/ImagemGenericaPostComputacao.webp"
 import PostStyle from "./dinamic_post.module.css"
 import Queue from "@/utils/Queue";
+import MakeAComment from "./MakeAComment";
+import Post from "@/Components/blog/Post";
 const postExample = {
 
     date : "10/10/2021",
@@ -118,6 +120,7 @@ export default function PostBlog() {
     }
 
 
+    //Dá para dar uma boa componentizada aqui!
     const render  = () =>  {
         return( 
             <section className={PostStyle.dinamicPost}>
@@ -131,11 +134,26 @@ export default function PostBlog() {
                     }
                 </main>
 
-                <footer>
-                    <p>{postExample.date}</p>
-                    <div>
-
+                <footer className={PostStyle.footer}>
+                    <p className={PostStyle.postDate}>Data do post: {postExample.date}</p>
+                    <div className={PostStyle.comments}>
+                        <h3>Comentários</h3>
+                        {
+                            postExample.comments.map((comment, index) => {
+                                return <div key={index}>
+                                    <div>
+                                        <span>{comment.author}</span>
+                                        <span>{comment.date}</span>
+                                    </div>
+                                    <p>{comment.comment}</p>
+                                </div>
+                            })
+                        }
                     </div>
+
+                    
+                    <MakeAComment/>
+                    
                 </footer>
             </section>
         )
