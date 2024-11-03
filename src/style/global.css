@@ -29,3 +29,8 @@ body{
     overflow-x: hidden;
 
 }
+
+p {
+    font-weight: lighter;
+
+}

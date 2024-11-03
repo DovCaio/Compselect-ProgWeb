@@ -12,7 +12,7 @@ export default function Post({tittle, image, summary}: any) {
 
     const goToDinamicPage = () => {
 
-        router.push(`/blog/${transformNameInPath(tittle)}`)
+        router.push(`/blog/${transformNameInPath(tittle)}/${encodeURIComponent(image.src)}`)
 
     }
 

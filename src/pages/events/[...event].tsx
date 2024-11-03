@@ -41,7 +41,7 @@ export default function Page(){
                         <span className={DinamicEventStyle.hour}>{evento.hour} </span>
                         <span className={DinamicEventStyle.locale}>{evento.locale} </span>
                     </p>
-                    <p>{evento.description}</p>
+                    <p className={DinamicEventStyle.description}>{evento.description}</p>
                     <p>Alvo do evento: {evento.target}</p>
                     <p>Atividades: {evento.activitys.map((item, index) => <span key={index}>{item}</span>)}</p>
                 </div>

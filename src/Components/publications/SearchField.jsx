@@ -154,7 +154,6 @@ export default function SearchField({setBooks}){
             Object.entries(catalogedBooks).forEach(item => {
                 item[1].forEach(b => {
 
-                    console.log(b.name)
                     if(b.name.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) > -1 ||
                       b.author.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) > -1 ||
                       b.type.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) > -1 ||
