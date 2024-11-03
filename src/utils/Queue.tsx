@@ -9,7 +9,11 @@ export default class Queue {
     }
 
     public pop() {
-        return this.queue.shift()
+        if (this.queue.length > 0){
+            return this.queue.shift()
+
+        }
+        return "" //NILL
     }
 
 }

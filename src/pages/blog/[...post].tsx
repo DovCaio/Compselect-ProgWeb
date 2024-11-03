@@ -7,7 +7,8 @@ import GenericImagePost from "@/assets/images/ImagemGenericaPostComputacao.webp"
 import PostStyle from "./dinamic_post.module.css"
 import Queue from "@/utils/Queue";
 import MakeAComment from "./MakeAComment";
-import Post from "@/Components/blog/Post";
+import NotificationElement from "@/Components/Notification";
+
 const postExample = {
 
     date : "10/10/2021",
@@ -69,17 +70,19 @@ export default function PostBlog() {
     const post = router.query.post
 
     function whenLoaded(){
+        const contentAux = []
+
         if( postExample.sequenceOfContent.length !== (postExample.content.texts.length + 
                                                     postExample.content.images.length + 
                                                     postExample.content.links.length
         )){
-           console.log("Isso Não deveria acontecer! erro!") 
+            contentAux.push(<NotificationElement type="error" mensage="Conteúdo com a quantidade errada!" header={"Erro no conteúdo"}/>)
+            
         }
 
         const queueImages = new Queue()
         const queueTexts = new Queue()
         const queueLinks = new Queue()
-        const contentAux = []
 
         for(let i = 0; i < postExample.content.images.length; i++){
             queueImages.push(postExample.content.images[i])
@@ -106,10 +109,10 @@ export default function PostBlog() {
                     break
                 case 2:
                     const link = queueLinks.pop()
-                    contentAux.push(<Link href={link}>{link}</Link>)
+                    contentAux.push(<Link target="_blank" href={link}>{link}</Link>)
                     break
                 default:
-                    console.log("Isso nao deveria acontecer!")
+                    contentAux.push(<NotificationElement type="error" mensage="Sequência de conteúdo inexistente!" header={"Erro no conteúdo"}/>)
                     break
 
             }
