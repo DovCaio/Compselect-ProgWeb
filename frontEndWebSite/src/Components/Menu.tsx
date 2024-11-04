@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import "@/style/active.css"
 import HeaderStyle from "./Header.module.css"
 import { useState } from "react";
+import React from "react";
 export default function Menu(){
     const pathName = usePathname()
 

@@ -1,18 +1,16 @@
 // jest.setup.js
-import { useRouter } from 'next/router';
+const { useRouter } =  require('next/router'); //Também tem o next/navigation, ele tem como ser mockado mais fácil também
+//Caso seja necessário usar o next/navigation, basta importar o useRouter do next/navigation no proprio teste e fazer as mesmas configurações
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }));
 
-useRouter.mockImplementation(() => ({
-  route: '/',
-  pathname: '/',
-  query: {},
-  asPath: '/',
-  push: jest.fn(),
-  replace: jest.fn(),
-  reload: jest.fn(),
-  back: jest.fn(),
-  prefetch: jest.fn().mockResolvedValue(undefined),
-}));
+beforeEach(() => {
+  useRouter.mockImplementation(() => ({
+    route: '/',
+    pathname: '/',
+    query: {},
+    asPath: '/',
+  }));
+});

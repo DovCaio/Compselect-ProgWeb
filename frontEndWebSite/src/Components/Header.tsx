@@ -2,6 +2,7 @@ import Menu from "./Menu"
 import HeaderStyle from "./Header.module.css"
 import Link from "next/link"
 import Image from "next/image"
+import React from "react"
 import WebSiteLogo from "@/assets/images/logoDoSite.png"
 export default function Header (){
 
