@@ -1,0 +1,12 @@
+.center-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+}
+
+.consertar {
+    margin: 0px;
+    padding: 0px;
+}

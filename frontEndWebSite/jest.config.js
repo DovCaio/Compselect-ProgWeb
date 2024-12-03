@@ -11,5 +11,5 @@ module.exports = {
      "^.+\\.css$": "jest-css-modules-transform",
      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
   }
-};
+}
 
