@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  frontend1:
+    build: ./frontEndWebSite
+    ports:
+      - "3000:3000"
+    container_name: frontEndWebSite
+
+  frontend2:
+    build: ./frontEndManagement
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontEndManagement:/app
+    container_name: frontEndManagement

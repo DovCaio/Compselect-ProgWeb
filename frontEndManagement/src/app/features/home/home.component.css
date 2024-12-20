@@ -1,0 +1,54 @@
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.apresentation  {
+    justify-self: center;
+    width: 80vw; /** Esse deve ser o complemento do tamanho do nav**/
+    display: flex;
+    flex-direction: column;
+    
+
+}
+
+section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin:  20px;
+    
+}
+
+section span {
+    font-weight: bold;
+}
+
+.statistic-qtt > div {
+    margin: 0 10px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.statistic-qtt > div > span:last-child {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.statistic-summary > div {
+    margin: 0 10px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.statistic-summary > div > span:last-child {
+
+    font-weight: bold;
+    font-size: 3em;
+}
