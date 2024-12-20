@@ -1,22 +1,67 @@
 <section>
 
-    <mat-form-field>
 
-        <mat-label for="eventName">Nome</mat-label>
-        <input matInput id="eventName">
-        
-        
-        
-    </mat-form-field>
 
-    <mat-form-field>
-        <mat-label for="eventDate" id="eventDate">Data</mat-label>
-        <input matInput id="eventDate">
-    </mat-form-field>
 
-    <mat-form-field>
-        <mat-label for="eventDescription">Descrição</mat-label>
-        <input matInput id="eventDescription">
-    </mat-form-field>
+    <form>
+        <h2>Criação de um novo Evento</h2>
+
+        <mat-form-field>
+    
+            <mat-label>Titulo</mat-label>
+            <input matInput>
+            
+        </mat-form-field>
+    
+        <div class="dateDiv">
+            <mat-form-field class="date">
+                <mat-label>Data que acontecerá o evento</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+              
+            
+            <mat-form-field>
+                <mat-label>Horário</mat-label>
+                <input matInput >
+            </mat-form-field>
+
+        </div>
+
+
+        <mat-form-field >
+            <mat-label>Descrição</mat-label>
+            <textarea matInput ></textarea>
+          </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Alvo</mat-label>
+            <input matInput >
+        </mat-form-field>
+
+
+        <mat-form-field>
+            <mat-label>Atividades</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-divider></mat-divider>
+ 
+        <div class="file">
+            <p>Arraste e solte a imagem aqui, ou <span>clique aqui</span> para escolher uma imagem.</p>
+            <input type="file" accept="image/*" placeholder="Escolha uma imagem">
+
+        </div>
+
+        <div class="buttons">
+            <button mat-raised-button color="primary">Enviar</button>
+            <button mat-raised-button routerLink="/events" color="warn">Cancelar</button>
+
+        </div>
+
+
+    </form>
 
 </section>

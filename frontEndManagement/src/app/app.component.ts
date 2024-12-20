@@ -6,7 +6,6 @@ import { NavComponent } from './components/template/nav/nav.component';
 
 import { RouterModule } from '@angular/router';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
