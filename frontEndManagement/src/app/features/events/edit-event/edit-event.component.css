@@ -15,6 +15,26 @@
     justify-content: center;
 }
 
+.edit-event > section{
+    
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+
+}
+
+.sets input {
+    width: 100%;
+}
+
 table {
     width: 100%;
+}
+
+table td button {
+    text-align: center;
+    height: 3em;
+    width: 3em;
 }

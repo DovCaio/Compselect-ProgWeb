@@ -1,0 +1,9 @@
+table {
+    width: 100%;
+}
+
+table td button {
+    text-align: center;
+    height: 3em;
+    width: 3em;
+}
