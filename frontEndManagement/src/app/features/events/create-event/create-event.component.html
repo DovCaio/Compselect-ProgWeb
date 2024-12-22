@@ -6,46 +6,7 @@
     <form>
         <h2>Criação de um novo Evento</h2>
 
-        <mat-form-field>
-    
-            <mat-label>Titulo</mat-label>
-            <input matInput>
-            
-        </mat-form-field>
-    
-        <div class="dateDiv">
-            <mat-form-field class="date">
-                <mat-label>Data que acontecerá o evento</mat-label>
-                <input matInput [matDatepicker]="picker">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-              
-            
-            <mat-form-field>
-                <mat-label>Horário</mat-label>
-                <input matInput >
-            </mat-form-field>
-
-        </div>
-
-
-        <mat-form-field >
-            <mat-label>Descrição</mat-label>
-            <textarea matInput ></textarea>
-          </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Alvo</mat-label>
-            <input matInput >
-        </mat-form-field>
-
-
-        <mat-form-field>
-            <mat-label>Atividades</mat-label>
-            <input matInput>
-        </mat-form-field>
+        <event-values-input></event-values-input>
 
         <mat-divider></mat-divider>
  

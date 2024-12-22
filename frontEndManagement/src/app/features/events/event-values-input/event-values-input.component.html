@@ -1,0 +1,51 @@
+<mat-form-field>
+    
+    <mat-label>Titulo</mat-label>
+    <input matInput>
+    
+</mat-form-field>
+
+<div class="dateDiv">
+    <mat-form-field class="date">
+        <mat-label>Data que acontecerá o evento</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+      
+    
+    <mat-form-field>
+        <mat-label>Horário</mat-label>
+        <input matInput >
+    </mat-form-field>
+
+</div>
+
+
+<mat-form-field >
+    <mat-label>Descrição</mat-label>
+    <textarea matInput ></textarea>
+  </mat-form-field>
+
+<mat-form-field>
+    <mat-label>Alvo</mat-label>
+    <input matInput >
+</mat-form-field>
+
+
+<mat-form-field>
+    <mat-label>Atividades</mat-label>
+    <input matInput>
+</mat-form-field>
+<hr>
+
+<div [(class)]="hideFileDiv" ondragover="event.preventDefault()" (drop)="dragTheFile($event)" [className]="">
+    <p>Arraste e solte a imagem aqui, ou 
+        <span><input type="file" accept="image/*" placeholder="Escolha uma imagem"
+        [(files)]="fileInputValue" (change)="changeTheFile($event)" >clique aqui</span> para escolher uma imagem. A imagem deve ter menos de 10MB</p>
+</div>
+<div [(class)]="hideImageDiv">
+    <img [(src)]="url" alt="" class="event-image">
+    <button mat-raised-button color="warn" (click)="removeImage()"><i class="material-icons">delete</i></button>
+</div>
