@@ -3,14 +3,19 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
+import {    MatNativeDateModule} from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
-  selector: 'app-event-values-input',
+  selector: 'event-values-input',
   standalone: true,
   imports: [
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatNativeDateModule,
+    MatButtonModule    
   ],
   templateUrl: './event-values-input.component.html',
   styleUrl: './event-values-input.component.css'
