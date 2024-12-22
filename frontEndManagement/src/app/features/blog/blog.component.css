@@ -1,0 +1,14 @@
+section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin: 20px;
+    width: 77vw;
+}
+
+section button {
+
+    margin: 0 10px;
+
+}

@@ -17,13 +17,15 @@
 
 .edit-event > section{
     
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
-    flex-direction: row;
     justify-content: space-evenly;
 
 
 }
 
-
+.edit-event > section > * {
+    margin: 0 10px;
+}
 

@@ -35,6 +35,9 @@ export class EventsTableComponent {
   constructor(private editService: EditService) {}
 
   eventEdited(id: number, title: string, date: string) {
+    //TODO
+    //Deve fazer uma requisição ao back e trazer de volta o evento relativo ao id, e esses dados devem ser
+    //Colocados nos inputs de edição.
     const event: Event = {id: id, title: title, date: date};
     this.dataSource.splice(id, 1, event);
     console.log(this.dataSource);
@@ -42,6 +45,8 @@ export class EventsTableComponent {
   }
 
   eventDeleted(id: number) {
+    //TODO
+    //Deve deletar o evento relativo ao id
     this.dataSource.splice(id, 1);
     this.editService.delete(id);
   }
