@@ -58,7 +58,8 @@
             </div>
     
             <div>
-                <button mat-raised-button color="primary" [disabled]="elements.length == 0" class="post-button">Postar</button>
+                <button mat-raised-button color="primary" [disabled]="elements.length == 0" class="post-button"
+                (click)="enviarPostagem()">Postar</button>
             </div>
         </form>
 
