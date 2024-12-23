@@ -33,6 +33,8 @@ interface Post {
 })
 export class CreateNewPostComponent {
 
+  private nextId = 0;
+
   postElements: PostElement[] = [
     {value: 'image', viewValue: 'Imagen'},
     {value: 'tittle', viewValue: 'Titulo'},
@@ -47,9 +49,11 @@ export class CreateNewPostComponent {
 
   insertElement(form: any): void {
     //TODO: resolver o problema de inserção da imagem, aparentemente o angular não gerencia esse tipo de input, por isso talvez seja necessário fazer alguma captura com o (change) no input do tipo file
+    if (!this.choiced) return
+    if (!form.value[this.choiced]) return
 
     const post: Post = {
-      id: this.elements.length + 1,
+      id: this.nextId++,
       element: this.choiced,
       content: this.choiced !== 'image' ? form.value[this.choiced] :  URL.createObjectURL(form.value[this.choiced])
     }
@@ -57,6 +61,8 @@ export class CreateNewPostComponent {
   }
 
   removeElement(id: number): void {
+    if(!id) return
+
     this.elements = this.elements.filter((element : Post) => element.id !== id);
   }
 
