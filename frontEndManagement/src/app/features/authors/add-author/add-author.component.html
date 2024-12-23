@@ -1,1 +1,32 @@
-<p>add-author works!</p>
+<section>
+
+    <h2>Criação de um novo autor</h2>
+
+    <form action="">
+        <mat-form-field>
+            <mat-label>Nome e Sobrenome</mat-label>
+            <input matInput>
+        </mat-form-field>
+    
+        <div>
+            <file-input></file-input>
+        </div>
+    
+        <mat-form-field>
+            <mat-label>Bibliografia</mat-label>
+            <textarea matInput></textarea>
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Publicações</mat-label>
+            <input matInput placeholder="Separe as publicações por espaços">
+        </mat-form-field>
+        <div class="buttons">
+            <button mat-raised-button color="primary">Cadastrar</button>
+            <button mat-raised-button routerLink="/authors" color="warn">Cancelar</button>
+        </div>
+    </form>
+
+
+
+</section>

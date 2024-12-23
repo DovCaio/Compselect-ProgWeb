@@ -72,7 +72,7 @@ export class CreateNewPostComponent {
   enviarPostagem(): void {
     //TODO: aqui ele deve enviar os dados para o back, basta enviar this.elements, porém também é necessário enviar
     //um array auxiliar para indicar a ordem em que os elementos devem ficar.
-    //Já que lidamos com linguagens fortemente tipadas precisamos de um array para cada tipo de elemento.
+    //Já que lidamos com linguagens fortemente tipadas precisamos de um array para cada tipo de elemento, e a ordem de cada um é dada pelo array auxiliar antes mencionado.
     console.log(this.elements);
   }
 

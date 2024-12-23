@@ -1,0 +1,34 @@
+
+section, form{ 
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin: 20px;
+    width: 77vw;
+}
+
+h2 {
+    text-align: center;
+}
+
+
+
+* {
+    width: 50%;
+    margin: 0 10px;
+}
+
+.buttons {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+div > button {
+    width: 100px;
+}
