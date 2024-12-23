@@ -1,0 +1,35 @@
+section, form {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin: 20px;
+    width: 77vw;
+}
+
+h2
+{
+    text-align: center;
+}
+
+span {
+    text-align: center;
+}
+
+* {
+    width: 50%;
+}
+
+.buttons {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    width: 100px;
+    margin: 10px;
+}
