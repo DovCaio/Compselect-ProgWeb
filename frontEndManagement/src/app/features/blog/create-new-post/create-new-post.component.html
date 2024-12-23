@@ -1,1 +1,67 @@
-<p>create-new-post works!</p>
+<section class="create-new-post">
+
+    <h2>Criação de uma nova publicação</h2>
+
+
+    <div *ngFor="let element of elements" class="post-element">
+        <ng-container [ngSwitch]="element.element">
+            <h2 *ngSwitchCase="'tittle'">{{element.content}}</h2>
+            <p *ngSwitchCase="'text'">{{element.content}}</p>
+            <a *ngSwitchCase="'link'">{{element.content}}</a>
+            <img *ngSwitchCase="'image'" [src]="element.content"/>
+        </ng-container>
+        <button mat-fab (click)="removeElement(element.id)" color="warn" class="delete-element-button">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+
+    <section>
+        <form  #form="ngForm" (ngSubmit)="insertElement(form)">
+            <div>
+                <mat-form-field class="favorite">
+                    <mat-form-field>
+                        <mat-label>Elemento da postagem</mat-label>
+                        <mat-select [(value)]="choiced">
+                          @for (element of postElements; track element) {
+                            <mat-option [value]="element.value">{{element.viewValue}}</mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                </mat-form-field>
+            </div>
+    
+            <div>
+                <file-input *ngIf="choiced == 'image'"></file-input>
+            </div>
+            <div>
+                <mat-form-field *ngIf="choiced == 'tittle'">
+                    <mat-label>Titulo</mat-label>
+                    <input matInput ngModel required name="tittle">
+                </mat-form-field>
+            </div>
+            <div>
+    
+                <mat-form-field class="textarea" *ngIf="choiced == 'text'">
+                    <mat-label>Texto</mat-label>
+                    <textarea matInput name="text" ngModel required></textarea>
+                </mat-form-field>
+    
+            </div>
+            <div>
+                <mat-form-field *ngIf="choiced == 'link'">
+                    <mat-label>Link</mat-label>
+                    <input matInput ngModel required name="link">
+                </mat-form-field>
+            </div>
+            <div>
+                <input value="Inserir na postagem" type="submit"  >
+            </div>
+    
+            <div>
+                <button mat-raised-button color="primary" [disabled]="elements.length == 0" class="post-button">Postar</button>
+            </div>
+        </form>
+
+    </section>
+
+</section>

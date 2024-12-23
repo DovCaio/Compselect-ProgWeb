@@ -41,13 +41,5 @@
     </mat-form-field>
     <hr>
     
-    <div [(class)]="hideFileDiv" ondragover="event.preventDefault()" (drop)="dragTheFile($event)" [className]="">
-        <p>Arraste e solte a imagem aqui, ou 
-            <span><input type="file" accept="image/*" placeholder="Escolha uma imagem"
-            [(files)]="fileInputValue" (change)="changeTheFile($event)" >clique aqui</span> para escolher uma imagem. A imagem deve ter menos de 10MB</p>
-    </div>
-    <div [(class)]="hideImageDiv">
-        <img [(src)]="url" alt="" class="event-image">
-        <button mat-raised-button color="warn" (click)="removeImage()"><i class="material-icons">delete</i></button>
-    </div>
+    <file-input></file-input>
 </div>

@@ -1,0 +1,77 @@
+.create-new-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+mat-form-field {
+    width: 50vw;
+}
+
+.textarea {
+    height: 50vh;
+}
+
+
+span {
+    text-align: center;
+    width: 100%;
+    align-self: center;
+    font-weight: bolder;
+    font-size: 1.5em;
+}
+
+.favorite {
+    width: 100%;
+}
+
+
+.favorite * {
+    width: 100%;
+}
+
+input[type="submit"] {
+    width: 150px;
+    height: 40px;
+    background-color: var(--color5);
+    color: #fff;
+    font-weight: bolder;
+    border: 0 ;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--color4);
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+}
+
+.delete-element-button {
+    width: 30px;
+    height: 30px;
+    align-self: center;
+    margin-bottom: 20px;
+}
+
+.post-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.post-element > ng-container >* {
+    margin-bottom: 1px;
+}
+
+.post-button {
+    margin: 20px;
+}
