@@ -15,7 +15,6 @@ import { EventValuesInputComponent } from '../event-values-input/event-values-in
   imports: [
 
     FormsModule,
-    MatNativeDateModule,
     MatButtonModule,
     RouterLink,
     MatDividerModule,

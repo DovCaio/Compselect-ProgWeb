@@ -1,16 +1,16 @@
 .file {
-width: 100%;
+width: 99%;
 align-self: center;
-border-radius: 1px;
+border-radius: 5px;
 border: 2px dashed var(--color3);
 padding: 20px 0px;
-margin: 5px; 
 text-align: center;
 }
 
 .file > input {
 display: none;
 }
+
 
 .file > p > span {
 cursor: pointer;

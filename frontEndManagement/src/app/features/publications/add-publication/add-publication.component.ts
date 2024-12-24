@@ -23,4 +23,8 @@ import { RouterLink } from '@angular/router';
 })
 export class AddPublicationComponent {
 
+  enviarPublicao() {
+    //TODO: enviar os dados para o back, fazer atravez de um service
+  }
+
 }

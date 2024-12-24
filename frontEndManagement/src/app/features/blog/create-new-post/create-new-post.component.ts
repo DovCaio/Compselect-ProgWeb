@@ -5,16 +5,12 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Post from "../Post";
+import { BlogService } from  '../../../shared/blog/blog.service';
 
 interface PostElement {
   value: string;
   viewValue: string;
-}
-
-interface Post {
-  id: number;
-  element: string;
-  content: string;
 }
 
 @Component({
@@ -26,7 +22,7 @@ interface Post {
     MatButtonModule,
     MatSelectModule,
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './create-new-post.component.html',
   styleUrl: './create-new-post.component.css'
@@ -34,6 +30,11 @@ interface Post {
 export class CreateNewPostComponent {
 
   private nextId = 0;
+  //TODO:Isso da qui tem que ser componentizado de uma forma melhor, para isso precisamos ter um componente
+  //Principal para o formulário e para onde podemos visualizar as postagens criadas
+  //E também precisamos de um componente para o fomulario e para onde podemos visualizar as postagens criadas
+
+  constructor (private blogService: BlogService) {}
 
   postElements: PostElement[] = [
     {value: 'image', viewValue: 'Imagen'},
