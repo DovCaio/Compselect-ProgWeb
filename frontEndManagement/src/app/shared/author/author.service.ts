@@ -8,7 +8,12 @@ export class AuthorService {
   constructor() { }
 
   sendAuthor() {
-    //TODO: enviar os dados para o back, fazer atravez de um service
+    //TODO: enviar os dados para o back
     console.log('Enviar')
+  }
+
+  updateAuthor() {
+    //TODO: enviar os dados para o back
+    console.log('Atualizar')
   }
 }
