@@ -3,6 +3,12 @@
     <h2>Editar ou excluir</h2>
 
     <div>
-        <publication-form></publication-form>
+        <publication-form>
+            <div>
+                <button mat-raised-button color="primary" (click)="editarPublicao()">Editar</button>
+            <button mat-raised-button routerLink="/publications" color="warn">Cancelar</button>
+            </div>
+        </publication-form>
+        <publication-table></publication-table>
     </div>
 </section>

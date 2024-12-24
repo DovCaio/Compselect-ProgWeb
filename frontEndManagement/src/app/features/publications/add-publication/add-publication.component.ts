@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { FileInputComponent } from '../../../components/inputs/file-input/file-input.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterLink } from '@angular/router';
 import { PublicationService } from '../../../shared/publication/publication.service';
 import { PublicationFormComponent } from '../publication-form/publication-form.component';
@@ -12,10 +8,6 @@ import { PublicationFormComponent } from '../publication-form/publication-form.c
   standalone: true,
   imports: [
     MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FileInputComponent,
-    MatDatepickerModule,
     RouterLink,
     PublicationFormComponent
   ],
