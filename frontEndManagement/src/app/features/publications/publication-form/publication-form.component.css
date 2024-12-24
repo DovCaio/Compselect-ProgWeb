@@ -1,5 +1,4 @@
-
-section {
+form {
 
     display: flex;
     flex-direction: column;
@@ -7,15 +6,9 @@ section {
     justify-content: center;
     align-content: center;
     margin: 20px;
-    width: 77vw;
+    width: 100%;
 }
 
-.buttons button {
-
-    margin: 0 5px;
-}
-
-section > div {
-    display: flex;
-    flex-direction: column;
+form > mat-form-field {
+    width: 100%;
 }

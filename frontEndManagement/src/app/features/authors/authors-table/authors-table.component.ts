@@ -44,6 +44,8 @@ export class AuthorsTableComponent {
   }
 
   authorEdit(id: number){
-    //TODO
+    window.scrollTo(0, 0);
+    //TODO deve fazer uma requisão, apartir de algum serivice, e trazer os dados do autor para o formulário
+
   }
 }

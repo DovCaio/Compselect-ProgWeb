@@ -1,32 +1,11 @@
 <section>
     <h2>Criação de uma nova publicação</h2>
-    <form>
 
-        <mat-form-field>
-            <mat-label>Titulo</mat-label>
-            <input matInput>
-        </mat-form-field>
-    
-        <div>
-            <span>Imagem da publicação</span>
-            <file-input></file-input>
-        </div>
-    
-        
-        <mat-form-field>
-            <mat-label>Autores</mat-label>
-            <input matInput placeholder="Separe os autores por espaços">
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Tipo</mat-label>
-            <textarea matInput placeholder="Algoritmo e estrutura de dados, segurança, etc"></textarea>
-        </mat-form-field>
+    <publication-form>
 
         <div class="buttons">
             <button mat-raised-button color="primary" (click)="enviarPublicao()">Cadastrar</button>
             <button mat-raised-button routerLink="/publications" color="warn">Cancelar</button>
         </div>
-
-    </form>
+    </publication-form>
 </section>

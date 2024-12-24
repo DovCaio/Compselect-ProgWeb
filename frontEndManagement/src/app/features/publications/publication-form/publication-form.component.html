@@ -1,0 +1,28 @@
+<form>
+
+    <mat-form-field>
+        <mat-label>Titulo</mat-label>
+        <input matInput>
+    </mat-form-field>
+
+    <div>
+        <span>Imagem da publicação</span>
+        <file-input></file-input>
+    </div>
+
+    
+    <mat-form-field>
+        <mat-label>Autores</mat-label>
+        <input matInput placeholder="Separe os autores por espaços">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Tipo</mat-label>
+        <textarea matInput placeholder="Algoritmo e estrutura de dados, segurança, etc"></textarea>
+    </mat-form-field>
+
+
+    <ng-content>
+
+    </ng-content>
+</form>

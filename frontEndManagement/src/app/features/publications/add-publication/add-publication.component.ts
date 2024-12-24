@@ -5,8 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FileInputComponent } from '../../../components/inputs/file-input/file-input.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterLink } from '@angular/router';
-
-
+import { PublicationService } from '../../../shared/publication/publication.service';
+import { PublicationFormComponent } from '../publication-form/publication-form.component';
 @Component({
   selector: 'app-add-publication',
   standalone: true,
@@ -16,15 +16,19 @@ import { RouterLink } from '@angular/router';
     MatInputModule,
     FileInputComponent,
     MatDatepickerModule,
-    RouterLink
+    RouterLink,
+    PublicationFormComponent
   ],
   templateUrl: './add-publication.component.html',
   styleUrl: './add-publication.component.css'
 })
 export class AddPublicationComponent {
 
+  constructor( private publicationService: PublicationService) { }
+
   enviarPublicao() {
-    //TODO: enviar os dados para o back, fazer atravez de um service
+
+    this.publicationService.postPublication()
   }
 
 }
