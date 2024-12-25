@@ -1,0 +1,46 @@
+<form  #form="ngForm" (ngSubmit)="insertElement(form)">
+    <div>
+        <mat-form-field class="favorite">
+            <mat-form-field>
+                <mat-label>Elemento da postagem</mat-label>
+                <mat-select [(value)]="choiced">
+                  @for (element of postElements; track element) {
+                    <mat-option [value]="element.value">{{element.viewValue}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <file-input *ngIf="choiced == 'image'"></file-input>
+    </div>
+    <div>
+        <mat-form-field *ngIf="choiced == 'tittle'">
+            <mat-label>Titulo</mat-label>
+            <input matInput ngModel required name="tittle">
+        </mat-form-field>
+    </div>
+    <div>
+
+        <mat-form-field class="textarea" *ngIf="choiced == 'text'">
+            <mat-label>Texto</mat-label>
+            <textarea matInput name="text" ngModel required></textarea>
+        </mat-form-field>
+
+    </div>
+    <div>
+        <mat-form-field *ngIf="choiced == 'link'">
+            <mat-label>Link</mat-label>
+            <input matInput ngModel required name="link">
+        </mat-form-field>
+    </div>
+    <div>
+        <input value="Inserir na postagem" type="submit"  >
+    </div>
+
+    <div>
+        <button mat-raised-button color="primary" [disabled]="elements.length == 0" class="post-button"
+        (click)="enviarPostagem()">Postar</button>
+    </div>
+</form>

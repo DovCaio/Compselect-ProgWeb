@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import Post from "../Post";
 import { BlogService } from  '../../../shared/blog/blog.service';
 
+import { PostInteractionComponent } from '../post-interaction/post-interaction.component';
+
 interface PostElement {
   value: string;
   viewValue: string;
@@ -23,6 +25,7 @@ interface PostElement {
     MatSelectModule,
     CommonModule,
     FormsModule,
+    PostInteractionComponent
   ],
   templateUrl: './create-new-post.component.html',
   styleUrl: './create-new-post.component.css'

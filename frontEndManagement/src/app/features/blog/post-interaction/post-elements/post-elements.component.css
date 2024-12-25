@@ -1,0 +1,22 @@
+
+.delete-element-button {
+    width: 30px;
+    height: 30px;
+    align-self: center;
+    margin-bottom: 20px;
+}
+
+.post-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.post-element > ng-container >* {
+    margin-bottom: 1px;
+}
+
+.post-button {
+    margin: 20px;
+}

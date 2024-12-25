@@ -1,0 +1,11 @@
+<div *ngFor="let element of elements" class="post-element">
+    <ng-container [ngSwitch]="element.element">
+        <h2 *ngSwitchCase="'tittle'">{{element.content}}</h2>
+        <p *ngSwitchCase="'text'">{{element.content}}</p>
+        <a *ngSwitchCase="'link'" href="{{element.content}}">{{element.content}}</a>
+        <img *ngSwitchCase="'image'" [src]="element.content"/>
+    </ng-container>
+    <button mat-fab (click)="removeElement(element.id)" color="warn" class="delete-element-button">
+        <i class="material-icons">close</i>
+    </button>
+</div>
