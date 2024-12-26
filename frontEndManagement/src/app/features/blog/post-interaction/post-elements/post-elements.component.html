@@ -5,7 +5,10 @@
         <a *ngSwitchCase="'link'" href="{{element.content}}">{{element.content}}</a>
         <img *ngSwitchCase="'image'" [src]="element.content"/>
     </ng-container>
+
+
     <button mat-fab (click)="removeElement(element.id)" color="warn" class="delete-element-button">
         <i class="material-icons">close</i>
     </button>
+
 </div>

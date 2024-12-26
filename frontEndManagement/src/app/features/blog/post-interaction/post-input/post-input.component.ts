@@ -31,7 +31,7 @@ interface PostElement {
 })
 export class PostInputComponent {
 
-  private nextId = 0
+  private nextId = 1;
 
   postElements: PostElement[] = [
     {value: 'image', viewValue: 'Imagen'},

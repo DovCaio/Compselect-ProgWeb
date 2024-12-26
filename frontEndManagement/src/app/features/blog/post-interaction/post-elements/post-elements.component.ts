@@ -14,7 +14,7 @@ import Post  from '../../Post';
 })
 export class PostElementsComponent {
 
-  _elements: Post[] = [
+  private _elements: Post[] = [
   ]
 
   @Output()
@@ -30,8 +30,26 @@ export class PostElementsComponent {
     this.elementsChange.emit(value)
   }
 
+
+  private _choiced: string = ""
+  @Output()
+  choicedChange = new EventEmitter<string>();
+
+  @Input()
+  get choiced(): string {
+    return this._choiced;
+  }
+
+  set choiced(value: string) {
+    this._choiced = value
+    this.choicedChange.emit(value)
+  }
+
+
   removeElement(id: number): void {
     if(!id) return
     this.elements = this.elements.filter((element : Post) => element.id !== id);
   }
+
+
 }
