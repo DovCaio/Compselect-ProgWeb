@@ -41,5 +41,5 @@
     </mat-form-field>
     <hr>
     
-    <file-input></file-input>
+    <file-input (fileInputValueEmitter)="sendToParent($event)"></file-input>
 </div>

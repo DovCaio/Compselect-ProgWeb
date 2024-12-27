@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'file-input',
@@ -14,7 +14,13 @@ export class FileInputComponent {
   url: string = '';
   hideFileDiv: string = "file";
   hideImageDiv: string = "hidden";
-  fileInputValue: FileList | null = null;
+
+  
+  
+  @Output()
+  fileInputValueEmitter = new EventEmitter<File | null>();
+
+
 
   dragTheFile(event: DragEvent ): void {
     event.preventDefault();
@@ -26,8 +32,8 @@ export class FileInputComponent {
 
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(file);
-      this.fileInputValue = dataTransfer.files;
-
+      this.fileInputValueEmitter.emit(dataTransfer.files[0]);
+      
     }else {
       console.log('Arquivo inválido');
     }
@@ -39,6 +45,7 @@ export class FileInputComponent {
       this.url = URL.createObjectURL(file);
       this.hideFileDiv = "hidden";
       this.hideImageDiv = "div-image";
+      this.fileInputValueEmitter.emit(file);
     }else {
       console.log('Arquivo inválido');
     }
@@ -48,7 +55,7 @@ export class FileInputComponent {
     this.url = '';
     this.hideFileDiv = "file";
     this.hideImageDiv = "hidden";
-    this.fileInputValue = null;
+    this.fileInputValueEmitter.emit(null);
   }
 
 }

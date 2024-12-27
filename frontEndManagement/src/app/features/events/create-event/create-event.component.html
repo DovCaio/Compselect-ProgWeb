@@ -3,17 +3,17 @@
 
 
 
-    <form>
+    <form (submit)="addEvent()">
         <h2>Criação de um novo Evento</h2>
 
-        <event-values-input></event-values-input>
+        <event-values-input (fileInputValueEmitter)="receiveFile($event)"></event-values-input>
 
         <mat-divider></mat-divider>
  
        
         <hr>
         <div class="buttons">
-            <button mat-raised-button color="primary">Enviar</button>
+            <button mat-raised-button color="primary" (click)="addEvent()">Enviar</button>
             <button mat-raised-button routerLink="/events" color="warn">Cancelar</button>
 
         </div>

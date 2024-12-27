@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material/input';
@@ -23,5 +23,13 @@ import { FileInputComponent } from '../../../components/inputs/file-input/file-i
 })
 export class EventValuesInputComponent {
 
-  
+
+
+  @Output()
+  fileInputValueEmitter = new EventEmitter<File | null>();
+
+  sendToParent(file: File| null): void {
+    this.fileInputValueEmitter.emit(file);
+  }
+
 }
