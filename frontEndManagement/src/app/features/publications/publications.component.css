@@ -3,11 +3,10 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80vw;
+    width: 100vw;
     margin-top: 20px;
 }
 
 section button {
-
     margin: 0 10px;
 }

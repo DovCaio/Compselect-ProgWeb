@@ -6,7 +6,7 @@ main {
 
 .apresentation  {
     justify-self: center;
-    width: 80vw; /** Esse deve ser o complemento do tamanho do nav**/
+    width: 100vw;
     display: flex;
     flex-direction: column;
     
