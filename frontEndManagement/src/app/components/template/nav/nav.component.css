@@ -15,6 +15,22 @@ nav > div {
     position: relative;
 }
 
+nav > div:hover link-box {
+    display: flex ;
+
+}
+
+link-box {
+    display: none;
+}
+
+
+link-box a:hover {
+    color: var(--color5);
+    border-bottom: 1px solid var(--color5);
+
+}
+
 
 nav a {
     margin: 10px;

@@ -1,25 +1,37 @@
 <nav>
     <div >
         <a routerLink="">Home <i class="material-icons">home</i></a>
-
+        
     </div>
     <div>
         <a routerLink="/events">Eventos <i class="material-icons">calendar_month</i></a>
+        <link-box>
+            <a routerLink="/events/create">Criar evento</a>    
+            <a routerLink="/events/edit">Editar ou excluir</a>    
+            <a routerLink="/events/comments">Gerenciar comentários</a>    
+        </link-box>
     </div>
     <div>
         <a routerLink="/blog">Blog <i class="material-icons">library_books</i></a>
+        <link-box>
+            <a routerLink="/blog/create">Criar post</a>    
+            <a routerLink="/blog/edit">editar ou excluir</a>    
+        </link-box>
 
     </div>
     <div>
         <a routerLink="/authors">Autores <i class="material-icons">person</i></a>
+        <link-box>
+            <a routerLink="/authors/add">Criar autor</a>    
+            <a routerLink="/authors/edit">editar ou excluir</a>    
+        </link-box>
     </div>
     <div>
         <a routerLink="/publications">Publicações <i class="material-icons">auto_stories</i></a>
         <link-box>
-        <a >criar um evento</a>    
-        <a >editar ou excluir um evento</a>    
-        <a >criar um evento</a>    
-    </link-box>
+            <a routerLink="/publications/add">Criar publicação</a>    
+            <a routerLink="/publications/edit">editar ou excluir</a>    
+        </link-box>
     </div>
 
 </nav>
