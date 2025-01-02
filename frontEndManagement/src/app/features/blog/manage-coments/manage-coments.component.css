@@ -1,0 +1,12 @@
+
+button {
+    width: 100%;
+    display: flex;
+    width: calc(max-content + 10px);
+    padding: 0;
+    min-width: unset;
+}
+
+i {
+    justify-self: center;
+}

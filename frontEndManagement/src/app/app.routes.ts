@@ -13,6 +13,7 @@ import { AddAuthorComponent } from './features/authors/add-author/add-author.com
 import { EditAuthorComponent } from './features/authors/edit-author/edit-author.component';
 import { AddPublicationComponent } from './features/publications/add-publication/add-publication.component';
 import { EditPublicationComponent } from './features/publications/edit-publication/edit-publication.component';
+import { ManageComentsComponent } from './features/blog/manage-coments/manage-coments.component';
 
 export const routes: Routes = [
     {
@@ -68,6 +69,10 @@ export const routes: Routes = [
     {
         path: 'publications/edit',
         component: EditPublicationComponent
+    },
+    {
+        path: 'blog/comments',
+        component: ManageComentsComponent
     }
 
 ];
