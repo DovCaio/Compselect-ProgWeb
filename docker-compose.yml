@@ -29,5 +29,16 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD:123  
     networks:
       - compselect-network
+
+  test-db:
+    image: mongo:latest
+    container_name: test-mongo
+    ports:
+      - 27018:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME:mongo
+      - MONGO_INITDB_ROOT_PASSWORD:123  
+    networks:
+      - compselect-network
 networks:
   compselect-network:

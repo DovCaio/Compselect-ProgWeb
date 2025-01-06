@@ -69,7 +69,7 @@ model AuthorsOnPublications {
   
 }
 
-model Statisc {
+model Statistics {
     id String @id @map("_id") //O id não tem como ser gerato automaticamente, 
     year Int
     month Int
