@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client-js"
@@ -11,4 +6,80 @@ generator client {
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model Event {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  createAt DateTime @default(now())
+  title    String
+  dateEvent DateTime
+  description String
+  target String[]
+  activities String[]
+  image Bytes
+
+}
+
+
+model Post {
+
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  createAt DateTime @default(now())
+  images Bytes[]
+  titles String[]
+  texts String[]
+  links String[]
+  sequenceOfContent Int[]
+  comments Comment[]
+}
+
+model Comment {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  createAt DateTime @default(now())
+  userName String?
+  email String
+  accept Boolean
+  post Post @relation(fields: [postId], references: [id])
+  postId String @db.ObjectId
+}
+
+model Author {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  createAt DateTime @default(now())
+  firstName String
+  lastName String
+  image Bytes
+  bibliography String
+  publications AuthorsOnPublications[]
+}
+
+model Publication {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  image Bytes
+  authors AuthorsOnPublications[]
+}
+
+model AuthorsOnPublications {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  author Author @relation(fields: [authorId], references: [id])
+  publication Publication @relation(fields: [publicationId], references: [id])
+  authorId String @db.ObjectId
+  publicationId String @db.ObjectId
+  
+}
+
+model Statisc {
+    id String @id @map("_id") //O id não tem como ser gerato automaticamente, 
+    year Int
+    month Int
+    createAt DateTime @default(now())
+    qttCreateEvents Int
+    qttCreatePublications Int
+    qttCreateAuthors Int
+    qttCreatePost Int
+    qttVisitors Int
+
+
+    @@unique([year, month])
 }
