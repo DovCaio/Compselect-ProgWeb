@@ -184,5 +184,16 @@ describe('AppController (e2e)', () => {
     })
 
   })
+
+  describe("DELETE", () => {
+    it('should delete a event', () => {
+      return pactum
+            .spec()
+            .delete("/events/{id}")
+            .withPathParams("id", "$S{eventId}")
+            .expectStatus(204)
+    })
+  })
+
   })
 });
