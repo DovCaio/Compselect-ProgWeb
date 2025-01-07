@@ -13,10 +13,11 @@ model Event {
   createAt DateTime @default(now())
   title    String @unique
   dateEvent DateTime
+  time String
   description String
   target String[]
   activities String[]
-  image Bytes
+  image String
 
 }
 
@@ -25,7 +26,7 @@ model Post {
   id Int @id @default(autoincrement())
 
   createAt DateTime @default(now())
-  images Bytes[]
+  images String[]
   titles String[] @unique
   texts String[]
   links String[]
@@ -47,7 +48,7 @@ model Author {
   createAt DateTime @default(now())
   firstName String
   lastName String
-  image Bytes
+  image String
   bibliography String
   publications AuthorsOnPublications[]
 }
@@ -55,7 +56,7 @@ model Author {
 model Publication {
   id Int @id @default(autoincrement())
   title String
-  image Bytes
+  image String
   authors AuthorsOnPublications[]
 }
 

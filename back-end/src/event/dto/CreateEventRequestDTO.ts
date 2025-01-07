@@ -7,7 +7,7 @@ export class CreateEventRequestDTO {
 
     @IsNotEmpty()
     @IsDateString()
-    date: Date;
+    dateEvent: Date;
 
     @IsNotEmpty()
     @IsString()
@@ -26,5 +26,5 @@ export class CreateEventRequestDTO {
     activities: string[]
 
     @IsNotEmpty()
-    image: Uint8Array
+    image: string
 }

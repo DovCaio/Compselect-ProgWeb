@@ -28,35 +28,52 @@ describe('AppController (e2e)', () => {
   });
 
   describe('Events', () => {
-    const eventDto: CreateEventRequestDTO = {
-      title: "Event 1",
-      date: new Date(),
-      time: "10:00",
-      description: "Description 1",
-      target: ["target 1", "target2"],
-      activities: ["activity 1", "activity 2"],
-      image: new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10])
-    }
 
-    it('should create an event', () => {
-      return pactum
-            .spec()
-            .post("/events")
-            .withBody(eventDto)
-            .expectStatus(201)
-            .inspect()
+    describe('GET', () => {
+      const eventDto: CreateEventRequestDTO = {
+        title: "Event 1",
+        dateEvent: new Date(),
+        time: "10:00",
+        description: "Description 1",
+        target: ["target 1", "target2"],
+        activities: ["activity 1", "activity 2"],
+        image: "aedaedaae" //ISSO da que deve vir em string, usar o FileRead.readAsDataURL 
+      }
+  
+      it('should create an event', () => {
+        return pactum
+              .spec()
+              .post("/events")
+              .withBody(eventDto)
+              .expectStatus(201)
+              .expectBodyContains(eventDto.title)
+              .expectBodyContains(eventDto.description)
+              .expectBodyContains(eventDto.dateEvent)
+              .expectBodyContains(eventDto.image)
+
+      })
+  
+      it('should return a error when create an event with title already exists', () => {
+        return pactum
+              .spec()
+              .post("/events")
+              .withBody({
+                ...eventDto,
+                title: ""
+              })
+              .expectStatus(400)
+      })
+
+      it('should return all events', () => {
+        return pactum
+              .spec()
+              .get("/events")
+              .expectStatus(200)
+              .expectJsonLength(1)
+      })
+
     })
 
-    it('should return a error when create an event with title already exists', () => {
-      return pactum
-            .spec()
-            .post("/events")
-            .withBody({
-              ...eventDto,
-              title: ""
-            })
-            .expectStatus(400)
-            .inspect()
-    })
+
   })
 });
