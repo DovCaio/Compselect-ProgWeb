@@ -19,6 +19,7 @@ export class EventController {
         return this.eventService.getEvents()
     }
 
+    @Get(':id')
     getEvent(@Param('id', ParseIntPipe) id: number) {
         return this.eventService.getEvent(id)
     }

@@ -46,6 +46,7 @@ describe('AppController (e2e)', () => {
               .post("/events")
               .withBody(eventDto)
               .expectStatus(201)
+              .stores("eventId", "id")
               .expectBodyContains(eventDto.title)
               .expectBodyContains(eventDto.description)
               .expectBodyContains(eventDto.dateEvent)
@@ -75,13 +76,14 @@ describe('AppController (e2e)', () => {
             .get("/events")
             .expectStatus(200)
             .expectJsonLength(1)
+            .inspect()
     })
 
     it('should return an event', () => {
       return pactum
             .spec()
             .get("/events/{id}")
-            .withPathParams("id", 1)
+            .withPathParams("id", "$S{eventId}")
             .expectStatus(200)
             .expectBodyContains("Event 1")
     })
