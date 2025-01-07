@@ -3,7 +3,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './../src/app.module';
 import  * as pactum from "pactum"
 import { PrismaService } from '../src/prisma/prisma.service';
-import { CreateEventRequestDTO } from '../src/event/dto';
+import { CreateEventRequestDTO, UpdateEventRequestDTO } from '../src/event/dto';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -67,7 +67,7 @@ describe('AppController (e2e)', () => {
     }
   )
 
-  describe('GET', () => {
+    describe('GET', () => {
 
 
     it('should return all events', () => {
@@ -76,7 +76,6 @@ describe('AppController (e2e)', () => {
             .get("/events")
             .expectStatus(200)
             .expectJsonLength(1)
-            .inspect()
     })
 
     it('should return an event', () => {
@@ -90,5 +89,100 @@ describe('AppController (e2e)', () => {
 
   })
 
+    describe("PATCH", () => {
+      it('should update a title of a event', () => {
+        const eventDto: UpdateEventRequestDTO = {
+          title: "Event 2",
+        }
+        return pactum
+              .spec()
+              .patch("/events/{id}")
+              .withPathParams("id", "$S{eventId}")
+              .withBody(eventDto)
+              .expectStatus(200)
+              .expectBodyContains(eventDto.title)
+    })
+
+      it('should update a time of a event', () => {
+        const eventDto: UpdateEventRequestDTO = {
+          time: "18:00",
+        }
+        return pactum
+              .spec()
+              .patch("/events/{id}")
+              .withPathParams("id", "$S{eventId}")
+              .withBody(eventDto)
+              .expectStatus(200)
+              .expectBodyContains(eventDto.time)
+    })
+
+      it('should update a desciption of a event', () => {
+        const eventDto: UpdateEventRequestDTO = {
+          description: "Description 2 updated",
+        }
+        return pactum
+              .spec()
+              .patch("/events/{id}")
+              .withPathParams("id", "$S{eventId}")
+              .withBody(eventDto)
+              .expectStatus(200)
+              .expectBodyContains(eventDto.description)
+    })
+
+    it('should update a date of a event', () => {
+        const eventDto: UpdateEventRequestDTO = {
+          dateEvent: new Date("2025-01-01"),
+        }
+        return pactum
+              .spec()
+              .patch("/events/{id}")
+              .withPathParams("id", "$S{eventId}")
+              .withBody(eventDto)
+              .expectStatus(200)
+              .expectBodyContains(eventDto.dateEvent)
+    })
+
+    it('should update a activities of a event', () => {
+      const eventDto: UpdateEventRequestDTO = {
+        activities: ["updated activity 1", "updated' activity 2"],
+      }
+      return pactum
+            .spec()
+            .patch("/events/{id}")
+            .withPathParams("id", "$S{eventId}")
+            .withBody(eventDto)
+            .expectStatus(200)
+            .expectBodyContains(eventDto.activities[0])
+            .expectBodyContains(eventDto.activities[1])
+    })
+
+    it('should update a activities of a event', () => {
+      const eventDto: UpdateEventRequestDTO = {
+        target: ["target activity 1", "target' activity 2"],
+      }
+      return pactum
+            .spec()
+            .patch("/events/{id}")
+            .withPathParams("id", "$S{eventId}")
+            .withBody(eventDto)
+            .expectStatus(200)
+            .expectBodyContains(eventDto.target[0])
+            .expectBodyContains(eventDto.target[1])
+    })
+
+    it('should update a date of a event', () => {
+      const eventDto: UpdateEventRequestDTO = {
+        image: "NEWIMAGE",
+      }
+      return pactum
+            .spec()
+            .patch("/events/{id}")
+            .withPathParams("id", "$S{eventId}")
+            .withBody(eventDto)
+            .expectStatus(200)
+            .expectBodyContains(eventDto.image)
+    })
+
+  })
   })
 });

@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { EventService } from './event.service';
-import { CreateEventRequestDTO } from './dto';
+import { CreateEventRequestDTO, UpdateEventRequestDTO } from './dto';
 
 
 
@@ -22,5 +22,11 @@ export class EventController {
     @Get(':id')
     getEvent(@Param('id', ParseIntPipe) id: number) {
         return this.eventService.getEvent(id)
+    }
+
+
+    @Patch(":id")
+    updateEvent(@Param('id', ParseIntPipe) id: number, @Body() event: UpdateEventRequestDTO) {
+        return this.eventService.updateEvent(id, event)
     }
 }
