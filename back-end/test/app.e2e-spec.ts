@@ -183,6 +183,18 @@ describe('AppController (e2e)', () => {
             .expectBodyContains(eventDto.image)
     })
 
+    it('should return a error when update without a id valid', () => {
+      const eventDto: UpdateEventRequestDTO = {
+        image: "NEWIMAGE",
+      }
+      return pactum
+            .spec()
+            .patch("/events/{id}")
+            .withPathParams("id", "500")
+            .withBody(eventDto)
+            .expectStatus(403)
+    })
+
   })
 
   describe("DELETE", () => {
@@ -192,6 +204,14 @@ describe('AppController (e2e)', () => {
             .delete("/events/{id}")
             .withPathParams("id", "$S{eventId}")
             .expectStatus(204)
+    })
+
+    it('should reuturn a error when delete a event not found', () => {
+      return pactum
+            .spec()
+            .delete("/events/{id}")
+            .withPathParams("id", "500")
+            .expectStatus(403)
     })
   })
 

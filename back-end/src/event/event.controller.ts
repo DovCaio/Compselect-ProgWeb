@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventRequestDTO, UpdateEventRequestDTO } from './dto';
 
@@ -28,5 +28,11 @@ export class EventController {
     @Patch(":id")
     updateEvent(@Param('id', ParseIntPipe) id: number, @Body() event: UpdateEventRequestDTO) {
         return this.eventService.updateEvent(id, event)
+    }
+
+    @Delete(":id")
+    @HttpCode(HttpStatus.NO_CONTENT)
+    deleteEvent(@Param('id', ParseIntPipe) id: number) {
+        return this.eventService.deleteEvent(id)
     }
 }

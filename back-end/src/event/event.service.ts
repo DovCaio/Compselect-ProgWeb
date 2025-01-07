@@ -48,4 +48,22 @@ export class EventService {
         })
 
     }
+
+    async deleteEvent(id: number){
+        const eventExists = await this.prisma.event.findUnique({
+            where: {
+                id
+            }
+        })
+
+        if(!eventExists){
+            throw new ForbiddenException("Event not found")
+        }
+
+        return await this.prisma.event.delete({
+            where: {
+                id
+            }
+        })
+    }
 }
