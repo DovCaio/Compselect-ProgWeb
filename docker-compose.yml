@@ -18,27 +18,26 @@ services:
     ports:
       - "3333:3333"
     container_name: backend
-
   dev-db:
-    image: mongo:latest
-    container_name: dev-mongo
+    image: postgres:13
     ports:
-      - 27017:27017
+      - 5432:5432
     environment:
-      - MONGO_INITDB_ROOT_USERNAME:mongo
-      - MONGO_INITDB_ROOT_PASSWORD:123  
+      - POSTGRES_USER=compselectuser
+      - POSTGRES_PASSWORD=strongpasswordhere
+      - POSTGRES_DB=compselectdb
     networks:
-      - compselect-network
-
+      - learning-nest
   test-db:
-    image: mongo:latest
-    container_name: test-mongo
+    image: postgres:13
     ports:
-      - 27018:27017
+      - 5435:5432
     environment:
-      - MONGO_INITDB_ROOT_USERNAME:mongo
-      - MONGO_INITDB_ROOT_PASSWORD:123  
+      - POSTGRES_USER=compselectuser
+      - POSTGRES_PASSWORD=strongpasswordhere
+      - POSTGRES_DB=compselectdb
     networks:
-      - compselect-network
+      - learning-nest
 networks:
-  compselect-network:
+  learning-nest:
+

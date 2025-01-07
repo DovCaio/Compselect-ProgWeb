@@ -4,14 +4,14 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Event {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id Int @id @default(autoincrement())
   createAt DateTime @default(now())
-  title    String
+  title    String @unique
   dateEvent DateTime
   description String
   target String[]
@@ -22,11 +22,11 @@ model Event {
 
 
 model Post {
+  id Int @id @default(autoincrement())
 
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
   createAt DateTime @default(now())
   images Bytes[]
-  titles String[]
+  titles String[] @unique
   texts String[]
   links String[]
   sequenceOfContent Int[]
@@ -34,17 +34,16 @@ model Post {
 }
 
 model Comment {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id Int @id @default(autoincrement())
   createAt DateTime @default(now())
   userName String?
   email String
   accept Boolean
+  postId Int
   post Post @relation(fields: [postId], references: [id])
-  postId String @db.ObjectId
 }
-
 model Author {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id Int @id @default(autoincrement())
   createAt DateTime @default(now())
   firstName String
   lastName String
@@ -54,32 +53,33 @@ model Author {
 }
 
 model Publication {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id Int @id @default(autoincrement())
   title String
   image Bytes
   authors AuthorsOnPublications[]
 }
 
 model AuthorsOnPublications {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
   author Author @relation(fields: [authorId], references: [id])
   publication Publication @relation(fields: [publicationId], references: [id])
-  authorId String @db.ObjectId
-  publicationId String @db.ObjectId
-  
+  authorId Int
+  publicationId Int
+
+
+  @@id([authorId, publicationId])
 }
 
 model Statistics {
-    id String @id @map("_id") //O id não tem como ser gerato automaticamente, 
-    year Int
-    month Int
-    createAt DateTime @default(now())
-    qttCreateEvents Int
-    qttCreatePublications Int
-    qttCreateAuthors Int
-    qttCreatePost Int
-    qttVisitors Int
+  id Int @id @default(autoincrement())
+  year Int
+  month Int
+  createAt DateTime @default(now())
+  qttCreateEvents Int
+  qttCreatePublications Int
+  qttCreateAuthors Int
+  qttCreatePost Int
+  qttVisitors Int
 
 
-    @@unique([year, month])
+  @@unique([year, month])
 }
