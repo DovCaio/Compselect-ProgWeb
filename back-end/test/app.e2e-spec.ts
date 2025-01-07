@@ -29,7 +29,7 @@ describe('AppController (e2e)', () => {
 
   describe('Events', () => {
 
-    describe('GET', () => {
+    describe('POST', () => {
       const eventDto: CreateEventRequestDTO = {
         title: "Event 1",
         dateEvent: new Date(),
@@ -63,17 +63,30 @@ describe('AppController (e2e)', () => {
               })
               .expectStatus(400)
       })
+    }
+  )
 
-      it('should return all events', () => {
-        return pactum
-              .spec()
-              .get("/events")
-              .expectStatus(200)
-              .expectJsonLength(1)
-      })
+  describe('GET', () => {
 
+
+    it('should return all events', () => {
+      return pactum
+            .spec()
+            .get("/events")
+            .expectStatus(200)
+            .expectJsonLength(1)
     })
 
+    it('should return an event', () => {
+      return pactum
+            .spec()
+            .get("/events/{id}")
+            .withPathParams("id", 1)
+            .expectStatus(200)
+            .expectBodyContains("Event 1")
+    })
+
+  })
 
   })
 });
