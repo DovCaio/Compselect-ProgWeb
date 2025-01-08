@@ -568,6 +568,26 @@ describe('AppController (e2e)', () => {
       })
     })
 
+    describe("DELETE", () => {
+
+      it("should delete a post", () => {
+        return pactum
+              .spec()
+              .delete("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .expectStatus(204)
+      })
+
+      it("should return a error when delete a post not found", () => {
+        return pactum
+              .spec()
+              .delete("/blog/{id}")
+              .withPathParams("id", "500")
+              .expectStatus(403)
+      })
+    }
+    
+  )
 
   })
 

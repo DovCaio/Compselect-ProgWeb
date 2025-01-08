@@ -55,7 +55,6 @@ export class BlogService {
                 id
             }
         })
-        console.log(existsPost as CreatePostRequestDTO)
         if (!existsPost) {
             throw new ForbiddenException("Post not found")
         }
@@ -76,6 +75,22 @@ export class BlogService {
             },
             data: {
                 ...postdto
+            }
+        })
+    }
+
+    async deletePost(id: number){
+        const existsPost = await this.prisma.post.findUnique({
+            where: {
+                id
+            }
+        })
+        if (!existsPost) {
+            throw new ForbiddenException("Post not found")
+        }
+        return await this.prisma.post.delete({
+            where: {
+                id
             }
         })
     }
