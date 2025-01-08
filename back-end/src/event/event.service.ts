@@ -47,7 +47,6 @@ export class EventService {
     }
 
     async updateEvent(id: number, event: UpdateEventRequestDTO){
-        console.log(id)
         const eventExists = await this.prisma.event.findUnique({
             where: {
                 id

@@ -4,7 +4,7 @@ import { AppModule } from './../src/app.module';
 import  * as pactum from "pactum"
 import { PrismaService } from '../src/prisma/prisma.service';
 import { CreateEventRequestDTO, CreateLocationRequestDTO, UpdateEventRequestDTO } from '../src/event/dto';
-import { CreatePostRequestDTO } from 'src/blog/dto';
+import { CreatePostRequestDTO, UpdatePostRequestDTO } from 'src/blog/dto';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -351,6 +351,218 @@ describe('AppController (e2e)', () => {
         return pactum
               .spec()
               .post("/blog")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+    })
+
+    describe("GET", () => {
+
+      it('should return all blog', () => {
+        return pactum
+              .spec()
+              .get("/blog")
+              .expectStatus(200)
+              .expectJsonLength(1)
+      })
+      it('should return a blog', () => {
+        return pactum
+              .spec()
+              .get("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .expectStatus(200)
+      })
+    })
+
+    describe("PATCH", () => {
+
+      it("should update the titles of a blog", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          titles: ["title1Updated", "title2Updated"],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(200)
+              .expectBodyContains(blogDto.titles[0])
+              .expectBodyContains(blogDto.titles[1])
+      })
+
+
+      it("should update the imagens of a blog", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          images: ["image1Updated", "image2Updated"],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(200)
+              .expectBodyContains(blogDto.images[0])
+              .expectBodyContains(blogDto.images[1])
+      })
+
+      it("should update the texts of a blog", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          texts: ["text1Updated", "text2Updated"],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(200)
+              .expectBodyContains(blogDto.texts[0])
+              .expectBodyContains(blogDto.texts[1])
+      })
+      
+
+      it("should update the links of a blog", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          links: ["links1Updated", "links2Updated"],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(200)
+              .expectBodyContains(blogDto.links[0])
+              .expectBodyContains(blogDto.links[1])
+      })
+
+
+
+      it("should update the sequence of content of a blog", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          sequenceOfContent: [
+            1, 0, 3, 2, 1, 0, 3, 2,
+          ].reverse()
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(200)
+              .expectBodyContains(blogDto.sequenceOfContent[0])
+              .expectBodyContains(blogDto.sequenceOfContent[1])
+              .expectBodyContains(blogDto.sequenceOfContent[2])
+              .expectBodyContains(blogDto.sequenceOfContent[3])
+              .expectBodyContains(blogDto.sequenceOfContent[4])
+              .expectBodyContains(blogDto.sequenceOfContent[5])
+              .expectBodyContains(blogDto.sequenceOfContent[6])
+              .expectBodyContains(blogDto.sequenceOfContent[7])
+      })
+
+      it("should return a error when try to update a blog of a post not exists", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          titles: ["title1Updated", "title2Updated"],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "500")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a error when try to update a post wich the body has invalid quantity of titles", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          titles: ["title1Updated", "title2Updated", "title2Updated"],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a error when try to update a post wich the body has invalid quantity of titles", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          titles: ["title1Updated", "title2Updated", "title2Updated"],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a error when try to update a post wich the body has invalid quantity of images", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          images: ["images1Updated", "images2Updated", "images2Updated"],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a error when try to update a post wich the body has invalid quantity of texts", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          texts: ["texts1Updated", "texts2Updated", "texts2Updated"],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a error when try to update a post wich the body has invalid quantity of links", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          links: ["links1Updated", "links2Updated", "links2Updated"],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a error when try to update a post wich the body has invalid quantity of length of sequenceOfContent", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          sequenceOfContent: [0, 1, 2, 3, 4, 5, 6, 7],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a error when try to update a post wich the body has invalid quantity of length of sequenceOfContent", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          sequenceOfContent: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+
+      it("should return a error when try to update a post wich the body has invalid sequenceOfContent", () => {
+        const blogDto: UpdatePostRequestDTO = {
+          sequenceOfContent: [1, 0, 3, 2, 1, 2, 3, 2,],
+        }
+        return pactum
+              .spec()
+              .patch("/blog/{id}")
+              .withPathParams("id", "$S{blogId}")
               .withBody(blogDto)
               .expectStatus(403)
       })
