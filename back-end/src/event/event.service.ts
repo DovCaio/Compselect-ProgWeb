@@ -7,16 +7,25 @@ export class EventService {
     constructor(private prisma: PrismaService){}
 
     async createEvent(event: CreateEventRequestDTO){
+
         return await this.prisma.event.create({
             data: {
                 ...event,
+                location: {
+                    create: {
+                        ...event.location
+                    }
+                }
             }
         })
+
+        
     }
 
     async getEvents(){
         return await this.prisma.event.findMany()
     }
+
 
     async getEvent(id: number){
         return await this.prisma.event.findUnique({
@@ -43,7 +52,12 @@ export class EventService {
                 id
             },
             data: {
-                ...event
+                ...event,
+                location: {
+                    update: {
+                        ...event.location
+                    }
+                }
             }
         })
 

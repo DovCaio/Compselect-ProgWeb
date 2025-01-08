@@ -3,7 +3,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './../src/app.module';
 import  * as pactum from "pactum"
 import { PrismaService } from '../src/prisma/prisma.service';
-import { CreateEventRequestDTO, UpdateEventRequestDTO } from '../src/event/dto';
+import { CreateEventRequestDTO, CreateLocationRequestDTO, UpdateEventRequestDTO } from '../src/event/dto';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -30,6 +30,12 @@ describe('AppController (e2e)', () => {
   describe('Events', () => {
 
     describe('POST', () => {
+      const locationDto: CreateLocationRequestDTO = {
+        country: "Country 1",
+        city: "City 1",
+        street: "Street 1",
+        number: 1
+      }
       const eventDto: CreateEventRequestDTO = {
         title: "Event 1",
         dateEvent: new Date(),
@@ -37,7 +43,8 @@ describe('AppController (e2e)', () => {
         description: "Description 1",
         target: ["target 1", "target2"],
         activities: ["activity 1", "activity 2"],
-        image: "aedaedaae" //ISSO da que deve vir em string, usar o FileRead.readAsDataURL 
+        image: "aedaedaae", //ISSO da que deve vir em string, usar o FileRead.readAsDataURL
+        location: locationDto
       }
   
       it('should create an event', () => {
@@ -51,6 +58,11 @@ describe('AppController (e2e)', () => {
               .expectBodyContains(eventDto.description)
               .expectBodyContains(eventDto.dateEvent)
               .expectBodyContains(eventDto.image)
+              .expectBodyContains(eventDto.time)
+              .expectBodyContains(eventDto.target[0])
+              .expectBodyContains(eventDto.target[1])
+              .expectBodyContains(eventDto.activities[0])
+              .expectBodyContains(eventDto.activities[1])
 
       })
   
@@ -197,7 +209,7 @@ describe('AppController (e2e)', () => {
 
   })
 
-  describe("DELETE", () => {
+   describe("DELETE", () => {
     it('should delete a event', () => {
       return pactum
             .spec()

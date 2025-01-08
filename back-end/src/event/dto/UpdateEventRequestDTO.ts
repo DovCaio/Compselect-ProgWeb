@@ -1,5 +1,5 @@
 import { IsOptional, IsString, IsDateString, IsArray } from "class-validator";
-
+import { UpdateLocationRequestDTO } from "./UpdateLocationRequestDTO";
 export class UpdateEventRequestDTO {
     @IsString()
     @IsOptional()
@@ -27,4 +27,7 @@ export class UpdateEventRequestDTO {
 
     @IsOptional()
     image?: string
+
+    @IsOptional()
+    location?: UpdateLocationRequestDTO
 }

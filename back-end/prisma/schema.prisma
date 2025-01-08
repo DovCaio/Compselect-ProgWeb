@@ -18,8 +18,20 @@ model Event {
   target String[]
   activities String[]
   image String
-
+  location Location?
 }
+
+
+model Location {
+  id Int @id @default(autoincrement())
+  country String
+  city String
+  street String
+  number Int
+  eventId Int @unique
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
 
 
 model Post {
@@ -27,8 +39,8 @@ model Post {
 
   createAt DateTime @default(now())
   images String[]
-  titles String[] @unique
-  texts String[]
+  titles String[] 
+    texts String[]
   links String[]
   sequenceOfContent Int[]
   comments Comment[]
@@ -38,7 +50,7 @@ model Comment {
   id Int @id @default(autoincrement())
   createAt DateTime @default(now())
   userName String?
-  email String
+  email String @unique
   accept Boolean
   postId Int
   post Post @relation(fields: [postId], references: [id])
@@ -55,7 +67,7 @@ model Author {
 
 model Publication {
   id Int @id @default(autoincrement())
-  title String
+  title String @unique
   image String
   authors AuthorsOnPublications[]
 }

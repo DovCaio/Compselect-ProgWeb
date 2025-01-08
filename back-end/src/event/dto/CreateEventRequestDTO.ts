@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty,  IsDateString, IsArray} from "class-validator";
-
+import { CreateLocationRequestDTO } from "./CreateLocationRequestDTO";
 export class CreateEventRequestDTO {
     @IsString()
     @IsNotEmpty()
@@ -27,4 +27,9 @@ export class CreateEventRequestDTO {
 
     @IsNotEmpty()
     image: string
+
+    @IsNotEmpty()
+    location: CreateLocationRequestDTO;
+
+    
 }
