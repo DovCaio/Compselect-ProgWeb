@@ -43,10 +43,8 @@ model Post {
   texts String[]
   links String[]
   sequenceOfContent Int[] /*Cada indice é uma a posição do elemento, ex: indice 0, primeiro elemento.
-  Os valores nesses indices são o que representam o os elemeentos, ex: image - 0
-                                                                       title - 1
-                                                                       text - 2
-                                                                       link - 3
+  Os valores nesses indices são o que representam o os elemeentos, ex: image - 0, 
+  title - 1, text - 2, link - 3
   tamanho desse array sempre deve ser a quantidade de total de todos os itens: images titulos,
   textos e links, e também deve conter a quantidade correta de valores dos indices e os valores
   desses mesmos indices como coluna da tabela */

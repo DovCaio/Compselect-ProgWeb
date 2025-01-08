@@ -256,16 +256,16 @@ describe('AppController (e2e)', () => {
 
     describe("POST", () => {
 
+      const blogDto: CreatePostRequestDTO = {
+        images: ["image1", "image2"],
+        titles: ["title1", "title2"],
+        texts: ["text1", "text2"],
+        links: ["link1", "link2"],
+        sequenceOfContent: [
+          1, 0, 3, 2, 1, 0, 3, 2,
+        ]
+      }
       it('should create a blog', () => {
-        const blogDto: CreatePostRequestDTO = {
-          images: ["image1", "image2"],
-          titles: ["title1", "title2"],
-          texts: ["text1", "text2"],
-          links: ["link1", "link2"],
-          sequenceOfContent: [
-            1, 0, 3, 2, 1, 0, 3, 2,
-          ]
-        }
         return pactum
               .spec()
               .post("/blog")
@@ -281,7 +281,79 @@ describe('AppController (e2e)', () => {
               .expectBodyContains(blogDto.links[0])
               .expectBodyContains(blogDto.links[1])
               .expectBodyContains(blogDto.sequenceOfContent[0])
-              .expectBodyContains(blogDto.sequenceOfContent[1])})
+              .expectBodyContains(blogDto.sequenceOfContent[1])
+            })
+
+      it("shold return a erro when dont have a body", () => {
+        return pactum
+              .spec()
+              .post("/blog")
+              .withBody({})
+              .expectStatus(400)
+      })
+      //Há muitos tests a serem feitos aqui, mas vou deixar apenas alguns por enquanto
+      //Todos esses testes estão relacionados com a variaável blog, e dependem de manterem a mesma sequência
+
+      it("should return a erro when dont have the same quantity of a total of all content with sequenceOfContent", () => {
+        blogDto.sequenceOfContent.pop()
+        return pactum
+              .spec()
+              .post("/blog")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+      
+      it("should return a erro when dont have the same quantity of a total of image content", () => {
+        blogDto.images.pop()
+        blogDto.sequenceOfContent.push(2)
+        blogDto.titles.push("title 5")
+        return pactum
+              .spec()
+              .post("/blog")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a erro when dont have the same quantity of a total of title content", () => {
+        blogDto.titles.pop()
+        blogDto.titles.pop()
+        blogDto.images.push("image3")
+        return pactum
+              .spec()
+              .post("/blog")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a erro when dont have the same quantity of a total of texts content", () => {
+        blogDto.texts.pop()
+        blogDto.titles.push("title 3")
+        return pactum
+              .spec()
+              .post("/blog")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a erro when dont have the same quantity of a total of links content", () => {
+        blogDto.links.pop()
+        blogDto.texts.push("title 3")
+        return pactum
+              .spec()
+              .post("/blog")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
+
+      it("should return a erro when dont have the same quantity of a total of links content", () => {
+        blogDto.links.pop()
+        blogDto.texts.push("title 3")
+        return pactum
+              .spec()
+              .post("/blog")
+              .withBody(blogDto)
+              .expectStatus(403)
+      })
     })
 
 
