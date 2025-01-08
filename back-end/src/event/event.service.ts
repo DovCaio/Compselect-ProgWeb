@@ -56,6 +56,9 @@ export class EventService {
 
         if(!eventExists){
             throw new ForbiddenException("Event not found")
+        }else if (event.dateEvent && !this.eventHaveValidDate(event.dateEvent)){
+            throw new ForbiddenException("Date must be greater than today")
+
         }
 
         return await this.prisma.event.update({

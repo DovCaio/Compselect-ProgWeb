@@ -79,7 +79,6 @@ describe('AppController (e2e)', () => {
 
       it("shold return a erro when create a event with data already passed", () => {
         eventDto.dateEvent = new Date(Date.UTC(2024, 11, 25))
-        console.log("date >>>>>>>>>>>>>>>>>>>>>", eventDto.dateEvent)
         eventDto.title = "Shold be a erro"
         return pactum
         .spec()
@@ -154,7 +153,7 @@ describe('AppController (e2e)', () => {
 
     it('should update a date of a event', () => {
         const eventDto: UpdateEventRequestDTO = {
-          dateEvent: new Date("2025-01-01"),
+          dateEvent: new Date("2030-01-01"), //talves um dia seja necessário alterar essa data para o teste passar
         }
         return pactum
               .spec()
@@ -164,6 +163,18 @@ describe('AppController (e2e)', () => {
               .expectStatus(200)
               .expectBodyContains(eventDto.dateEvent)
     })
+
+    it('should throw a error when update a date invalid of a event', () => {
+      const eventDto: UpdateEventRequestDTO = {
+        dateEvent: new Date("2024-11-15"), //talves um dia seja necessário alterar essa data para o teste passar
+      }
+      return pactum
+            .spec()
+            .patch("/events/{id}")
+            .withPathParams("id", "$S{eventId}")
+            .withBody(eventDto)
+            .expectStatus(403)
+  })
 
     it('should update a activities of a event', () => {
       const eventDto: UpdateEventRequestDTO = {
