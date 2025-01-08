@@ -4,6 +4,7 @@ import { AppModule } from './../src/app.module';
 import  * as pactum from "pactum"
 import { PrismaService } from '../src/prisma/prisma.service';
 import { CreateEventRequestDTO, CreateLocationRequestDTO, UpdateEventRequestDTO } from '../src/event/dto';
+import { CreatePostRequestDTO } from 'src/blog/dto';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -231,7 +232,7 @@ describe('AppController (e2e)', () => {
 
   })
 
-   describe("DELETE", () => {
+    describe("DELETE", () => {
     it('should delete a event', () => {
       return pactum
             .spec()
@@ -248,6 +249,47 @@ describe('AppController (e2e)', () => {
             .expectStatus(403)
     })
   })
+
+  })
+
+  describe("Blog", () => {
+
+    describe("POST", () => {
+
+      it('should create a blog', () => {
+        const blogDto: CreatePostRequestDTO = {
+          images: ["image1", "image2"],
+          titles: ["title1", "title2"],
+          texts: ["text1", "text2"],
+          links: ["link1", "link2"],
+          sequenceOfContent: [
+            1, 0, 3, 2, 1, 0, 3, 2,
+          ]
+        }
+        return pactum
+              .spec()
+              .post("/blog")
+              .withBody(blogDto)
+              .expectStatus(201)
+              .stores("blogId", "id")
+              .expectBodyContains(blogDto.images[0])
+              .expectBodyContains(blogDto.images[1])
+              .expectBodyContains(blogDto.titles[0])
+              .expectBodyContains(blogDto.titles[1])
+              .expectBodyContains(blogDto.texts[0])
+              .expectBodyContains(blogDto.texts[1])
+              .expectBodyContains(blogDto.links[0])
+              .expectBodyContains(blogDto.links[1])
+              .expectBodyContains(blogDto.sequenceOfContent[0])
+              .expectBodyContains(blogDto.sequenceOfContent[1])})
+    })
+
+
+  })
+
+  describe("Publications", () => {
+
+    it.todo("Fazer os tests e a implementação de publications")
 
   })
 });

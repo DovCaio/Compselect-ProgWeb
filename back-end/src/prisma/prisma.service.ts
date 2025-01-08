@@ -18,7 +18,10 @@ export class PrismaService extends PrismaClient{
         this.$connect();
         return this.$transaction([
             this.location.deleteMany(),
-            this.event.deleteMany()
+            this.event.deleteMany(),
+            this.post.deleteMany(),
+            this.comment.deleteMany(),
+            this.publication.deleteMany()
         ])
     }
 
