@@ -38,7 +38,7 @@ describe('AppController (e2e)', () => {
       }
       const eventDto: CreateEventRequestDTO = {
         title: "Event 1",
-        dateEvent: new Date(),
+        dateEvent: new Date(Date.UTC(2030, 5, 19)), //Talvez isso deva ser atualizado a depender da data em que está sendo testado
         time: "10:00",
         description: "Description 1",
         target: ["target 1", "target2"],
@@ -75,6 +75,17 @@ describe('AppController (e2e)', () => {
                 title: ""
               })
               .expectStatus(400)
+      })
+
+      it("shold return a erro when create a event with data already passed", () => {
+        eventDto.dateEvent = new Date(Date.UTC(2024, 11, 25))
+        console.log("date >>>>>>>>>>>>>>>>>>>>>", eventDto.dateEvent)
+        eventDto.title = "Shold be a erro"
+        return pactum
+        .spec()
+        .post("/events")
+        .withBody(eventDto)
+        .expectStatus(403)
       })
     }
   )

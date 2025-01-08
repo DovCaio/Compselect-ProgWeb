@@ -6,7 +6,12 @@ import { CreateEventRequestDTO, UpdateEventRequestDTO } from './dto';
 export class EventService {
     constructor(private prisma: PrismaService){}
 
+
     async createEvent(event: CreateEventRequestDTO){
+
+        if(!this.eventHaveValidDate(event.dateEvent)) {
+            throw new ForbiddenException("Date must be greater than today");
+        }
 
         return await this.prisma.event.create({
             data: {
@@ -20,6 +25,12 @@ export class EventService {
         })
 
         
+    }
+
+    private eventHaveValidDate(date: Date) {
+        const today = new Date()
+        date = new Date(date)
+        return date > today;
     }
 
     async getEvents(){
