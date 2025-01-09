@@ -62,7 +62,7 @@ model Comment {
   seja aceita ou não, caso seja aceita 
 
   */
-  emailVerificationToken String
+  emailVerificationToken String @unique
   content String
   postId Int
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)

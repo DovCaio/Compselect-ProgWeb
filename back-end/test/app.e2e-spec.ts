@@ -639,8 +639,51 @@ describe('AppController (e2e)', () => {
   
       })
 
+
+      
+
       describe("PATCH", () => {
-        it("should acept a comment", () => {
+        /*  Infelizmente não consegui recuperar o token para testar isso automaticamente
+        it("should make a comment not pending", () => {
+          return pactum
+                .spec()
+                .patch("/blog/{id}/comment/{tokenToValidate}")
+                .withPathParams("id", "$S{postId}")
+                .withPathParams("tokenToValidate", "DEVERIA TER UMA FORMA DE RECUPERAR ISSO")
+                .expectStatus(200)
+        })
+        */
+        it("should return a error when try to make a comment not pending in a post not found", () => {
+          return pactum
+                .spec()
+                .patch("/blog/{id}/comment/{tokenToValidate}")
+                .withPathParams("id", "500")
+                .withPathParams("tokenToValidate", "DEVERIA TER UMA FORMA DE RECUPERAR ISSO")
+                .expectStatus(403)
+                .expectBodyContains("Post not found")
+        })
+        /* Infelizmente não consegui recuperar o token para testar isso automaticamente
+        it("should return a error when try to make a comment not pending whith a invalid token", () => {
+          return pactum
+                .spec()
+                .patch("/blog/{id}/comment/{tokenToValidate}")
+                .withPathParams("id", "$S{postId}")
+                .withPathParams("tokenToValidate", "Token inválid")
+                .expectStatus(403)
+                .expectBodyContains("This token do not exist")
+        })
+
+        it("should return a error when try to make a comment already not pending into a comment not pending ", () => {
+          return pactum
+                .spec()
+                .patch("/blog/{id}/comment/{tokenToValidate}")
+                .withPathParams("id", "$S{postId}")
+                .withPathParams("tokenToValidate", "DEVERIA TER UMA FORMA DE RECUPERAR ISSO")
+                .expectStatus(403)
+                .expectBodyContains("Comment already not pending")
+        })
+        */
+        it("should accept a comment", () => {
           return pactum
                 .spec()
                 .patch("/blog/{id}/comment/{commentId}/accept")
@@ -678,15 +721,50 @@ describe('AppController (e2e)', () => {
                 .expectStatus(403)
                 .expectBodyContains("Comment already accepted")
         })
+
+
       })
 
       describe("GET", () => {
 
+        it("should return a comment", () => {
+          const commentDto: CreateCommentDTO = {
+            userName: "user2",
+            email: "test@gmail.com", 
+            content: "Também achei o assunto desse post interessante.",
+          }
+          return pactum
+                .spec()
+                .post("/blog/{id}/comment")
+                .withPathParams("id", "$S{postId}")
+                .withBody(commentDto)
+                .expectStatus(201)
+        })
+
         it("should return comments not pendings and not acepted", () => {
           return pactum
                 .spec()
-                .get("/blog/{id}/comments")
+                .get("/blog/{id}/comments/not-accepteds")
                 .withPathParams("id", "$S{postId}")
+                .expectStatus(200)
+                .expectJsonLength(1)
+        }) 
+
+        it("should return a error when try to get comments in a post not found", () => {
+          return pactum
+                .spec()
+                .get("/blog/{id}/comments/not-accepteds")
+                .withPathParams("id", "500")
+                .expectStatus(403)
+                .expectBodyContains("Post not found")
+        })
+
+        it("should return comments not pending and accepted", () => {
+          return pactum
+                .spec()
+                .get("/blog/{id}/comments/accepteds")
+                .withPathParams("id", "$S{postId}")
+                .withPathParams("commentId", "$S{commentId}")
                 .expectStatus(200)
                 .expectJsonLength(1)
         })
@@ -694,7 +772,7 @@ describe('AppController (e2e)', () => {
         it("should return a error when try to get comments in a post not found", () => {
           return pactum
                 .spec()
-                .get("/blog/{id}/comments")
+                .get("/blog/{id}/comments/accepteds")
                 .withPathParams("id", "500")
                 .expectStatus(403)
                 .expectBodyContains("Post not found")

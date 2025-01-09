@@ -49,10 +49,23 @@ export class BlogController {
         })
     }
 
-    @Get(":id/comments")
+    @Get(":id/comments/not-accepteds")
     getCommentsNotAcceptedAndNotPending(@Param("id", ParseIntPipe) postId: number){
 
         return this.blogService.getCommentsNotAcceptedAndNotPending(postId)
+    }
+
+    @Get(":id/comments/accepteds")
+    getCommentsAccepted(@Param("id", ParseIntPipe) postId: number){
+
+        return this.blogService.getCommentsAccepted(postId)
+    }
+
+
+    @Patch(":id/comment/:tokenForValidation")
+    async validateCommentToken(@Param("id", ParseIntPipe) postId: number,
+     @Param("tokenForValidation") tokenForValidation: string) {
+        return  await this.blogService.validateCommentToken(postId, tokenForValidation)
     }
 
     @Patch(":id/comment/:commentId/accept")
