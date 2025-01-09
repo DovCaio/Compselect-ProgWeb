@@ -240,5 +240,36 @@ export class BlogService {
         })
     }
 
+    async deleteComment(postId: number, commentId: number){
+
+        const existsPost = await this.prisma.post.findUnique({
+            where: {
+                id: postId
+            }
+        })
+
+        if (!existsPost) {
+            throw new ForbiddenException("Post not found")
+        }
+
+        const existsComment = await this.prisma.comment.findUnique({
+            where: {
+                id: commentId
+            }
+        })
+
+        if (!existsComment) {
+            throw new ForbiddenException("Comment not found")
+        }else if(existsPost.id !== existsComment.postId){
+            throw new ForbiddenException("Comment not found")
+        }
+
+        return this.prisma.comment.delete({
+            where: {
+                id: commentId
+            }
+        })
+    }
+
 
 }

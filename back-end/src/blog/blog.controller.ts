@@ -75,4 +75,11 @@ export class BlogController {
         
     }
 
+    @HttpCode(HttpStatus.NO_CONTENT)
+    @Delete(":id/comment/:commentId")
+    async deleteComment(@Param("id", ParseIntPipe) postId: number,
+     @Param("commentId", ParseIntPipe) commentId: number) {
+        return  await this.blogService.deleteComment(postId, commentId)        
+    }
+
 }

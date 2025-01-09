@@ -640,8 +640,6 @@ describe('AppController (e2e)', () => {
       })
 
 
-      
-
       describe("PATCH", () => {
         /*  Infelizmente não consegui recuperar o token para testar isso automaticamente
         it("should make a comment not pending", () => {
@@ -777,6 +775,40 @@ describe('AppController (e2e)', () => {
                 .expectStatus(403)
                 .expectBodyContains("Post not found")
         })
+      })
+
+      describe("DELETE", () => {
+
+        it("should return a error when try to delete a comment in a post not found", () => {
+          return pactum
+                .spec()
+                .delete("/blog/{id}/comment/{commentId}")
+                .withPathParams("id", "500")
+                .withPathParams("commentId", "$S{commentId}")
+                .expectStatus(403)
+                .expectBodyContains("Post not found")
+        })
+
+        it("should return a error when try to delete a comment not found", () => {
+          return pactum
+                .spec()
+                .delete("/blog/{id}/comment/{commentId}")
+                .withPathParams("id", "$S{postId}")
+                .withPathParams("commentId", "500")
+                .expectStatus(403)
+                .expectBodyContains("Comment not found")
+        })
+
+        it("should delete a comment", () => {
+          return pactum
+                .spec()
+                .delete("/blog/{id}/comment/{commentId}")
+                .withPathParams("id", "$S{postId}")
+                .withPathParams("commentId", "$S{commentId}")
+                .expectStatus(204)
+        })
+
+
       })
 
 
