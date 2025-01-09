@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { EventModule } from './event/event.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PublicationModule } from './publication/publication.module';
 import { BlogModule } from './blog/blog.module';
 
@@ -20,4 +20,5 @@ import { BlogModule } from './blog/blog.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+}

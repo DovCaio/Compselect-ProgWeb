@@ -4,7 +4,7 @@ import { AppModule } from './../src/app.module';
 import  * as pactum from "pactum"
 import { PrismaService } from '../src/prisma/prisma.service';
 import { CreateEventRequestDTO, CreateLocationRequestDTO, UpdateEventRequestDTO } from '../src/event/dto';
-import { CreatePostRequestDTO, UpdatePostRequestDTO } from 'src/blog/dto';
+import { CreateCommentDTO, CreatePostRequestDTO, UpdatePostRequestDTO } from 'src/blog/dto';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -589,6 +589,120 @@ describe('AppController (e2e)', () => {
     
   )
 
+    describe("Comments", () => { 
+      const postDto: CreatePostRequestDTO = {
+        titles: ["title1", "title2", "title3"],
+        images: ["images1", "images2", "images3"],
+        texts: ["texts1", "texts2", "texts3"],
+        links: ["links1", "links2", "links3"],
+        sequenceOfContent: [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3],
+      }
+      it("should create a post", () => {
+          return pactum
+                .spec()
+                .post("/blog")
+                .withBody(postDto)
+                .stores("postId", "id")
+      })
+
+
+
+      describe("POST", () => {
+        const commentDto: CreateCommentDTO = {
+          userName: "user1",
+          email: "caiosciencec@gmail.com", 
+          content: "Muito interessante o assunto desse post.",
+        }
+  
+        it("should create a comment", () => {
+          return pactum
+                .spec()
+                .post("/blog/{id}/comment")
+                .withPathParams("id", "$S{postId}")
+                .withBody(commentDto)
+                .expectStatus(201)
+                .stores("commentId", "id")
+                .expectBodyContains(commentDto.userName)
+                .expectBodyContains(commentDto.email)
+                .expectBodyContains(commentDto.content)
+        })
+
+        it("should return a error when try to create a comment in a post not found", () => {
+          return pactum
+                .spec()
+                .post("/blog/{id}/comment")
+                .withPathParams("id", "500")
+                .withBody(commentDto)
+                .expectStatus(403)
+                .expectBodyContains("Post not found")
+        })
+  
+      })
+
+      describe("PATCH", () => {
+        it("should acept a comment", () => {
+          return pactum
+                .spec()
+                .patch("/blog/{id}/comment/{commentId}/accept")
+                .withPathParams("id", "$S{postId}")
+                .withPathParams("commentId", "$S{commentId}")
+                .expectStatus(200)
+        })
+
+        it("should return a error when try to acept a comment in a post not found", () => {
+          return pactum
+                .spec()
+                .patch("/blog/{id}/comment/{commentId}/accept")
+                .withPathParams("id", "500")
+                .withPathParams("commentId", "500")
+                .expectStatus(403)
+                .expectBodyContains("Post not found")
+        })
+
+        it("should return a error when try to acept a comment not found", () => {
+          return pactum
+                .spec()
+                .patch("/blog/{id}/comment/{commentId}/accept")
+                .withPathParams("id", "$S{postId}")
+                .withPathParams("commentId", "500")
+                .expectStatus(403)
+                .expectBodyContains("Comment not found")
+        })
+
+        it("should return a error when try to acept a comment already acepted", () => {
+          return pactum
+                .spec()
+                .patch("/blog/{id}/comment/{commentId}/accept")
+                .withPathParams("id", "$S{postId}")
+                .withPathParams("commentId", "$S{commentId}")
+                .expectStatus(403)
+                .expectBodyContains("Comment already accepted")
+        })
+      })
+
+      describe("GET", () => {
+
+        it("should return comments not pendings and not acepted", () => {
+          return pactum
+                .spec()
+                .get("/blog/{id}/comments")
+                .withPathParams("id", "$S{postId}")
+                .expectStatus(200)
+                .expectJsonLength(1)
+        })
+
+        it("should return a error when try to get comments in a post not found", () => {
+          return pactum
+                .spec()
+                .get("/blog/{id}/comments")
+                .withPathParams("id", "500")
+                .expectStatus(403)
+                .expectBodyContains("Post not found")
+        })
+      })
+
+
+    } )
   })
 
   describe("Publications", () => {

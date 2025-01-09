@@ -1,6 +1,6 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, UseInterceptors } from '@nestjs/common';
 import { BlogService } from './blog.service';
-import { CreatePostRequestDTO, UpdatePostRequestDTO } from './dto';
+import { CreateCommentDTO, CreatePostRequestDTO, UpdatePostRequestDTO } from './dto';
 
 
 @Controller('blog')
@@ -35,6 +35,31 @@ export class BlogController {
     @HttpCode(HttpStatus.NO_CONTENT)
     deletePost(@Param("id", ParseIntPipe) id: number){
         return this.blogService.deletePost(id)
+    }
+
+
+    //Comentários
+
+    @UseInterceptors(ClassSerializerInterceptor)
+    @Post(":id/comment")
+    async createComment(@Param("id", ParseIntPipe) postId: number,
+     @Body() commentDto: CreateCommentDTO) {
+        return  new CreateCommentDTO({
+            ...(await this.blogService.createComment(postId, commentDto))
+        })
+    }
+
+    @Get(":id/comments")
+    getCommentsNotAcceptedAndNotPending(@Param("id", ParseIntPipe) postId: number){
+
+        return this.blogService.getCommentsNotAcceptedAndNotPending(postId)
+    }
+
+    @Patch(":id/comment/:commentId/accept")
+    async updateComment(@Param("id", ParseIntPipe) postId: number,
+     @Param("commentId", ParseIntPipe) commentId: number) {
+        return  await this.blogService.acceptComment(postId, commentId)
+        
     }
 
 }

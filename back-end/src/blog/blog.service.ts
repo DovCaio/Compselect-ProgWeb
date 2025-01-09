@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreatePostRequestDTO, UpdatePostRequestDTO } from './dto';
-
+import { CreateCommentDTO, CreatePostRequestDTO, UpdatePostRequestDTO } from './dto';
+import { v4 as uuid} from "uuid";
 @Injectable()
 export class BlogService {
 
@@ -95,4 +95,91 @@ export class BlogService {
         })
     }
 
+    async createComment(postId: number, commentDto: CreateCommentDTO){
+        
+        const exitsPost = await this.prisma.post.findUnique({
+            where: {
+                id: postId
+            }
+        })
+
+        if (!exitsPost) {
+            throw new ForbiddenException("Post not found")
+        }
+        
+        
+        const emailVerificationToken = uuid()
+
+        //Enviar email
+
+        return await this.prisma.comment.create({
+            data: {
+                ...commentDto,
+                accept: false,
+                pending: true,
+                emailVerificationToken,
+                post: {
+
+                    connect: {
+                        id: postId
+                    }
+                }
+            }
+        })
+    }
+
+    async getCommentsNotAcceptedAndNotPending(postId: number){
+
+        const existsPost = await this.prisma.post.findUnique({
+            where: {
+                id: postId
+            }
+        })
+
+        if (!existsPost) {
+            throw new ForbiddenException("Post not found")
+        }
+
+        return  await this.prisma.comment.findMany({
+            where: {
+                postId,
+                accept: false,
+                pending: true
+            }
+        })
+    }
+
+    async acceptComment(postId: number, commentId: number){
+
+        const existsPost = await this.prisma.post.findUnique({
+            where: {
+                id: postId
+            }
+        })
+
+        if (!existsPost) {
+            throw new ForbiddenException("Post not found")
+        }
+
+        const existsComment = await this.prisma.comment.findUnique({
+            where: {
+                id: commentId
+            }
+        })
+
+        if (!existsComment) {
+            throw new ForbiddenException("Comment not found")
+        }else  if(existsComment.accept){
+            throw new ForbiddenException("Comment already accepted")
+        }
+
+        return await this.prisma.comment.update({
+            where: {
+                id: commentId
+            },
+            data: {
+                accept: true
+            }
+        })
+    }
 }
