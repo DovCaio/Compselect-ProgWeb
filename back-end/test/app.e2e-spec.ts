@@ -820,15 +820,15 @@ describe('AppController (e2e)', () => {
 
 
 
+    const authorDto: CreateAuthorDTO = {
+      firstName: "Author 1 FistName",
+      lastName: "Author 1 LastName",
+      image: "É uma imagen",
+      bibliography: "bibliografia",
+      publications: []
+    }
     describe("POST", () => {
 
-      const authorDto: CreateAuthorDTO = {
-        firstName: "Author 1 FistName",
-        lastName: "Author 1 LastName",
-        image: "É uma imagen",
-        bibliography: "bibliografia",
-        publications: []
-      }
 
       it("should create a author without publications", () => {
         return pactum
@@ -872,6 +872,26 @@ describe('AppController (e2e)', () => {
               .expectJsonLength(1)
       })
 
+      it("should return an author", () => {
+        return pactum
+              .spec()
+              .get("/authors/{id}")
+              .withPathParams("id", "$S{authorId}")
+              .expectStatus(200)
+              .expectBodyContains(authorDto.firstName)
+              .expectBodyContains(authorDto.lastName)
+              .expectBodyContains(authorDto.image)
+              .expectBodyContains(authorDto.bibliography)
+      })
+
+      it("should return a error when try to get an author not found", () => {
+        return pactum
+              .spec()
+              .get("/authors/{id}")
+              .withPathParams("id", "500")
+              .expectStatus(403)
+              .expectBodyContains("Author not found")
+      })
 
     })
 

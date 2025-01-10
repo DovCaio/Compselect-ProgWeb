@@ -20,7 +20,6 @@ export class AuthorService {
                 }
             })
             if (publications.length !== authorDto.publications.length) {
-                console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>")
                 throw new ForbiddenException("Publication not found")
             }
         }
@@ -38,6 +37,23 @@ export class AuthorService {
             }
             
         })
+    }
+
+    getAuthors(){
+        return this.prisma.author.findMany()
+    }
+
+    async getAuthor(id: number){
+        const author = await this.prisma.author.findUnique({
+            where: {
+                id
+            }
+        })
+        if (!author) {
+            throw new ForbiddenException("Author not found")
+        }
+
+        return author 
     }
 
 }

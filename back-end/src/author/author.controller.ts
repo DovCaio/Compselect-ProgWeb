@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { AuthorService } from './author.service';
 import { CreateAuthorDTO } from './dto';
 
@@ -10,6 +10,16 @@ export class AuthorController {
     @Post()
     createAuthor(@Body() authorDto: CreateAuthorDTO) {
         return this.authorService.createAuthor(authorDto)
+    }
+
+    @Get()
+    getAuthors() {
+        return this.authorService.getAuthors()
+    }
+
+    @Get(":id")
+    getAuthor(@Param("id", ParseIntPipe) id: number) {
+        return this.authorService.getAuthor(id)
     }
 
 }
