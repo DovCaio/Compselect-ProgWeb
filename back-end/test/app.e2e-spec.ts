@@ -5,6 +5,7 @@ import  * as pactum from "pactum"
 import { PrismaService } from '../src/prisma/prisma.service';
 import { CreateEventRequestDTO, CreateLocationRequestDTO, UpdateEventRequestDTO } from '../src/event/dto';
 import { CreateCommentDTO, CreatePostRequestDTO, UpdatePostRequestDTO } from 'src/blog/dto';
+import { CreateAuthorDTO } from 'src/author/dto';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -815,9 +816,72 @@ describe('AppController (e2e)', () => {
     } )
   })
 
+  describe("Authors", () => {
+
+
+
+    describe("POST", () => {
+
+      const authorDto: CreateAuthorDTO = {
+        firstName: "Author 1 FistName",
+        lastName: "Author 1 LastName",
+        image: "É uma imagen",
+        bibliography: "bibliografia",
+        publications: []
+      }
+
+      it("should create a author without publications", () => {
+        return pactum
+              .spec()
+              .post("/authors")
+              .withBody(authorDto)
+              .expectStatus(201)
+              .stores("authorId", "id")
+              .expectBodyContains(authorDto.firstName)
+              .expectBodyContains(authorDto.lastName)
+              .expectBodyContains(authorDto.image)
+              .expectBodyContains(authorDto.bibliography)
+      })
+
+      it("should return a error when try to create a author with invalid publications ", () => {
+        const authorDto: CreateAuthorDTO = {
+          firstName: "Author 2 FistName",
+          lastName: "Author 2 LastName",
+          image: "É uma imagen",
+          bibliography: "bibliografia",
+          publications: ["Not found publication 1", "Not found publication 2"]
+        }
+        return pactum
+              .spec()
+              .post("/authors")
+              .withBody(authorDto)
+              .expectStatus(403)
+              .expectBodyContains("Publication not found")
+      })
+
+      it.todo("Deve ter o test para quando existe publications.")
+    })
+
+    describe("GET", () => {
+
+      it("should return all authors", () => {
+        return pactum
+              .spec()
+              .get("/authors")
+              .expectStatus(200)
+              .expectJsonLength(1)
+      })
+
+
+    })
+
+  })
+
   describe("Publications", () => {
 
     it.todo("Fazer os tests e a implementação de publications")
 
   })
+
+
 });

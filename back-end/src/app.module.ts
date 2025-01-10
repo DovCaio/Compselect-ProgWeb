@@ -6,6 +6,7 @@ import { EventModule } from './event/event.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PublicationModule } from './publication/publication.module';
 import { BlogModule } from './blog/blog.module';
+import { AuthorModule } from './author/author.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { BlogModule } from './blog/blog.module';
     PrismaModule,
      EventModule,
      PublicationModule,
-     BlogModule
+     BlogModule,
+     AuthorModule
     ],
   controllers: [AppController],
   providers: [AppService],
