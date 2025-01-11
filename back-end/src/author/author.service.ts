@@ -1,6 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateAuthorDTO } from './dto';
+import { CreateAuthorDTO, UpdateAuthorDTO } from './dto';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class AuthorService {
@@ -28,6 +29,7 @@ export class AuthorService {
             data: {
                 ...authorDto,
                 publications: {
+                    
                     create: publications.map((publicationId) => {
                         return {
                             publicationId
@@ -56,4 +58,67 @@ export class AuthorService {
         return author 
     }
 
+    async updateAuthor(id: number, authorDto: UpdateAuthorDTO){
+        let publications = []
+
+        if(authorDto.publications && authorDto.publications.length > 0){
+
+            try {
+
+                publications = await this.prisma.publication.findMany({
+                    where: {
+                        title: {
+                            in: authorDto.publications
+                        }
+                    }
+                })
+            }catch(error){
+                if ((error instanceof  Prisma.PrismaClientKnownRequestError && error.code === "P2025") ||
+                        publications.length !== authorDto.publications.length) {
+                    throw new ForbiddenException("Publication not found")
+                }
+                throw error
+            }
+        }
+
+        try{
+            return await this.prisma.author.update({
+               
+                data: {
+                    ...authorDto,
+                    publications: {
+                        create: publications.map((publicationId) => {
+                            return {
+                                publicationId
+                            }
+                        })
+                    }
+                },
+                where: {
+                    id
+                }
+            })
+        } catch (error) {
+            if (error instanceof  Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+                throw new ForbiddenException("Author not found")
+            }
+            throw error
+        }
+    }
+
+
+    async deleteAuthor(id: number){
+        try{
+            return await this.prisma.author.delete({
+                where: {
+                    id
+                }
+            })    
+        }catch(error){
+            if (error instanceof  Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+                throw new ForbiddenException("Author not found")
+            }
+            throw error
+        }
+    }
 }

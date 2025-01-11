@@ -5,7 +5,7 @@ import  * as pactum from "pactum"
 import { PrismaService } from '../src/prisma/prisma.service';
 import { CreateEventRequestDTO, CreateLocationRequestDTO, UpdateEventRequestDTO } from '../src/event/dto';
 import { CreateCommentDTO, CreatePostRequestDTO, UpdatePostRequestDTO } from 'src/blog/dto';
-import { CreateAuthorDTO } from 'src/author/dto';
+import { CreateAuthorDTO, UpdateAuthorDTO } from 'src/author/dto';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -893,6 +893,110 @@ describe('AppController (e2e)', () => {
               .expectBodyContains("Author not found")
       })
 
+    })
+
+
+    describe("PATCH", () => {
+      const authorUpdateDto : UpdateAuthorDTO = {
+        firstName: "Author 1 FistName Update",
+        lastName: "Author 1 LastName Update",
+        image: "É uma imagen Update",
+        bibliography: "bibliografia Update",
+        publications: []
+      }
+      it("should update all fields of  author", () => {
+        return pactum
+              .spec()
+              .patch("/authors/{id}")
+              .withPathParams("id", "$S{authorId}")
+              .withBody(authorUpdateDto)
+              .expectStatus(200)
+              .expectBodyContains(authorUpdateDto.firstName)
+              .expectBodyContains(authorUpdateDto.lastName)
+              .expectBodyContains(authorUpdateDto.image)
+              .expectBodyContains(authorUpdateDto.bibliography)
+      })
+
+      it("shoul update only firstName fields of  author", () => {
+        const authorUpdateDto : UpdateAuthorDTO = {
+          firstName: "Author 1 Only FistName Update",
+        }
+        return pactum
+              .spec()
+              .patch("/authors/{id}")
+              .withPathParams("id", "$S{authorId}")
+              .withBody(authorUpdateDto)
+              .expectStatus(200)
+              .expectBodyContains(authorUpdateDto.firstName)
+      })
+
+      it("should update only lastName fields of  author", () => {
+        const authorUpdateDto : UpdateAuthorDTO = {
+          lastName: "Author 1 Only LastName Update",
+        }
+        return pactum
+              .spec()
+              .patch("/authors/{id}")
+              .withPathParams("id", "$S{authorId}")
+              .withBody(authorUpdateDto)
+              .expectStatus(200)
+              .expectBodyContains(authorUpdateDto.lastName)
+      })
+
+      it("should update only image fields of  author", () => {
+        const authorUpdateDto : UpdateAuthorDTO = {
+          image: "É uma imagen Update",
+        }
+        return pactum
+              .spec()
+              .patch("/authors/{id}")
+              .withPathParams("id", "$S{authorId}")
+              .withBody(authorUpdateDto)
+              .expectStatus(200)
+              .expectBodyContains(authorUpdateDto.image)
+      })
+
+      it("should update only bibliography fields of  author", () => {
+        const authorUpdateDto : UpdateAuthorDTO = {
+          bibliography: "bibliografia Update",
+        }
+        return pactum
+              .spec()
+              .patch("/authors/{id}")
+              .withPathParams("id", "$S{authorId}")
+              .withBody(authorUpdateDto)
+              .expectStatus(200)
+              .expectBodyContains(authorUpdateDto.bibliography)
+      })
+
+      it("should return a error when try to update an author not found", () => {
+        return pactum
+              .spec()
+              .patch("/authors/{id}")
+              .withPathParams("id", "500")
+              .expectStatus(403)
+              .expectBodyContains("Author not found")
+      })
+    })
+
+    describe("DELETE", () => {
+
+      it("should delete an author", () => {
+        return pactum
+              .spec()
+              .delete("/authors/{id}")
+              .withPathParams("id", "$S{authorId}")
+              .expectStatus(204)
+      })
+
+      it("should return a error when try to delete an author not found", () => {
+        return pactum
+              .spec()
+              .delete("/authors/{id}")
+              .withPathParams("id", "500")
+              .expectStatus(403)
+              .expectBodyContains("Author not found")
+      })
     })
 
   })

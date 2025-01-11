@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { AuthorService } from './author.service';
-import { CreateAuthorDTO } from './dto';
+import { CreateAuthorDTO, UpdateAuthorDTO } from './dto';
 
 @Controller('authors')
 export class AuthorController {
@@ -20,6 +20,17 @@ export class AuthorController {
     @Get(":id")
     getAuthor(@Param("id", ParseIntPipe) id: number) {
         return this.authorService.getAuthor(id)
+    }
+
+    @Patch(":id")
+    updateAuthor(@Param("id", ParseIntPipe) id: number, @Body() authorDto: UpdateAuthorDTO) {
+        return this.authorService.updateAuthor(id, authorDto)
+    }
+
+    @HttpCode(HttpStatus.NO_CONTENT)
+    @Delete(":id")
+    deleteAuthor(@Param("id", ParseIntPipe) id: number) {
+        return this.authorService.deleteAuthor(id)
     }
 
 }
