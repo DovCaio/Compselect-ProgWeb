@@ -1127,6 +1127,26 @@ describe('AppController (e2e)', () => {
 
       
     })
+  
+  describe("DELETE", () => {
+
+    it('should delete a publication', () => {
+      return pactum
+            .spec()
+            .delete("/publications/{id}")
+            .withPathParams("id", "$S{publicationId}")
+            .expectStatus(204)
+    })
+
+    it('should return a error when try to delete a publication not found', () => {
+      return pactum
+            .spec()
+            .delete("/publications/{id}")
+            .withPathParams("id", "500")
+            .expectStatus(403)
+            .expectBodyContains("Publication not found")
+    })
+  })
 
   })
 
