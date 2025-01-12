@@ -9,7 +9,7 @@ export function GetExceptionCatches(message: string = "Resource not found") {
             const result =  await originalValue.apply(this, args)
 
             if (!result) {
-                throw new NotFoundException(message)
+                throw new NotFoundException(message) //Aqui ele retorna o código 404, o que pode parecer que o endpoint não existe, por isso a mensagem de erro deve ser verificada.
             }
 
             return result

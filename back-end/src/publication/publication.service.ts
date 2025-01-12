@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreatePublicationDTO } from './dto';
+import { CreatePublicationDTO, UpdatePublicationDTO } from './dto';
 
 @Injectable()
 export class PublicationService {
@@ -58,5 +58,43 @@ export class PublicationService {
         }
 
         return existsPublication
+    }
+
+    async updatePublication(id: number, publicationDto: UpdatePublicationDTO){
+
+        let authors = []
+
+        if(publicationDto.authors && publicationDto.authors.length > 0){
+
+            authors = await this.prisma.author.findMany({
+                where: {
+                    id: {
+                        in: publicationDto.authors
+                    }
+                }
+            })
+
+            if(authors.length !== publicationDto.authors.length) {
+                throw new ForbiddenException("Author not found")
+            }
+        }
+
+        return await this.prisma.publication.update({
+            where: {
+                id
+            },
+            data: {
+                ...publicationDto,
+                authors: {
+                    create: authors.map((authorId) => {
+                        return {
+                            authorId
+                        }
+                    })
+                }
+
+
+            }
+        })
     }
 }

@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { PublicationService } from './publication.service';
-import { CreatePublicationDTO } from './dto';
-import { CreateExceptionCatches, GetExceptionCatches } from '../decorator';
+import { CreatePublicationDTO, UpdatePublicationDTO } from './dto';
+import { CreateExceptionCatches, GetExceptionCatches, UpdateDeleteExceptionCatches } from '../decorator';
 @Controller('publications')
 export class PublicationController {
 
@@ -13,8 +13,8 @@ export class PublicationController {
         return this.publicationService.createPublication(publicationDto)
     }
 
-
     @Get()
+    @GetExceptionCatches("Publication not founds")
     getPublications(){
         return this.publicationService.getPublications()
     }
@@ -25,5 +25,11 @@ export class PublicationController {
         return this.publicationService.getPublication(id)
     }
 
+
+    @Patch(":id")
+    @UpdateDeleteExceptionCatches("Publication not found")
+    updatePublication(@Param("id", ParseIntPipe) id: number, @Body() publicationDto: UpdatePublicationDTO){
+        return this.publicationService.updatePublication(id, publicationDto)
+    }    
     
 }

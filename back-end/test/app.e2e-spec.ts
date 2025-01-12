@@ -6,7 +6,7 @@ import { PrismaService } from '../src/prisma/prisma.service';
 import { CreateEventRequestDTO, CreateLocationRequestDTO, UpdateEventRequestDTO } from '../src/event/dto';
 import { CreateCommentDTO, CreatePostRequestDTO, UpdatePostRequestDTO } from 'src/blog/dto';
 import { CreateAuthorDTO, UpdateAuthorDTO } from 'src/author/dto';
-import { CreatePublicationDTO } from 'src/publication/dto';
+import { CreatePublicationDTO, UpdatePublicationDTO } from 'src/publication/dto';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -1050,6 +1050,82 @@ describe('AppController (e2e)', () => {
               .expectStatus(404)
               .expectBodyContains("Publication not found")
       })
+    })
+
+    describe("PATCH", () => {
+
+      it('should update a all the fields of a publication', () => {
+        const publicationDto: UpdatePublicationDTO = {
+          title: "Publication 2",
+          image: "É uma imagen Update",
+          authors: [],
+          type: "Cyber Security"
+        }
+        return pactum
+              .spec()
+              .patch("/publications/{id}")
+              .withPathParams("id", "$S{publicationId}")
+              .withBody(publicationDto)
+              .expectStatus(200)
+              .expectBodyContains(publicationDto.title)
+              .expectBodyContains(publicationDto.image)
+              .expectBodyContains(publicationDto.type)
+
+      })
+
+      it('should update only title of a publication', () => {
+        const publicationDto: UpdatePublicationDTO = {
+          title: "Publication 2 only Updated",
+        }
+        return pactum
+              .spec()
+              .patch("/publications/{id}")
+              .withPathParams("id", "$S{publicationId}")
+              .withBody(publicationDto)
+              .expectStatus(200)
+              .expectBodyContains(publicationDto.title)
+      })
+
+      it('should update only image of a publication', () => {
+        const publicationDto: UpdatePublicationDTO = {
+          image: "É uma imagen Only Update",
+        }
+        return pactum
+              .spec()
+              .patch("/publications/{id}")
+              .withPathParams("id", "$S{publicationId}")
+              .withBody(publicationDto)
+              .expectStatus(200)
+              .expectBodyContains(publicationDto.image)
+      })
+
+      it('should update only type of a publication', () => {
+        const publicationDto: UpdatePublicationDTO = {
+          type: "Cyber Security Only Update",
+        }
+        return pactum
+              .spec()
+              .patch("/publications/{id}")
+              .withPathParams("id", "$S{publicationId}")
+              .withBody(publicationDto)
+              .expectStatus(200)
+              .expectBodyContains(publicationDto.type)
+      })
+
+      it('should return a error when try to update a publication not found', () => {
+        const publicationDto: UpdatePublicationDTO = {
+          title: "Publication 2",
+        }
+        return pactum
+              .spec()
+              .patch("/publications/{id}")
+              .withPathParams("id", "500")
+              .withBody(publicationDto)
+              .expectStatus(403)
+              .expectBodyContains("Publication not found")
+      })
+
+      
     })
 
   })
