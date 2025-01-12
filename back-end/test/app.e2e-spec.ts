@@ -1047,7 +1047,7 @@ describe('AppController (e2e)', () => {
               .spec()
               .get("/publications/{id}")
               .withPathParams("id", "500")
-              .expectStatus(403)
+              .expectStatus(404)
               .expectBodyContains("Publication not found")
       })
     })
