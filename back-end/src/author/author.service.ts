@@ -63,47 +63,32 @@ export class AuthorService {
 
         if(authorDto.publications && authorDto.publications.length > 0){
 
-            try {
 
-                publications = await this.prisma.publication.findMany({
-                    where: {
-                        title: {
-                            in: authorDto.publications
-                        }
-                    }
-                })
-            }catch(error){
-                if ((error instanceof  Prisma.PrismaClientKnownRequestError && error.code === "P2025") ||
-                        publications.length !== authorDto.publications.length) {
-                    throw new ForbiddenException("Publication not found")
-                }
-                throw error
-            }
-        }
-
-        try{
-            return await this.prisma.author.update({
-               
-                data: {
-                    ...authorDto,
-                    publications: {
-                        create: publications.map((publicationId) => {
-                            return {
-                                publicationId
-                            }
-                        })
-                    }
-                },
+            publications = await this.prisma.publication.findMany({
                 where: {
-                    id
+                    title: {
+                        in: authorDto.publications
+                    }
                 }
             })
-        } catch (error) {
-            if (error instanceof  Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
-                throw new ForbiddenException("Author not found")
-            }
-            throw error
         }
+
+        return await this.prisma.author.update({
+            
+            data: {
+                ...authorDto,
+                publications: {
+                    create: publications.map((publicationId) => {
+                        return {
+                            publicationId
+                        }
+                    })
+                }
+            },
+            where: {
+                id
+            }
+        })
     }
 
 

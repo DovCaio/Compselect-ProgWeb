@@ -6,6 +6,7 @@ import { PrismaService } from '../src/prisma/prisma.service';
 import { CreateEventRequestDTO, CreateLocationRequestDTO, UpdateEventRequestDTO } from '../src/event/dto';
 import { CreateCommentDTO, CreatePostRequestDTO, UpdatePostRequestDTO } from 'src/blog/dto';
 import { CreateAuthorDTO, UpdateAuthorDTO } from 'src/author/dto';
+import { CreatePublicationDTO } from 'src/publication/dto';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -975,7 +976,7 @@ describe('AppController (e2e)', () => {
               .patch("/authors/{id}")
               .withPathParams("id", "500")
               .expectStatus(403)
-              .expectBodyContains("Author not found")
+              .expectBodyContains("Author or Publication not found")
       })
     })
 
@@ -1003,7 +1004,53 @@ describe('AppController (e2e)', () => {
 
   describe("Publications", () => {
 
-    it.todo("Fazer os tests e a implementação de publications")
+    describe("POST", () => {
+
+      it("should create a publication", () => {
+        const publicationDto : CreatePublicationDTO = {
+          title: "Publication 1",
+          image: "É uma imagen",
+          authors: [],
+          type: "Cyber Security"
+        }
+        return pactum
+              .spec()
+              .post("/publications")
+              .withBody(publicationDto)
+              .expectStatus(201)
+              .stores("publicationId", "id")
+      })
+
+        
+    })
+
+    describe("GET", () => {
+
+      it("should get all publications", () => {
+        return pactum
+              .spec()
+              .get("/publications")
+              .expectStatus(200)
+              .expectJsonLength(1)
+      })
+
+      it("should get a publication", () => {
+        return pactum
+              .spec()
+              .get("/publications/{id}")
+              .withPathParams("id", "$S{publicationId}")
+              .expectStatus(200)
+      })
+
+      it("should return a error when try to get a publication not found", () => {
+        return pactum
+              .spec()
+              .get("/publications/{id}")
+              .withPathParams("id", "500")
+              .expectStatus(403)
+              .expectBodyContains("Publication not found")
+      })
+    })
 
   })
 

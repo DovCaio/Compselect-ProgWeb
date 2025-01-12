@@ -1,1 +1,1 @@
-export * from "./not-found-catches"
+export * from "./error-catches"

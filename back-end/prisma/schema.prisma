@@ -82,6 +82,7 @@ model Publication {
   title String @unique
   image String
   authors AuthorsOnPublications[]
+  type String
 }
 
 model AuthorsOnPublications {
