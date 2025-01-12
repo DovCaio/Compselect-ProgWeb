@@ -108,17 +108,10 @@ export class AuthorService {
 
 
     async deleteAuthor(id: number){
-        try{
-            return await this.prisma.author.delete({
-                where: {
-                    id
-                }
-            })    
-        }catch(error){
-            if (error instanceof  Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
-                throw new ForbiddenException("Author not found")
+        return await this.prisma.author.delete({
+            where: {
+                id
             }
-            throw error
-        }
+        })    
     }
 }

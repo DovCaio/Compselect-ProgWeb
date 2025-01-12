@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { AuthorService } from './author.service';
 import { CreateAuthorDTO, UpdateAuthorDTO } from './dto';
+import { NotFoundCatches } from '../decorator';
 
 @Controller('authors')
 export class AuthorController {
@@ -29,6 +30,7 @@ export class AuthorController {
 
     @HttpCode(HttpStatus.NO_CONTENT)
     @Delete(":id")
+    @NotFoundCatches("Author not found")
     deleteAuthor(@Param("id", ParseIntPipe) id: number) {
         return this.authorService.deleteAuthor(id)
     }
