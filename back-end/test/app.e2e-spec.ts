@@ -1151,6 +1151,151 @@ describe('AppController (e2e)', () => {
   })
 
   describe("Statistics", () => {
+
+    describe("Event Statistics", () => {
+
+      it('should return a event quantity witgh no one event', () => {
+        return pactum
+              .spec()
+              .get("/statistics/events/qtt")
+              .expectStatus(200)
+              .expectBody("0")
+      })
+
+      const locationDTO: CreateLocationRequestDTO = {
+        country: "Portugal",
+        city: "Lisboa",
+        street: "Avenida",
+        number: 1
+      }
+  
+      const eventDTOFORSTATISTICS: CreateEventRequestDTO = {
+        title: "Event 1",
+        image: "image",
+        description: "description",
+        time: "18:00",
+        dateEvent: new Date("2030-01-01"),
+        activities: ["activity 1", "activity 2"],
+        target: ["target activity 1", "target activity 2"],
+        location: locationDTO
+      }
+  
+      it("Create an event for statistics", () => {
+        return pactum
+              .spec()
+              .post("/events")
+              .withBody(eventDTOFORSTATISTICS)
+              .expectStatus(201)
+      })
+  
+      describe("Event Statistics", () => {
+  
+        it('should return a event quantity', () => {
+          return pactum
+                .spec()
+                .get("/statistics/events/qtt")
+                .expectStatus(200)
+                .expectBody("1")
+        })
+  
+      })
+
+    })
+
+    describe("Blog Statistics", () => {
+      //precisei criar um post em comments, por isso ja tem um
+      it('should return a blog quantity witgh no one blog', () => {
+        return pactum
+              .spec()
+              .get("/statistics/blogs/qtt")
+              .expectStatus(200)
+              .expectBody("1")
+      })
+
+    })
+
+    describe("Comments Statistics", () => {
+
+      it('should return a comment quantity witgh no one comment', () => {
+
+        return pactum
+              .spec()
+              .get("/statistics/comments/qtt")
+              .expectStatus(200)
+              .expectBody("1")
+
+      })
+
+    })
+
+    describe("Publication Statistics", () => {
+      it('should return a publication quantity with no no one publication', () => {
+        return pactum
+              .spec()
+              .get("/statistics/publications/qtt")
+              .expectStatus(200)
+              .expectBody("0")
+      })
+
+      const publicationDto : CreatePublicationDTO = {
+        title: "Publication 1",
+        image: "image",
+        authors: [],
+        type: "Cyber Security"
+      }
+
+      it("Create a publication for statistics", () => {
+        return pactum
+              .spec()
+              .post("/publications")
+              .withBody(publicationDto)
+              .expectStatus(201)
+      })
+
+      it('should return a publication quantity', () => {
+        return pactum
+              .spec()
+              .get("/statistics/publications/qtt")
+              .expectStatus(200)
+              .expectBody("1")
+      })
+    })
+
+    describe("Authors Statistics", () => {
+      it('should return a author quantity witgh no one author', () => {
+        return pactum
+              .spec()
+              .get("/statistics/authors/qtt")
+              .expectStatus(200)
+              .expectBody("0")
+      })
+
+      const authorDto : CreateAuthorDTO = {
+        firstName: "Author 1",
+        lastName: "Author 1",
+        image: "image",
+        bibliography: "bibliography",
+        publications: []
+      }
+
+      it("Create an author for statistics", () => {
+        return pactum
+              .spec()
+              .post("/authors")
+              .withBody(authorDto)
+              .expectStatus(201)
+      })
+
+      it('should return a author quantity', () => {
+        return pactum
+              .spec()
+              .get("/statistics/authors/qtt")
+              .expectStatus(200)
+              .expectBody("1")
+      })
+    })
+
+
     it.todo("FAZER OS TESTS DE E A IMPLEMENTEAÇÂO DE STATISTIC")
   })
 

@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PublicationModule } from './publication/publication.module';
 import { BlogModule } from './blog/blog.module';
 import { AuthorModule } from './author/author.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { AuthorModule } from './author/author.module';
      EventModule,
      PublicationModule,
      BlogModule,
-     AuthorModule
+     AuthorModule,
+     StatisticsModule
     ],
   controllers: [AppController],
   providers: [AppService],

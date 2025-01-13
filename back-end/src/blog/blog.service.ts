@@ -94,7 +94,7 @@ export class BlogService {
         
         const emailVerificationToken = uuid()
 
-        //Enviar email
+        //TODO: Enviar email
 
         return await this.prisma.comment.create({
             data: {
@@ -155,7 +155,9 @@ export class BlogService {
 
 
 
-    //Essas funções tem muito código em comun talvez deve ser refatorado, criar uma função private
+
+
+    //TODO: Essas funções tem muito código em comun talvez devam ser refatoradas. Criar uma função private
     //Que faça todas essas verificações
     async acceptComment(postId: number, commentId: number){
 
@@ -183,6 +185,7 @@ export class BlogService {
         }else  if(existsComment.accept){
             throw new ForbiddenException("Comment already accepted")
         }
+
         return await this.prisma.comment.update({
             where: {
                 id: commentId
@@ -192,6 +195,7 @@ export class BlogService {
             }
         })
     }
+
 
     async validateCommentToken(postId: number, tokenForValidation: string){
 
