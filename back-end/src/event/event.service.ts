@@ -47,19 +47,11 @@ export class EventService {
     }
 
     async updateEvent(id: number, event: UpdateEventRequestDTO){
-        const eventExists = await this.prisma.event.findUnique({
-            where: {
-                id
-            }
-        })
 
-        if(!eventExists){
-            throw new ForbiddenException("Event not found")
-        }else if (event.dateEvent && !this.eventHaveValidDate(event.dateEvent)){
+        if (event.dateEvent && !this.eventHaveValidDate(event.dateEvent)){
             throw new ForbiddenException("Date must be greater than today")
 
         }
-
         return await this.prisma.event.update({
             where: {
                 id
@@ -77,15 +69,6 @@ export class EventService {
     }
 
     async deleteEvent(id: number){
-        const eventExists = await this.prisma.event.findUnique({
-            where: {
-                id
-            }
-        })
-
-        if(!eventExists){
-            throw new ForbiddenException("Event not found")
-        }
 
         return await this.prisma.event.delete({
             where: {

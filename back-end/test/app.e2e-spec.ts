@@ -1150,5 +1150,13 @@ describe('AppController (e2e)', () => {
 
   })
 
+  describe("Statistics", () => {
+    it.todo("FAZER OS TESTS DE E A IMPLEMENTEAÇÂO DE STATISTIC")
+  })
+
+  describe("Authors and Publications", () => {
+    it.todo("Fazer os tests da relação de autor e publicação, e caso necessário, mudar a implementalção deles.")
+  })
+
 
 });
