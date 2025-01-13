@@ -1,7 +1,7 @@
 import { Body, ClassSerializerInterceptor, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, UseInterceptors } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { CreateCommentDTO, CreatePostRequestDTO, UpdatePostRequestDTO } from './dto';
-
+import { CreateExceptionCatches, GetExceptionCatches, UpdateDeleteExceptionCatches } from '../decorator';
 
 @Controller('blog')
 export class BlogController {
@@ -9,6 +9,7 @@ export class BlogController {
     constructor(private blogService: BlogService){}
 
     @Post()
+    @CreateExceptionCatches("Post already exists, check the fields: ")
     createPost(@Body() postdto: CreatePostRequestDTO){
 
         return this.blogService.createPost(postdto)
@@ -16,23 +17,27 @@ export class BlogController {
     }
 
     @Get()
+    @GetExceptionCatches("No posts found")
     getPosts(){
         return this.blogService.getPosts()
     }
 
     @Get(":id")
+    @GetExceptionCatches("Post not found")
     getPost(@Param("id", ParseIntPipe) id: number){
         
         return this.blogService.getPost(id)
     }
 
     @Patch(":id")
+    //Aqui não é necessário o decorator de exceção, pois é nececessário para a validação a recuperação do post e verificarmos se ele existe.
     updatePost(@Param("id", ParseIntPipe) id: number, @Body() postdto: UpdatePostRequestDTO){
         return this.blogService.updatePost(id, postdto)
     }
 
     @Delete(":id")
     @HttpCode(HttpStatus.NO_CONTENT)
+    @UpdateDeleteExceptionCatches("Post not found")
     deletePost(@Param("id", ParseIntPipe) id: number){
         return this.blogService.deletePost(id)
     }

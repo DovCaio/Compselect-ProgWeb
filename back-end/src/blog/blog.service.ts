@@ -36,6 +36,7 @@ export class BlogService {
     }
 
 
+    
     getPosts(){
         return this.prisma.post.findMany()
     }
@@ -80,14 +81,6 @@ export class BlogService {
     }
 
     async deletePost(id: number){
-        const existsPost = await this.prisma.post.findUnique({
-            where: {
-                id
-            }
-        })
-        if (!existsPost) {
-            throw new ForbiddenException("Post not found")
-        }
         return await this.prisma.post.delete({
             where: {
                 id
