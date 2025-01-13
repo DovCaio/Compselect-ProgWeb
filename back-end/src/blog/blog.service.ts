@@ -90,16 +90,7 @@ export class BlogService {
 
     async createComment(postId: number, commentDto: CreateCommentDTO){
         
-        const exitsPost = await this.prisma.post.findUnique({
-            where: {
-                id: postId
-            }
-        })
 
-        if (!exitsPost) {
-            throw new ForbiddenException("Post not found")
-        }
-        
         
         const emailVerificationToken = uuid()
 
@@ -162,6 +153,10 @@ export class BlogService {
         })
     }
 
+
+
+    //Essas funções tem muito código em comun talvez deve ser refatorado, criar uma função private
+    //Que faça todas essas verificações
     async acceptComment(postId: number, commentId: number){
 
         const existsPost = await this.prisma.post.findUnique({

@@ -30,7 +30,6 @@ export class BlogController {
     }
 
     @Patch(":id")
-    //Aqui não é necessário o decorator de exceção, pois é nececessário para a validação a recuperação do post e verificarmos se ele existe.
     updatePost(@Param("id", ParseIntPipe) id: number, @Body() postdto: UpdatePostRequestDTO){
         return this.blogService.updatePost(id, postdto)
     }
@@ -47,12 +46,15 @@ export class BlogController {
 
     @UseInterceptors(ClassSerializerInterceptor)
     @Post(":id/comment")
+    @UpdateDeleteExceptionCatches("Post not found")
+    @CreateExceptionCatches("Comment already exists, check the fields: ")
     async createComment(@Param("id", ParseIntPipe) postId: number,
      @Body() commentDto: CreateCommentDTO) {
         return  new CreateCommentDTO({
             ...(await this.blogService.createComment(postId, commentDto))
         })
     }
+
 
     @Get(":id/comments/not-accepteds")
     getCommentsNotAcceptedAndNotPending(@Param("id", ParseIntPipe) postId: number){
@@ -82,6 +84,7 @@ export class BlogController {
 
     @HttpCode(HttpStatus.NO_CONTENT)
     @Delete(":id/comment/:commentId")
+    
     async deleteComment(@Param("id", ParseIntPipe) postId: number,
      @Param("commentId", ParseIntPipe) commentId: number) {
         return  await this.blogService.deleteComment(postId, commentId)        
