@@ -81,6 +81,7 @@ model Publication {
   id Int @id @default(autoincrement())
   title String @unique
   image String
+  createAt DateTime @default(now())
   authors AuthorsOnPublications[]
   type String
 }
@@ -100,12 +101,11 @@ model Statistics {
   year Int
   month Int
   createAt DateTime @default(now())
-  qttCreateEvents Int
-  qttCreatePublications Int
-  qttCreateAuthors Int
-  qttCreatePost Int
-  qttVisitors Int
-
+  qttSecondsEventPage Int[] 
+  qttSecondsPublicationsPage Int[]
+  qttSecondsAuthorsPage Int[]
+  qttSecondsPostPage Int[]
+  qttVisitors Int[]
 
   @@unique([year, month])
 }

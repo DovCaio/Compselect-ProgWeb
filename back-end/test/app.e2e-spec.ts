@@ -30,6 +30,8 @@ describe('AppController (e2e)', () => {
     app.close();
   });
 
+
+
   describe('Events', () => {
 
     describe('POST', () => {
@@ -1295,6 +1297,72 @@ describe('AppController (e2e)', () => {
       })
     })
 
+    describe("Comments Average per post"  , () => {
+
+      it('should return a comment average per post', () => {
+
+        return pactum
+              .spec()
+              .get("/statistics/comments/average-per-post")
+              .expectStatus(200)
+              .expectBody("1")
+
+      })
+
+      const commentDto:CreateCommentDTO = {
+       content: "Comment 1",
+       email: "email@adedea.com",
+       userName: "userName"  
+      }
+
+      it("Create a comment for statistics", () => {
+        return pactum
+              .spec()
+              .post("/blog/{id}/comment")
+              .withPathParams("id", "$S{postId}")
+              .withBody(commentDto)
+              .expectStatus(201)
+      })
+
+
+      it('should return a comment average per post wich is 2', () => {
+
+        return pactum
+              .spec()
+              .get("/statistics/comments/average-per-post")
+              .expectStatus(200)
+              .expectBody("2")
+
+      })
+
+      const postDto : CreatePostRequestDTO = {
+        titles: ["Post 1"],
+        texts: ["content"],
+        images: ["image"],
+        links: ["blog"],
+        sequenceOfContent: [0, 1, 2, 3]
+      }
+
+      it("Create a post for statistics of comments", () => {
+        return pactum
+              .spec()
+              .post("/blog")
+              .withBody(postDto)
+              .expectStatus(201)
+      })
+
+      it('should return a comment average per post wich is 1 again', () => {
+
+        return pactum
+              .spec()
+              .get("/statistics/comments/average-per-post")
+              .expectStatus(200)
+              .expectBody("1")
+
+      })
+
+
+    })
 
     it.todo("FAZER OS TESTS DE E A IMPLEMENTEAÇÂO DE STATISTIC")
   })

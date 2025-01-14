@@ -33,4 +33,9 @@ export class StatisticsController {
         return this.statisticsService.getAuthorsQuantity()
     }
 
+    @Get("comments/average-per-post")
+    getCommentsAverage(){
+        return this.statisticsService.getCommentsAveragePerPost()
+    }
+
 }
