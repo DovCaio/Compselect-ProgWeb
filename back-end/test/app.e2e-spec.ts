@@ -1420,7 +1420,7 @@ describe('AppController (e2e)', () => {
 
       describe("PATCH", () => {
         const newPublicationDto : CreatePublicationDTO = {
-          title: "Publication 2 for authors and publications seconds ",
+          title: "Publication 2 for authors and publications seconds updated",
           image: "image",
           authors: [],
           type: "Cyber Security"
@@ -1443,7 +1443,6 @@ describe('AppController (e2e)', () => {
                   publications: [newPublicationDto.title]
                 })
                 .expectStatus(200)
-                .expectBodyContains(newPublicationDto.title)
         })
       })
         

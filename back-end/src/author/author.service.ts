@@ -9,13 +9,33 @@ export class AuthorService {
     constructor(private prisma: PrismaService){}
 
 
+    async createRelationWithPublication(authorId: number, titlesPublications: string[]){
+
+        let publications = []
+                
+            publications = await this.prisma.publication.findMany({
+                where: {
+                    title: {
+                        in: titlesPublications
+                    }
+                }
+            })    
+            if (publications.length !== titlesPublications.length) {
+                throw new ForbiddenException("Publication not found")
+            }
+
+            await this.prisma.authorsOnPublications.createMany({
+                data: publications.map((publication) => {
+                    return {
+                        authorId: authorId,
+                        publicationId: publication.id
+                    }
+                })
+            })
+
+    }
+
     async createAuthor(authorDto: CreateAuthorDTO){
-    
-
-
-        
-
-
 
         let author = await this.prisma.author.create({
             data: {
@@ -29,27 +49,7 @@ export class AuthorService {
         })
 
         if (authorDto.publications.length > 0) {
-            let publications = []
-                
-            publications = await this.prisma.publication.findMany({
-                where: {
-                    title: {
-                        in: authorDto.publications
-                    }
-                }
-            })    
-            if (publications.length !== authorDto.publications.length) {
-                throw new ForbiddenException("Publication not found")
-            }
-
-            await this.prisma.authorsOnPublications.createMany({
-                data: publications.map((publication) => {
-                    return {
-                        authorId: author.id,
-                        publicationId: publication.id
-                    }
-                })
-            })
+            await this.createRelationWithPublication(author.id, authorDto.publications)
         }
 
 
@@ -79,22 +79,14 @@ export class AuthorService {
         if(authorDto.publications && authorDto.publications.length > 0){
 
 
-            publications = await this.prisma.publication.findMany({
+            await this.prisma.authorsOnPublications.deleteMany({
                 where: {
-                    title: {
-                        in: authorDto.publications
-                    }
+                    authorId: id
                 }
-            }).then((publications) => {
-                return publications.map((publication) => {
-                    return  publication.id
-                    
-                })
             })
 
-            if(publications.length !== authorDto.publications.length) {
-                throw new ForbiddenException("Publication not found")
-            }
+            await this.createRelationWithPublication(id, authorDto.publications)
+
 
         }
 
@@ -104,9 +96,8 @@ export class AuthorService {
             data: {
                 ...authorDto,
                 publications: {
-                    create: publications
-                }
-            },
+                    connect: []
+                }},
             where: {
                 id
             }
