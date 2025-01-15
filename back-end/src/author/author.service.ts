@@ -10,8 +10,26 @@ export class AuthorService {
 
 
     async createAuthor(authorDto: CreateAuthorDTO){
-        let publications = []
+    
+
+
+        
+
+
+
+        let author = await this.prisma.author.create({
+            data: {
+                ...authorDto,
+                publications: {
+                    connect: []
+                }
+                
+            }
+            
+        })
+
         if (authorDto.publications.length > 0) {
+            let publications = []
                 
             publications = await this.prisma.publication.findMany({
                 where: {
@@ -19,26 +37,23 @@ export class AuthorService {
                         in: authorDto.publications
                     }
                 }
-            })
+            })    
             if (publications.length !== authorDto.publications.length) {
                 throw new ForbiddenException("Publication not found")
             }
+
+            await this.prisma.authorsOnPublications.createMany({
+                data: publications.map((publication) => {
+                    return {
+                        authorId: author.id,
+                        publicationId: publication.id
+                    }
+                })
+            })
         }
-        
-        return this.prisma.author.create({
-            data: {
-                ...authorDto,
-                publications: {
-                    
-                    create: publications.map((publicationId) => {
-                        return {
-                            publicationId
-                        }
-                    })
-                }
-            }
-            
-        })
+
+
+        return author
     }
 
     getAuthors(){
@@ -70,19 +85,26 @@ export class AuthorService {
                         in: authorDto.publications
                     }
                 }
+            }).then((publications) => {
+                return publications.map((publication) => {
+                    return  publication.id
+                    
+                })
             })
+
+            if(publications.length !== authorDto.publications.length) {
+                throw new ForbiddenException("Publication not found")
+            }
+
         }
 
+        
         return await this.prisma.author.update({
             
             data: {
                 ...authorDto,
                 publications: {
-                    create: publications.map((publicationId) => {
-                        return {
-                            publicationId
-                        }
-                    })
+                    create: publications
                 }
             },
             where: {

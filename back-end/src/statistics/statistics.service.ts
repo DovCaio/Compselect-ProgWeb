@@ -45,28 +45,6 @@ export class StatisticsService {
     }
 
 
-    getMostCommentedPost() {
-        //TODO: faz a implementação da feature que recupera o post com maior quantidade de comentarios
-        
-    }
-
-    getMostViewedPost() {
-        //TODO: faz a implementação da feature que recupera o post com maior quantidade de views
-    }
-
-    getMostViewedPage() {
-        //TODO: faz a implementação da feature que recupera o post com maior quantidade de views
-    }
-
-    getMostViewedEvent() {
-        //TODO: faz a implementação da feature que recupera o post com maior quantidade de views
-    }
-
-    getMostViewedPublication() {
-        //TODO: faz a implementação da feature que recupera o post com maior quantidade de views
-    }
-
-    getPageWithMostTime() {
-        //TODO: faz a implementação da feature que recupera o post com maior quantidade de tempo de visualização
-    }
+   
+    
 }

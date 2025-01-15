@@ -846,23 +846,7 @@ describe('AppController (e2e)', () => {
               .expectBodyContains(authorDto.bibliography)
       })
 
-      it("should return a error when try to create a author with invalid publications ", () => {
-        const authorDto: CreateAuthorDTO = {
-          firstName: "Author 2 FistName",
-          lastName: "Author 2 LastName",
-          image: "É uma imagen",
-          bibliography: "bibliografia",
-          publications: ["Not found publication 1", "Not found publication 2"]
-        }
-        return pactum
-              .spec()
-              .post("/authors")
-              .withBody(authorDto)
-              .expectStatus(403)
-              .expectBodyContains("Publication not found")
-      })
 
-      it.todo("Deve ter o test para quando existe publications.")
     })
 
     describe("GET", () => {
@@ -1364,11 +1348,71 @@ describe('AppController (e2e)', () => {
 
     })
 
-    it.todo("FAZER OS TESTS DE E A IMPLEMENTEAÇÂO DE STATISTIC")
   })
 
   describe("Authors and Publications", () => {
-    it.todo("Fazer os tests da relação de autor e publicação, e caso necessário, mudar a implementalção deles.")
+
+
+    describe("Authors", () => {
+
+      describe("POST", () => {
+        const publicationDto : CreatePublicationDTO = {
+          title: "Publication 1 for authors and publications",
+          image: "image",
+          authors: [],
+          type: "Cyber Security"
+        }
+    
+        it("create a publication", () => {
+          return pactum
+                .spec()
+                .post("/publications")
+                .withBody(publicationDto)
+                .expectStatus(201)
+        })
+    
+        const authorDTO: CreateAuthorDTO = {
+          firstName: "Author 1",
+          lastName: "Author 1",
+          image: "image",
+          bibliography: "bibliography",
+          publications: [publicationDto.title]
+        }
+    
+        it("create a author", () => {
+          return pactum
+                .spec()
+                .post("/authors")
+                .withBody(authorDTO)
+                .expectStatus(201)
+        })
+    
+    
+        it("should return a error when try to create a author with invalid publications ", () => {
+          const authorDto: CreateAuthorDTO = {
+            firstName: "Author 2 FistName",
+            lastName: "Author 2 LastName",
+            image: "É uma imagen",
+            bibliography: "bibliografia",
+            publications: ["Not found publication 1", "Not found publication 2"]
+          }
+          return pactum
+                .spec()
+                .post("/authors")
+                .withBody(authorDto)
+                .expectStatus(403)
+                .expectBodyContains("Publication not found")
+        })
+  
+      })
+
+      describe("PATCH", () => {
+        
+      })
+        
+    })
+    
+
   })
 
 

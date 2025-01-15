@@ -86,7 +86,8 @@ model Publication {
   type String
 }
 
-model AuthorsOnPublications {
+model AuthorsOnPublications { // Issos não precisa dos campos author e publications, o relacionamento não vai ser direto
+                              // a recuperação de publicações apatir do author, e vice versa, pode ser feito sem esse relacionamento direto, use a cabeça meu amigo
   author Author @relation(fields: [authorId], references: [id])
   publication Publication @relation(fields: [publicationId], references: [id])
   authorId Int
@@ -96,16 +97,17 @@ model AuthorsOnPublications {
   @@id([authorId, publicationId])
 }
 
+/* Desisti, muita já tem muita implentação, e isso pode acarretar em perca de performace
 model Statistics {
   id Int @id @default(autoincrement())
   year Int
   month Int
   createAt DateTime @default(now())
-  qttSecondsEventPage Int[] 
-  qttSecondsPublicationsPage Int[]
-  qttSecondsAuthorsPage Int[]
-  qttSecondsPostPage Int[]
-  qttVisitors Int[]
+  qttSecondsEventPage Int  
+  qttSecondsPublicationsPage Int
+  qttSecondsAuthorsPage Int
+  qttSecondsPostPage Int
+  qttVisitors Int
 
   @@unique([year, month])
-}
+}*/

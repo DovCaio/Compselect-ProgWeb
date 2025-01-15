@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { StatisticsService } from './statistics.service';
 
 @Controller('statistics')
@@ -7,6 +7,7 @@ export class StatisticsController {
     constructor(private statisticsService: StatisticsService){}
 
 
+    //GETS
     @Get("events/qtt")
     getEventsQuantity(){
         return this.statisticsService.getEventsQuantity()
@@ -37,5 +38,6 @@ export class StatisticsController {
     getCommentsAverage(){
         return this.statisticsService.getCommentsAveragePerPost()
     }
+
 
 }
