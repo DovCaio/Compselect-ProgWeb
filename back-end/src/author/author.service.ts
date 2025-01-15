@@ -121,4 +121,29 @@ export class AuthorService {
             }
         })    
     }
+
+    async getAuthorPublications(id: number){
+
+        const author = await this.prisma.author.findUnique({
+            where: {
+                id
+            }
+        })
+
+        const publicationsIds = await this.prisma.authorsOnPublications.findMany({
+            where: {
+                authorId: author.id
+            }
+        })
+
+        return await this.prisma.publication.findMany({
+            where: {
+                id: {
+                    in: publicationsIds.map((publication) => {
+                        return publication.publicationId
+                    })
+                }
+            }
+        })
+    }
 }

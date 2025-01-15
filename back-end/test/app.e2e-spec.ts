@@ -1385,6 +1385,7 @@ describe('AppController (e2e)', () => {
                 .post("/authors")
                 .withBody(authorDTO)
                 .expectStatus(201)
+                .stores("authorId", "id")
         })
     
     
@@ -1406,8 +1407,44 @@ describe('AppController (e2e)', () => {
   
       })
 
+      describe("GET", () => {
+        it("should return all publications of an author", () => {
+          return pactum
+                .spec()
+                .get("/authors/{id}/publications")
+                .withPathParams("id", "$S{authorId}")
+                .expectStatus(200)
+                .expectJsonLength(1)
+        })
+      })
+
       describe("PATCH", () => {
-        
+        const newPublicationDto : CreatePublicationDTO = {
+          title: "Publication 2 for authors and publications seconds ",
+          image: "image",
+          authors: [],
+          type: "Cyber Security"
+        }
+
+        it("create a publication", () => {
+          return pactum
+                .spec()
+                .post("/publications")
+                .withBody(newPublicationDto)
+                .expectStatus(201)
+        })
+
+        it("update an author", () => {
+          return pactum
+                .spec()
+                .patch("/authors/{id}")
+                .withPathParams("id", "$S{authorId}")
+                .withBody({
+                  publications: [newPublicationDto.title]
+                })
+                .expectStatus(200)
+                .expectBodyContains(newPublicationDto.title)
+        })
       })
         
     })

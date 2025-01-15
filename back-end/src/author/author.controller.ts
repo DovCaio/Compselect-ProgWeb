@@ -37,4 +37,10 @@ export class AuthorController {
         return this.authorService.deleteAuthor(id)
     }
 
+    @Get(":id/publications")
+    @GetExceptionCatches("Author not found")
+    getAuthorPublications(@Param("id", ParseIntPipe) id: number) {
+        return this.authorService.getAuthorPublications(id)
+    }
+
 }
