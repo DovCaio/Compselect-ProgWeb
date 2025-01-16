@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventRequestDTO, UpdateEventRequestDTO } from './dto';
-import { UpdateDeleteExceptionCatches, GetExceptionCatches } from '../decorator';
+import { UpdateExceptionCatches, GetExceptionCatches, DeleteExceptionCatches } from '../decorator';
 
 @Controller('events')
 export class EventController {
@@ -28,14 +28,14 @@ export class EventController {
 
 
     @Patch(":id")
-    @UpdateDeleteExceptionCatches("Event not found")
+    @UpdateExceptionCatches("Event not found")
     updateEvent(@Param('id', ParseIntPipe) id: number, @Body() event: UpdateEventRequestDTO) {
         return this.eventService.updateEvent(id, event)
     }
 
     @HttpCode(HttpStatus.NO_CONTENT)
     @Delete(":id")
-    @UpdateDeleteExceptionCatches("Event not found")
+    @DeleteExceptionCatches("Event not found")
     deleteEvent(@Param('id', ParseIntPipe) id: number) {
         return this.eventService.deleteEvent(id)
     }

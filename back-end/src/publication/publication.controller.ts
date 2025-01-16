@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { PublicationService } from './publication.service';
 import { CreatePublicationDTO, UpdatePublicationDTO } from './dto';
-import { CreateExceptionCatches, GetExceptionCatches, UpdateDeleteExceptionCatches } from '../decorator';
+import { CreateExceptionCatches, GetExceptionCatches, UpdateExceptionCatches } from '../decorator';
 @Controller('publications')
 export class PublicationController {
 
@@ -34,14 +34,14 @@ export class PublicationController {
 
 
     @Patch(":id")
-    @UpdateDeleteExceptionCatches("Publication not found")
+    @UpdateExceptionCatches("Publication not found")
     updatePublication(@Param("id", ParseIntPipe) id: number, @Body() publicationDto: UpdatePublicationDTO){
         return this.publicationService.updatePublication(id, publicationDto)
     }   
     
     @Delete(":id")
     @HttpCode(HttpStatus.NO_CONTENT)
-    @UpdateDeleteExceptionCatches("Publication not found")
+    @UpdateExceptionCatches("Publication not found")
     deletePublication(@Param("id", ParseIntPipe) id: number){
         return this.publicationService.deletePublication(id)
     }
