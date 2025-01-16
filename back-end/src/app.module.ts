@@ -8,6 +8,7 @@ import { PublicationModule } from './publication/publication.module';
 import { BlogModule } from './blog/blog.module';
 import { AuthorModule } from './author/author.module';
 import { StatisticsModule } from './statistics/statistics.module';
+import { AuthorsOnPublicationsModule } from './authors-on-publications/authors-on-publications.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { StatisticsModule } from './statistics/statistics.module';
      PublicationModule,
      BlogModule,
      AuthorModule,
-     StatisticsModule
+     StatisticsModule,
+     AuthorsOnPublicationsModule
     ],
   controllers: [AppController],
   providers: [AppService],

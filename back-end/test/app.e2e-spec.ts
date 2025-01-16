@@ -1405,6 +1405,8 @@ describe('AppController (e2e)', () => {
                 .expectBodyContains("Publication not found")
         })
   
+        it.todo("FAZER TEST COM MAIS DE UMA PUBLICAÇÂO COMO RELAÇÂO")
+
       })
 
       describe("GET", () => {
@@ -1444,10 +1446,17 @@ describe('AppController (e2e)', () => {
                 })
                 .expectStatus(200)
         })
+
+        it.todo("FAZER TEST COM MAIS DE UMA PUBLICAÇÂO COMO RELAÇÂO")
       })
         
     })
     
+    describe("Publications", () => {
+
+      
+
+    })
 
   })
 

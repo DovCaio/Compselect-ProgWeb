@@ -1,39 +1,14 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAuthorDTO, UpdateAuthorDTO } from './dto';
-import { Prisma } from '@prisma/client';
+import { AuthorsOnPublicationsService } from '../authors-on-publications/authors-on-publications.service';
 
 @Injectable()
 export class AuthorService {
 
-    constructor(private prisma: PrismaService){}
+    constructor(private prisma: PrismaService, private authorsOnPublicationsService: AuthorsOnPublicationsService){}
 
 
-    async createRelationWithPublication(authorId: number, titlesPublications: string[]){
-
-        let publications = []
-                
-            publications = await this.prisma.publication.findMany({
-                where: {
-                    title: {
-                        in: titlesPublications
-                    }
-                }
-            })    
-            if (publications.length !== titlesPublications.length) {
-                throw new ForbiddenException("Publication not found")
-            }
-
-            await this.prisma.authorsOnPublications.createMany({
-                data: publications.map((publication) => {
-                    return {
-                        authorId: authorId,
-                        publicationId: publication.id
-                    }
-                })
-            })
-
-    }
 
     async createAuthor(authorDto: CreateAuthorDTO){
 
@@ -49,7 +24,7 @@ export class AuthorService {
         })
 
         if (authorDto.publications.length > 0) {
-            await this.createRelationWithPublication(author.id, authorDto.publications)
+            await this.authorsOnPublicationsService.createRelationWithPublication(author.id, authorDto.publications)
         }
 
 
@@ -73,23 +48,15 @@ export class AuthorService {
         return author 
     }
 
+
     async updateAuthor(id: number, authorDto: UpdateAuthorDTO){
-        let publications = []
 
         if(authorDto.publications && authorDto.publications.length > 0){
 
-
-            await this.prisma.authorsOnPublications.deleteMany({
-                where: {
-                    authorId: id
-                }
-            })
-
-            await this.createRelationWithPublication(id, authorDto.publications)
-
+            await this.authorsOnPublicationsService.deleteRelationWithPublication(id)
+            await this.authorsOnPublicationsService.createRelationWithPublication(id, authorDto.publications)
 
         }
-
         
         return await this.prisma.author.update({
             
@@ -106,6 +73,9 @@ export class AuthorService {
 
 
     async deleteAuthor(id: number){
+
+        await this.authorsOnPublicationsService.deleteRelationWithPublication(id)
+
         return await this.prisma.author.delete({
             where: {
                 id
