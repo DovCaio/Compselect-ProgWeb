@@ -7,7 +7,7 @@ export class AuthorsOnPublicationsService {
     constructor (private prisma: PrismaService){}
 
 
-    //Authors > Publications
+    //Authors -> Publications
     async createRelationWithPublication(authorId: number, titlesPublications: string[]){
                 
         const publications = await this.prisma.publication.findMany({
@@ -41,7 +41,7 @@ export class AuthorsOnPublicationsService {
     }
 
 
-    //Publications > Authors
+    //Publications -> Authors
 
     async createRelationWithAuthor(publicationId: number, authorsId: number[]){
 
@@ -60,8 +60,8 @@ export class AuthorsOnPublicationsService {
         return this.prisma.authorsOnPublications.createMany({
             data: authorsId.map((authorId) => {
                 return {
-                    authorId: authorId,
-                    publicationId: publicationId
+                    authorId,
+                    publicationId
                 }
             })
         })

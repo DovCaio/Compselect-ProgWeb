@@ -26,6 +26,13 @@ export class PublicationController {
     }
 
 
+    @Get(":id/authors")
+    @GetExceptionCatches("Publication not found")
+    getPublicationAuthors(@Param("id", ParseIntPipe) id: number){
+        return this.publicationService.getPublicationAuthors(id)
+    }
+
+
     @Patch(":id")
     @UpdateDeleteExceptionCatches("Publication not found")
     updatePublication(@Param("id", ParseIntPipe) id: number, @Body() publicationDto: UpdatePublicationDTO){
@@ -38,5 +45,6 @@ export class PublicationController {
     deletePublication(@Param("id", ParseIntPipe) id: number){
         return this.publicationService.deletePublication(id)
     }
+
     
 }

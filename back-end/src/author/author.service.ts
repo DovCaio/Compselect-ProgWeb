@@ -8,8 +8,6 @@ export class AuthorService {
 
     constructor(private prisma: PrismaService, private authorsOnPublicationsService: AuthorsOnPublicationsService){}
 
-
-
     async createAuthor(authorDto: CreateAuthorDTO){
 
         const publications = [...authorDto.publications]
@@ -17,8 +15,7 @@ export class AuthorService {
 
         let author = await this.prisma.author.create({
             data: {
-                ...authorDto,
-                
+                ...authorDto,                
             }
             
         })
@@ -85,15 +82,10 @@ export class AuthorService {
 
     async getAuthorPublications(id: number){
 
-        const author = await this.prisma.author.findUnique({
-            where: {
-                id
-            }
-        })
 
         const publicationsIds = await this.prisma.authorsOnPublications.findMany({
             where: {
-                authorId: author.id
+                authorId: id
             }
         })
 

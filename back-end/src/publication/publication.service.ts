@@ -12,18 +12,15 @@ export class PublicationService {
         let authors = [...publicationDto.authors];
         delete publicationDto.authors
 
-
         const publication = await this.prisma.publication.create({
             data: {
                 ...publicationDto,
                 }
         })
 
-        if(authors.length > 0) {
-
-            this.authorsOnPublicationsService.createRelationWithAuthor(publication.id, authors)
-        }
-
+        if(authors.length > 0)  this.authorsOnPublicationsService.createRelationWithAuthor(publication.id, authors)
+        
+        
         return publication
     }
 
@@ -79,5 +76,24 @@ export class PublicationService {
                 id
             }
         })
+    }
+
+    async getPublicationAuthors(id: number){
+        const authorsIds = await this.prisma.authorsOnPublications.findMany({
+            where: {
+                publicationId: id
+            }
+        })
+
+        return await this.prisma.author.findMany({
+            where: {
+                id: {
+                    in: authorsIds.map((author) => {
+                        return author.authorId
+                    })
+                }
+            }
+        })
+
     }
 }

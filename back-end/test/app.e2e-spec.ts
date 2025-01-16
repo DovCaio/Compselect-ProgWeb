@@ -1454,9 +1454,96 @@ describe('AppController (e2e)', () => {
     
     describe("Publications", () => {
 
-      
+      describe("POST", () => { 
+
+        const author : CreateAuthorDTO = {
+          firstName: "Author TESTPUBLICATION",
+          lastName: "Author 1 TESTPUBLICATION",
+          image: "imagedadeae",
+          bibliography: "bibliography adae",
+          publications: []
+        }
+    
+        it("create an author", () => {
+          return pactum
+                .spec()
+                .post("/authors")
+                .withBody(author)
+                .expectStatus(201)
+                .stores("authorPublicationId", "id")
+        })
+
+        const publicationDto : CreatePublicationDTO = {
+          title: "Publication 1 for authors and publications for the testing",
+          image: "image",
+          authors: [],
+          type: "Cyber Security"
+        }
+    
+        it("create a publication", () => {
+          return pactum
+                .spec()
+                .post("/publications")
+                .withBody({
+                  title: publicationDto.title,
+                  image: publicationDto.image,
+                  authors: ["$S{authorPublicationId}"],
+                  type: publicationDto.type
+                })
+                .expectStatus(201)
+                .stores("publicationIdAuthor", "id")
+        })
+
+      })
+
+      describe("GET", () => {
+        it("should return all authors of a publication", () =>{
+  
+          return pactum
+                .spec()
+                .get("/publications/{id}/authors")
+                .withPathParams("id", "$S{publicationIdAuthor}")
+                .expectStatus(200)
+                .expectJsonLength(1)
+  
+        })
+      })
+
+      describe("PATCH", () => {
+        const author : CreateAuthorDTO = {
+          firstName: "Author TESTPUBLICATION UPDATE",
+          lastName: "Author 1 TESTPUBLICATION UPDATE",
+          image: "imagedadeae",
+          bibliography: "bibliography adaea",
+          publications: []
+        }
+
+        it("create an author", () => {  
+          return pactum
+                .spec()
+                .post("/authors")
+                .withBody(author)
+                .expectStatus(201)
+                .stores("authorPublicationIdForUpdate", "id")
+        })
+
+
+
+        it("update a publication", () => {
+          return pactum
+                .spec()
+                .patch("/publications/{id}")
+                .withPathParams("id", "$S{publicationIdAuthor}")
+                .withBody({
+                  authors: ["$S{authorPublicationIdForUpdate}"]
+                })
+                .expectStatus(200)
+        })
+      })
 
     })
+
+    
 
   })
 
