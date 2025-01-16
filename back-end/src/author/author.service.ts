@@ -12,7 +12,7 @@ export class AuthorService {
 
     async createAuthor(authorDto: CreateAuthorDTO){
 
-        const publications = authorDto.publications
+        const publications = [...authorDto.publications]
         delete authorDto.publications
 
         let author = await this.prisma.author.create({
@@ -24,7 +24,7 @@ export class AuthorService {
         })
 
         if (publications.length > 0) {
-            await this.authorsOnPublicationsService.createRelationWithPublication(author.id, authorDto.publications)
+            await this.authorsOnPublicationsService.createRelationWithPublication(author.id, publications)
         }
 
 
@@ -51,12 +51,14 @@ export class AuthorService {
 
     async updateAuthor(id: number, authorDto: UpdateAuthorDTO){
 
+
         if(authorDto.publications && authorDto.publications.length > 0){
 
             await this.authorsOnPublicationsService.deleteRelationWithPublication(id)
             await this.authorsOnPublicationsService.createRelationWithPublication(id, authorDto.publications)
 
         }
+        delete authorDto.publications
         
         return await this.prisma.author.update({
             

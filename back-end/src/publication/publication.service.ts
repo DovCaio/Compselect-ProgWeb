@@ -9,7 +9,7 @@ export class PublicationService {
     constructor(private prisma: PrismaService, private authorsOnPublicationsService: AuthorsOnPublicationsService){}
 
     async createPublication(publicationDto: CreatePublicationDTO){
-        let authors = publicationDto.authors;
+        let authors = [...publicationDto.authors];
         delete publicationDto.authors
 
 
@@ -23,6 +23,8 @@ export class PublicationService {
 
             this.authorsOnPublicationsService.createRelationWithAuthor(publication.id, authors)
         }
+
+        return publication
     }
 
 
@@ -47,22 +49,15 @@ export class PublicationService {
 
     async updatePublication(id: number, publicationDto: UpdatePublicationDTO){
 
-        let authors = []
 
         if(publicationDto.authors && publicationDto.authors.length > 0){
 
-            authors = await this.prisma.author.findMany({
-                where: {
-                    id: {
-                        in: publicationDto.authors
-                    }
-                }
-            })
-
-            if(authors.length !== publicationDto.authors.length) {
-                throw new ForbiddenException("Author not found")
-            }
+            this.authorsOnPublicationsService.deleteRelationWithAuthor(id)
+            this.authorsOnPublicationsService.createRelationWithAuthor(id, publicationDto.authors)
+        
         }
+
+        delete publicationDto.authors
 
         return await this.prisma.publication.update({
             where: {
@@ -72,11 +67,13 @@ export class PublicationService {
                 ...publicationDto,
             }
 
-
         })
     }
 
     async deletePublication(id: number){
+
+        this.authorsOnPublicationsService.deleteRelationWithAuthor(id)
+
         return await this.prisma.publication.delete({
             where: {
                 id

@@ -67,4 +67,12 @@ export class AuthorsOnPublicationsService {
         })
     }
 
+    async deleteRelationWithAuthor(publicationId: number){
+        await this.prisma.authorsOnPublications.deleteMany({
+            where: {
+                publicationId: publicationId
+            }
+        })
+    }
+
 }
