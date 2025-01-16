@@ -74,7 +74,6 @@ model Author {
   lastName String
   image String
   bibliography String
-  publications AuthorsOnPublications[]
 }
 
 model Publication {
@@ -82,14 +81,11 @@ model Publication {
   title String @unique
   image String
   createAt DateTime @default(now())
-  authors AuthorsOnPublications[]
   type String
 }
 
-model AuthorsOnPublications { // Issos não precisa dos campos author e publications, o relacionamento não vai ser direto
-                              // a recuperação de publicações apatir do author, e vice versa, pode ser feito sem esse relacionamento direto, use a cabeça meu amigo
-  author Author @relation(fields: [authorId], references: [id])
-  publication Publication @relation(fields: [publicationId], references: [id])
+model AuthorsOnPublications { 
+  
   authorId Int
   publicationId Int
 

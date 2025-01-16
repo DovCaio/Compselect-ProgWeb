@@ -12,18 +12,18 @@ export class AuthorService {
 
     async createAuthor(authorDto: CreateAuthorDTO){
 
+        const publications = authorDto.publications
+        delete authorDto.publications
+
         let author = await this.prisma.author.create({
             data: {
                 ...authorDto,
-                publications: {
-                    connect: []
-                }
                 
             }
             
         })
 
-        if (authorDto.publications.length > 0) {
+        if (publications.length > 0) {
             await this.authorsOnPublicationsService.createRelationWithPublication(author.id, authorDto.publications)
         }
 
@@ -62,9 +62,7 @@ export class AuthorService {
             
             data: {
                 ...authorDto,
-                publications: {
-                    connect: []
-                }},
+            },
             where: {
                 id
             }

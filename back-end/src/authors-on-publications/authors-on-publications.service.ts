@@ -7,10 +7,10 @@ export class AuthorsOnPublicationsService {
     constructor (private prisma: PrismaService){}
 
 
-
+    //Authors > Publications
     async createRelationWithPublication(authorId: number, titlesPublications: string[]){
                 
-        let publications = await this.prisma.publication.findMany({
+        const publications = await this.prisma.publication.findMany({
             where: {
                 title: {
                     in: titlesPublications
@@ -37,6 +37,33 @@ export class AuthorsOnPublicationsService {
             where: {
                 authorId: authorId
             }
+        })
+    }
+
+
+    //Publications > Authors
+
+    async createRelationWithAuthor(publicationId: number, authorsId: number[]){
+
+        const authors = await this.prisma.author.findMany({
+            where: {
+                id: {
+                    in: authorsId
+                }
+            }
+        })
+
+        if (authors.length !== authorsId.length) {
+            throw new ForbiddenException("Author not found")
+        }
+
+        return this.prisma.authorsOnPublications.createMany({
+            data: authorsId.map((authorId) => {
+                return {
+                    authorId: authorId,
+                    publicationId: publicationId
+                }
+            })
         })
     }
 

@@ -1,43 +1,28 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePublicationDTO, UpdatePublicationDTO } from './dto';
+import { AuthorsOnPublicationsService } from '../authors-on-publications/authors-on-publications.service';
 
 @Injectable()
 export class PublicationService {
 
-    constructor(private prisma: PrismaService){}
+    constructor(private prisma: PrismaService, private authorsOnPublicationsService: AuthorsOnPublicationsService){}
 
     async createPublication(publicationDto: CreatePublicationDTO){
-        let authors = [];
-        if(publicationDto.authors.length > 0) {
-
-            authors = await this.prisma.author.findMany({
-                where: {
-                    id: {
-                        in: publicationDto.authors
-                    }
-                }
-                
-            })
-
-            if(authors.length !== publicationDto.authors.length) {
-                throw new ForbiddenException("Author not found")
-            }
-        }
+        let authors = publicationDto.authors;
+        delete publicationDto.authors
 
 
-        return await this.prisma.publication.create({
+        const publication = await this.prisma.publication.create({
             data: {
                 ...publicationDto,
-                authors: {
-                    create: authors.map((authorId) => {
-                        return {
-                            authorId
-                        }
-                    })
                 }
-            }
         })
+
+        if(authors.length > 0) {
+
+            this.authorsOnPublicationsService.createRelationWithAuthor(publication.id, authors)
+        }
     }
 
 
@@ -85,16 +70,9 @@ export class PublicationService {
             },
             data: {
                 ...publicationDto,
-                authors: {
-                    create: authors.map((authorId) => {
-                        return {
-                            authorId
-                        }
-                    })
-                }
-
-
             }
+
+
         })
     }
 
