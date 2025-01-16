@@ -1404,8 +1404,53 @@ describe('AppController (e2e)', () => {
                 .expectStatus(403)
                 .expectBodyContains("Publication not found")
         })
+
+        const publicationDto2 : CreatePublicationDTO = {
+          title: "Publication 2 for 2 publicaitons",
+          image: "image",
+          authors: [],
+          type: "Cyber Security"
+        }
+
+        const publicationDto3 : CreatePublicationDTO = {
+          title: "Publication 3 for 2 publicaitons",
+          image: "image",
+          authors: [],
+          type: "Cyber Security"
+        }
   
-        it.todo("FAZER TEST COM MAIS DE UMA PUBLICAÇÂO COMO RELAÇÂO")
+        it("create a publication", () => {
+          return pactum
+                .spec()
+                .post("/publications")
+                .withBody(publicationDto2)
+                .expectStatus(201)
+        })
+
+        it("create a publication with two publications", () => {
+          return pactum
+                .spec()
+                .post("/publications")
+                .withBody(publicationDto3)
+                .expectStatus(201)
+        })
+
+        const authorDTO2: CreateAuthorDTO = {
+          firstName: "Author 1",
+          lastName: "Author 1",
+          image: "image",
+          bibliography: "bibliography",
+          publications: [publicationDto2.title, publicationDto3.title]
+        }
+
+        it("create a author", () => {
+          return pactum
+                .spec()
+                .post("/authors")
+                .withBody(authorDTO2)
+                .expectStatus(201)
+                .stores("authorId2P", "id")
+        })
 
       })
 
@@ -1417,6 +1462,15 @@ describe('AppController (e2e)', () => {
                 .withPathParams("id", "$S{authorId}")
                 .expectStatus(200)
                 .expectJsonLength(1)
+        })
+
+        it("Should return two publications of an author", () => {
+          return pactum
+                .spec()
+                .get("/authors/{id}/publications")
+                .withPathParams("id", "$S{authorId2P}")
+                .expectStatus(200)
+                .expectJsonLength(2)
         })
       })
 
@@ -1494,6 +1548,60 @@ describe('AppController (e2e)', () => {
                 .stores("publicationIdAuthor", "id")
         })
 
+        const authorDTO1 : CreateAuthorDTO = {
+          firstName: "Author TESTPUBLICATION",
+          lastName: "Author 1 TESTPUBLICATION",
+          image: "imagedadeae",
+          bibliography: "bibliography adae",
+          publications: []
+        }
+    
+        const authorDTO2 : CreateAuthorDTO = {
+          firstName: "Author TESTPUBLICATION",
+          lastName: "Author 1 TESTPUBLICATION",
+          image: "imagedadeae",
+          bibliography: "bibliography adae",
+          publications: []
+        }
+    
+        it("create an author", () => {
+          return pactum
+                .spec()
+                .post("/authors")
+                .withBody(authorDTO1)
+                .expectStatus(201)
+                .stores("authorPublicationId1", "id")
+        })
+  
+        it("create an author", () => {
+          return pactum
+                .spec()
+                .post("/authors")
+                .withBody(authorDTO2)
+                .expectStatus(201)
+                .stores("authorPublicationId2", "id")
+        })
+
+        const publicationDto2 : CreatePublicationDTO = {
+          title: "Publication 1 for authors and publications with some words more in the title",
+          image: "image",
+          authors: [],
+          type: "Cyber Security"
+        }
+    
+        it("create a publication", () => {
+          return pactum
+                .spec()
+                .post("/publications")
+                .withBody({
+                  title: publicationDto2.title,
+                  image: publicationDto2.image,
+                  authors: ["$S{authorPublicationId1}", "$S{authorPublicationId2}"],
+                  type: publicationDto2.type
+                })
+                .expectStatus(201)
+        })
+
       })
 
       describe("GET", () => {
@@ -1527,8 +1635,6 @@ describe('AppController (e2e)', () => {
                 .stores("authorPublicationIdForUpdate", "id")
         })
 
-
-
         it("update a publication", () => {
           return pactum
                 .spec()
@@ -1540,6 +1646,9 @@ describe('AppController (e2e)', () => {
                 .expectStatus(200)
         })
       })
+
+
+
 
     })
 
