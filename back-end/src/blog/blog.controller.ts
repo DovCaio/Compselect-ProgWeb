@@ -1,7 +1,7 @@
 import { Body, ClassSerializerInterceptor, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, UseInterceptors } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { CreateCommentDTO, CreatePostRequestDTO, UpdatePostRequestDTO } from './dto';
-import { CreateExceptionCatches, GetExceptionCatches, UpdateExceptionCatches } from '../decorator';
+import { CreateExceptionCatches, DeleteExceptionCatches, GetExceptionCatches, UpdateExceptionCatches } from '../decorator';
 
 @Controller('blog')
 export class BlogController {
@@ -16,10 +16,10 @@ export class BlogController {
 
     }
 
-    @Get()
+    @Get("/:limit/:page")
     @GetExceptionCatches("No posts found")
-    getPosts(){
-        return this.blogService.getPosts()
+    getPosts(@Param("limit", ParseIntPipe) limit: number, @Param("page", ParseIntPipe) page: number){
+        return this.blogService.getPosts(limit, page)
     }
 
     @Get(":id")
@@ -36,7 +36,7 @@ export class BlogController {
 
     @Delete(":id")
     @HttpCode(HttpStatus.NO_CONTENT)
-    @UpdateExceptionCatches("Post not found")
+    @DeleteExceptionCatches("Post not found")
     deletePost(@Param("id", ParseIntPipe) id: number){
         return this.blogService.deletePost(id)
     }
@@ -84,7 +84,6 @@ export class BlogController {
 
     @HttpCode(HttpStatus.NO_CONTENT)
     @Delete(":id/comment/:commentId")
-    
     async deleteComment(@Param("id", ParseIntPipe) postId: number,
      @Param("commentId", ParseIntPipe) commentId: number) {
         return  await this.blogService.deleteComment(postId, commentId)        

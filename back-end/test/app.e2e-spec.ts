@@ -411,13 +411,56 @@ describe('AppController (e2e)', () => {
 
     describe("GET", () => {
 
-      it('should return all blog', () => {
+      const postDto2: CreatePostRequestDTO = {
+        images: ["image1", "image2"],
+        titles: ["title1", "title2"],
+        texts: ["text1", "text2"],
+        links: ["link1", "link2"],
+        sequenceOfContent: [
+          1, 0, 3, 2, 1, 0, 3, 2,
+        ]
+      }
+
+      it("create a post for pageination testing", () => {
         return pactum
               .spec()
-              .get("/blog")
+              .post("/blog")
+              .withBody(postDto2)
+              .expectStatus(201)
+              .stores("blogIdForDeleteAfter", "id")
+      })
+
+      it('should return a blog list with first page blog, with paginations', () => {
+        return pactum
+              .spec()
+              .get("/blog/{limit}/{page}")
+              .withPathParams("limit", 1)
+              .withPathParams("page", 1)
               .expectStatus(200)
               .expectJsonLength(1)
       })
+
+      it('should return a blog list with last page blog, with paginations', () => {
+        return pactum
+              .spec()
+              .get("/blog/{limit}/{page}")
+              .withPathParams("limit", 1)
+              .withPathParams("page", 2)
+              .expectStatus(200)
+              .expectJsonLength(1)
+      })
+
+
+      it('should return all pages with paginations', () => {
+        return pactum
+              .spec()
+              .get("/blog/{limit}/{page}")
+              .withPathParams("limit", 2)
+              .withPathParams("page", 1)
+              .expectStatus(200)
+              .expectJsonLength(2)
+      })
+
       it('should return a blog', () => {
         return pactum
               .spec()
@@ -628,6 +671,14 @@ describe('AppController (e2e)', () => {
               .spec()
               .delete("/blog/{id}")
               .withPathParams("id", "$S{blogId}")
+              .expectStatus(204)
+      })
+
+      it("should delte a post an another post", () => {
+        return pactum
+              .spec()
+              .delete("/blog/{id}")
+              .withPathParams("id", "$S{blogIdForDeleteAfter}")
               .expectStatus(204)
       })
 

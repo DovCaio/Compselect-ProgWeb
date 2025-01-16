@@ -37,8 +37,15 @@ export class BlogService {
 
 
     
-    getPosts(){
-        return this.prisma.post.findMany()
+    getPosts(limit: number, page: number){
+        return this.prisma.post.findMany({
+            take: limit,
+            skip: (page - 1) * limit,
+            orderBy: {
+                createAt: "desc"
+            }
+
+        })
     }
 
     getPost(id: number){
