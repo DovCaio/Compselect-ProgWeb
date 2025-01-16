@@ -33,8 +33,14 @@ export class EventService {
         return date > today;
     }
 
-    async getEvents(){
-        return await this.prisma.event.findMany()
+    async getEvents(page:number, limit: number){
+        return await this.prisma.event.findMany({
+            take: limit,
+            skip: (page - 1) * limit,
+            orderBy: {
+                createAt: "desc"
+            }
+        })
     }
 
 

@@ -97,12 +97,61 @@ describe('AppController (e2e)', () => {
     describe('GET', () => {
 
 
-    it('should return all events', () => {
+    const locationDto2: CreateLocationRequestDTO = {
+      country: "Country 1",
+      city: "City 1",
+      street: "Street 1",
+      number: 1
+    }
+
+    const eventDTO2:CreateEventRequestDTO  = {
+      title: "Event 2",
+      dateEvent: new Date(Date.UTC(2030, 5, 19)),
+      time: "10:00",
+      description: "Description 1",
+      target: ["target 1", "target2"],
+      activities: ["activity 1", "activity 2"],
+      image: "aedaedaae",
+      location: locationDto2
+    }
+
+    it("Create an event for test of pagination", () => {
       return pactum
             .spec()
-            .get("/events")
+            .post("/events")
+            .withBody(eventDTO2)
+            .expectStatus(201)
+    })
+
+
+    it('should return first page with limit equals 1', () => {
+      return pactum
+            .spec()
+            .get("/events/{limit}/{page}")
+            .withPathParams("limit", 1)
+            .withPathParams("page", 1)
             .expectStatus(200)
             .expectJsonLength(1)
+    })
+
+    it('should return last page with limit equals 1', () => {
+      return pactum
+            .spec()
+            .get("/events/{limit}/{page}")
+            .withPathParams("limit", 1)
+            .withPathParams("page", 2)
+            .expectStatus(200)
+            .expectJsonLength(1)
+    })
+
+    it('should return all events with pagination', () => {
+      return pactum
+            .spec()
+            .get("/events/{limit}/{page}")
+            .withPathParams("limit", 2)
+            .withPathParams("page", 1)
+            .expectStatus(200)
+            .expectJsonLength(2)
     })
 
     it('should return an event', () => {
@@ -119,7 +168,7 @@ describe('AppController (e2e)', () => {
     describe("PATCH", () => {
       it('should update a title of a event', () => {
         const eventDto: UpdateEventRequestDTO = {
-          title: "Event 2",
+          title: "Event 2 Updated",
         }
         return pactum
               .spec()
@@ -1145,7 +1194,7 @@ describe('AppController (e2e)', () => {
               .spec()
               .get("/statistics/events/qtt")
               .expectStatus(200)
-              .expectBody("0")
+              .expectBody("1")
       })
 
       const locationDTO: CreateLocationRequestDTO = {
@@ -1181,7 +1230,7 @@ describe('AppController (e2e)', () => {
                 .spec()
                 .get("/statistics/events/qtt")
                 .expectStatus(200)
-                .expectBody("1")
+                .expectBody("2")
         })
   
       })

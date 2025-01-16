@@ -14,10 +14,10 @@ export class EventController {
     }
 
 
-    @Get()
+    @Get("/:limit/:page")
     @GetExceptionCatches("No events found")
-    getEvents() {
-        return this.eventService.getEvents()
+    getEvents( @Param('limit', ParseIntPipe) limit:number, @Param('page', ParseIntPipe) page:number) {
+        return this.eventService.getEvents(page, limit)
     }
 
     @Get(':id')
