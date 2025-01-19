@@ -14,6 +14,15 @@ export class AuthorController {
         return this.authorService.createAuthor(authorDto)
     }
 
+
+
+    //A sequência entre: getAuthorPublications e getAuthors, importa por uma questão de ambiguidade.
+    @Get(":id/publications")
+    @GetExceptionCatches("Author not found")
+    getAuthorPublications(@Param("id", ParseIntPipe) id: number) {
+        return this.authorService.getAuthorPublications(id)
+    }
+
     @Get(":limit/:page")
     getAuthors(@Param("limit", ParseIntPipe) limit: number, @Param("page", ParseIntPipe) page: number) {
         return this.authorService.getAuthors(limit, page)
@@ -37,10 +46,6 @@ export class AuthorController {
         return this.authorService.deleteAuthor(id)
     }
 
-    @Get(":id/publications")
-    @GetExceptionCatches("Author not found")
-    getAuthorPublications(@Param("id", ParseIntPipe) id: number) {
-        return this.authorService.getAuthorPublications(id)
-    }
+    
 
 }

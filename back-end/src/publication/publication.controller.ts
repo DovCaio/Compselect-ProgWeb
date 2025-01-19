@@ -13,24 +13,27 @@ export class PublicationController {
         return this.publicationService.createPublication(publicationDto)
     }
 
+
+
+    //A sequência entre: getPublicationAuthors e getPublications, importa, por uma questão de ambiguidade
+    @Get(":id/authors")
+    @GetExceptionCatches("Publication not found")
+    getPublicationAuthors(@Param("id", ParseIntPipe) id: number){
+        return this.publicationService.getPublicationAuthors(id)
+    }
+
     @Get(":limit/:page")
     @GetExceptionCatches("Publication not founds")
     getPublications(@Param("limit", ParseIntPipe) limit: number, @Param("page", ParseIntPipe) page: number){
         return this.publicationService.getPublications(limit, page)
     }
 
+
     @Get(":id")
     @GetExceptionCatches("Publication not found")
     getPublication(@Param("id", ParseIntPipe) id: number){
         return this.publicationService.getPublication(id)
-    }
-
-
-    @Get(":id/authors")
-    @GetExceptionCatches("Publication not found")
-    getPublicationAuthors(@Param("id", ParseIntPipe) id: number){
-        return this.publicationService.getPublicationAuthors(id)
-    }
+    }    
 
 
     @Patch(":id")
