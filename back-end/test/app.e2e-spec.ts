@@ -412,7 +412,7 @@ describe('AppController (e2e)', () => {
     describe("GET", () => {
 
       const postDto2: CreatePostRequestDTO = {
-        images: ["image1", "image2"],
+        images: ["image1aaa", "image2"],
         titles: ["title1", "title2"],
         texts: ["text1", "text2"],
         links: ["link1", "link2"],
@@ -921,8 +921,6 @@ describe('AppController (e2e)', () => {
 
   describe("Authors", () => {
 
-
-
     const authorDto: CreateAuthorDTO = {
       firstName: "Author 1 FistName",
       lastName: "Author 1 LastName",
@@ -951,12 +949,60 @@ describe('AppController (e2e)', () => {
 
     describe("GET", () => {
 
-      it("should return all authors", () => {
+      const createAuthorDto2: CreateAuthorDTO = {
+        firstName: "Author 2 FistName",
+        lastName: "Author 2 LastName",
+        image: "É uma imagen",
+        bibliography: "bibliografia",
+        publications: []
+      }
+
+      it("should create a author for pagination testing", () => {
+
         return pactum
               .spec()
-              .get("/authors")
+              .post("/authors")
+              .withBody(createAuthorDto2)
+              .expectStatus(201)
+              .stores("authorId2delete", "id")
+
+      })
+
+      it("shold return firt page of authors", () => {
+
+        return pactum
+              .spec()
+              .get("/authors/{limit}/{page}")
+              .withPathParams("limit", 1)
+              .withPathParams("page", 1)
               .expectStatus(200)
               .expectJsonLength(1)
+
+      })
+
+
+      it("shold return last page of authors", () => {
+
+        return pactum
+              .spec()
+              .get("/authors/{limit}/{page}")
+              .withPathParams("limit", 1)
+              .withPathParams("page", 2)
+              .expectStatus(200)
+              .expectJsonLength(1)
+
+      })
+
+      it("shold return all the authors", () => {
+
+        return pactum
+              .spec()
+              .get("/authors/{limit}/{page}")
+              .withPathParams("limit", 2)
+              .withPathParams("page", 1)
+              .expectStatus(200)
+              .expectJsonLength(2)
+
       })
 
       it("should return an author", () => {
@@ -1068,11 +1114,20 @@ describe('AppController (e2e)', () => {
 
     describe("DELETE", () => {
 
+
       it("should delete an author", () => {
         return pactum
               .spec()
               .delete("/authors/{id}")
               .withPathParams("id", "$S{authorId}")
+              .expectStatus(204)
+      })
+
+      it("delete another author for the pagination test", () => {
+        return pactum
+              .spec()
+              .delete("/authors/{id}")
+              .withPathParams("id", "$S{authorId2delete}")
               .expectStatus(204)
       })
 
@@ -1112,12 +1167,60 @@ describe('AppController (e2e)', () => {
 
     describe("GET", () => {
 
-      it("should get all publications", () => {
+      const publicationDto : CreatePublicationDTO = {
+        title: "Publication 1 for pagination",
+        image: "É uma imagen",
+        authors: [],
+        type: "Cyber Security"
+      }
+
+      it("should create a publication for pagination testing", () => {
+
         return pactum
               .spec()
-              .get("/publications")
+              .post("/publications")
+              .withBody(publicationDto)
+              .expectStatus(201)
+              .stores("publicationId2delete", "id")
+      })
+
+
+      it("should get fist page of publications with pagination", () => {
+        return pactum
+              .spec()
+              .get("/publications/{limit}/{page}")
+              .withPathParams("limit", 1)
+              .withPathParams("page", 1)
               .expectStatus(200)
               .expectJsonLength(1)
+      })
+
+      it("should get last page of publications with pagination", () => {
+        return pactum
+              .spec()
+              .get("/publications/{limit}/{page}")
+              .withPathParams("limit", 1)
+              .withPathParams("page", 2)
+              .expectStatus(200)
+              .expectJsonLength(1)
+      })
+
+      it("should get all the two pages of publications with pagination", () => {
+        return pactum
+              .spec()
+              .get("/publications/{limit}/{page}")
+              .withPathParams("limit", 2)
+              .withPathParams("page", 1)
+              .expectStatus(200)
+              .expectJsonLength(2)
+      })
+
+      it("should delete a publication for pagination testing", () => {
+        return pactum
+              .spec()
+              .delete("/publications/{id}")
+              .withPathParams("id", "$S{publicationId2delete}")
+              .expectStatus(204)
       })
 
       it("should get a publication", () => {
@@ -1555,7 +1658,7 @@ describe('AppController (e2e)', () => {
       })
 
       describe("GET", () => {
-        it("should return all publications of an author", () => {
+        it("should return one publications of an author", () => {
           return pactum
                 .spec()
                 .get("/authors/{id}/publications")
@@ -1564,7 +1667,7 @@ describe('AppController (e2e)', () => {
                 .expectJsonLength(1)
         })
 
-        it("Should return two publications of an author", () => {
+        it("should return two publications of an author", () => {
           return pactum
                 .spec()
                 .get("/authors/{id}/publications")
@@ -1700,6 +1803,7 @@ describe('AppController (e2e)', () => {
                   type: publicationDto2.type
                 })
                 .expectStatus(201)
+                .stores("publicationIdAuthor2", "id")
         })
 
       })
@@ -1713,6 +1817,17 @@ describe('AppController (e2e)', () => {
                 .withPathParams("id", "$S{publicationIdAuthor}")
                 .expectStatus(200)
                 .expectJsonLength(1)
+  
+        })
+
+        it("should return all authors of a publication, two authors", () =>{
+  
+          return pactum
+                .spec()
+                .get("/publications/{id}/authors")
+                .withPathParams("id", "$S{publicationIdAuthor2}")
+                .expectStatus(200)
+                .expectJsonLength(2)
   
         })
       })
@@ -1751,8 +1866,6 @@ describe('AppController (e2e)', () => {
 
 
     })
-
-    
 
   })
 

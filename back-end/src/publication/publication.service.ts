@@ -25,8 +25,14 @@ export class PublicationService {
     }
 
 
-    getPublications(){
-        return this.prisma.publication.findMany()
+    getPublications(limit: number, page: number){
+        return this.prisma.publication.findMany({
+            take: limit,
+            skip: (page - 1) * limit,
+            orderBy: {
+                createAt: "desc"
+            }
+        })
     }
 
     getPublication(id: number){

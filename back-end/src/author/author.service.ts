@@ -28,8 +28,14 @@ export class AuthorService {
         return author
     }
 
-    getAuthors(){
-        return this.prisma.author.findMany()
+    getAuthors(limit: number, page: number){
+        return this.prisma.author.findMany({
+            take: limit,
+            skip: (page - 1) * limit,
+            orderBy: {
+                createAt: "desc"
+            }
+        })
     }
 
     async getAuthor(id: number){

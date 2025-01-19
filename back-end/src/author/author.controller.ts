@@ -14,9 +14,9 @@ export class AuthorController {
         return this.authorService.createAuthor(authorDto)
     }
 
-    @Get()
-    getAuthors() {
-        return this.authorService.getAuthors()
+    @Get(":limit/:page")
+    getAuthors(@Param("limit", ParseIntPipe) limit: number, @Param("page", ParseIntPipe) page: number) {
+        return this.authorService.getAuthors(limit, page)
     }
 
     @Get(":id")
