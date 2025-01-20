@@ -15,7 +15,7 @@ export class PublicationController {
 
 
 
-    //A sequência entre: getPublicationAuthors e getPublications, importa, por uma questão de ambiguidade
+    //A sequência entre: getPublicationAuthors e getPublications, importa, por uma questão de ambiguidade de rotas
     @Get(":id/authors")
     @GetExceptionCatches("Publication not found")
     getPublicationAuthors(@Param("id", ParseIntPipe) id: number){

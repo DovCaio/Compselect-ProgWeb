@@ -26,9 +26,7 @@ link-box {
 
 
 link-box a:hover {
-    color: var(--color5);
-    border-bottom: 1px solid var(--color5);
-
+    color: var(--color3);
 }
 
 
