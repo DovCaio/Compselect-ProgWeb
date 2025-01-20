@@ -14,5 +14,8 @@ export class HomeService {
     return this.http.get(`${URL}/statistics/${wichStatistics}`);
   }
 
+  getCommentsAverage() {
+    return this.http.get(`${URL}/statistics/comments/average-per-post`);
+  }
 
 }

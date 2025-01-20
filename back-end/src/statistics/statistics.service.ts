@@ -41,6 +41,9 @@ export class StatisticsService {
 
         const totalComments = await this.prisma.comment.count()
         const totalPosts = await this.prisma.post.count() 
+
+        if (totalPosts === 0) return 0
+
         return totalComments / totalPosts 
     }
 
