@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy} from '@angular/core';
 import { HomeService } from './home.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -13,38 +14,37 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './home.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
+
+
 export class HomeComponent {
 
-  //totalEvents, totalPublicationsBlog, totalAuthors, totalPublications;
-  statics : number[] = [];
+  //totalEvents, totalPublicationsBlog, totalAuthors, totalPublications, totalComments;
+  statics$ : Observable<number>[] = [ new Observable<number>(), new Observable<number>(), new Observable<number>(), new Observable<number>(), new Observable<number>()]
   //statics e text devem ter o mesmo tamanho.
   texts : string[] = ["Qtd de eventos", "Qtd de publicações", "Qtd de autores",
      "Qtd de publicações", "Qtd de comentários"];
 
   endpoints : string[] = ["events/qtt", "blogs/qtt", "authors/qtt", "publications/qtt", "comments/qtt"];
 
-  commentsAverage : number = -1;
+  commentsAverage$: Observable<number> = new Observable<number>();
 
   constructor (private homeService: HomeService){}
 
+
+
+
   ngOnInit(){
-    let staticsAux = [0, 0, 0, 0, 0];
 
     this.endpoints.forEach((endpoint, i) => {
-      this.homeService.getStatistics(endpoint).subscribe(data => {
-        staticsAux[i] = data as number;
-      })
-    })
+      this.statics$[i] = this.homeService.getStatistics(endpoint);
+    });
 
-    this.statics = [...staticsAux]
+    this.commentsAverage$ = this.homeService.getCommentsAverage();
+      
 
-
-    let commentsAverageAux = 0;
-    this.homeService.getCommentsAverage().subscribe(data => {
-      commentsAverageAux = data as number;
-    })
-
-    this.commentsAverage = commentsAverageAux
+    
   }
 
 }
+

@@ -11,11 +11,11 @@ export class HomeService {
 
 
   getStatistics(wichStatistics: string) {
-    return this.http.get(`${URL}/statistics/${wichStatistics}`);
+    return this.http.get<number>(`${URL}/statistics/${wichStatistics}`)
   }
 
   getCommentsAverage() {
-    return this.http.get(`${URL}/statistics/comments/average-per-post`);
+    return this.http.get<number>(`${URL}/statistics/comments/average-per-post`);
   }
 
 }

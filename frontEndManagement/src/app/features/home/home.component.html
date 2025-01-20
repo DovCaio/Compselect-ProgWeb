@@ -7,17 +7,17 @@
     </section>
 
     <section class="statistic-qtt">
-        <div *ngFor="let static of statics; index as i">
+        <div *ngFor="let text of texts; index as i">
             <span>
                 {{texts[i]}}
             </span>
-            <span>{{statics[i]}}</span>
+            <span>{{statics$[i] | async}}</span>
         </div>
     </section>
 
     <section>
         <div>
-            <span>Média de comentários por post: {{commentsAverage}}</span>
+            <span>Média de comentários por post: {{commentsAverage$ | async}}</span>
         </div>
     </section>
 
