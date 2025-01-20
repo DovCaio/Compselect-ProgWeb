@@ -16,11 +16,30 @@ import { MatCardModule } from '@angular/material/card';
 export class HomeComponent {
 
   //totalEvents, totalPublicationsBlog, totalAuthors, totalPublications;
-  statics : number[] = [0, 0, 0, 0];
+  statics : number[] = [0, 0, 0, 0, 0];
   //statics e text devem ter o mesmo tamanho.
-  texts : string[] = ["Qtd de eventos", "Qtd de publicações", "Qtd de autores", "Qtd de publicações"]
+  texts : string[] = ["Qtd de eventos", "Qtd de publicações", "Qtd de autores",
+     "Qtd de publicações", "Qtd de comentários"];
+
+   endpoints : string[] = ["events/qtt", "blogs/qtt", "authors/qtt", "publications/qtt", "comments/qtt"];
 
 
   constructor (private homeService: HomeService){}
+
+  ngOnInit(){
+
+    this.homeService.getStatistics(this.endpoints[0]).subscribe(data => {
+      console.log(data)
+    })
+
+    /*
+    let staticsAux = [0, 0, 0, 0, 0];
+    this.endpoints.forEach((endpoint, i) => {
+      this.homeService.getStatistics(endpoint).subscribe(data => {
+        console.log(data);
+      })
+    })
+    */
+  }
 
 }

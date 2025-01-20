@@ -1,4 +1,3 @@
-
 services:
   frontend1:
     build: ./frontEndWebSite
@@ -18,6 +17,8 @@ services:
     ports:
       - "3333:3333"
     container_name: backend
+    networks:
+      - compselect-network
   dev-db:
     image: postgres:13
     ports:
@@ -27,7 +28,7 @@ services:
       - POSTGRES_PASSWORD=strongpasswordhere
       - POSTGRES_DB=compselectdb
     networks:
-      - learning-nest
+      - compselect-network
   test-db:
     image: postgres:13
     ports:
@@ -37,7 +38,6 @@ services:
       - POSTGRES_PASSWORD=strongpasswordhere
       - POSTGRES_DB=compselectdb
     networks:
-      - learning-nest
+      - compselect-network
 networks:
-  learning-nest:
-
+  compselect-network:

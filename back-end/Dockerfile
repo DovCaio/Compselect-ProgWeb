@@ -1,15 +1,15 @@
 FROM node:18-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm i
+RUN npm install
+
+COPY prisma ./prisma/
 
 COPY . .
 
 EXPOSE 3333
-
-RUN npm install -g @nestjs/cli
 
 CMD ["npm", "run", "start:dev"]
