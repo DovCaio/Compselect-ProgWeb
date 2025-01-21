@@ -39,5 +39,19 @@ services:
       - POSTGRES_DB=compselectdb
     networks:
       - compselect-network
+  images-db:
+    image: minio/minio:latest
+    container_name: non-strutured-data-db
+    ports:
+      - "9000:9000" 
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
 networks:
   compselect-network:
+volumes:
+  minio-data:
