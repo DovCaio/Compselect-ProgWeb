@@ -41,6 +41,21 @@ describe('AppController (e2e)', () => {
         street: "Street 1",
         number: 1
       }
+
+      const mockFile: Express.Multer.File = {
+        fieldname: 'file',
+        originalname: 'test-image.png',
+        encoding: '7bit',
+        mimetype: 'image/png',
+        size: 1024,
+        buffer: Buffer.from(''), 
+        stream: null, 
+        destination: '',
+        filename: 'test-image.png',
+        path: '',
+      };
+      
+
       const eventDto: CreateEventRequestDTO = {
         title: "Event 1",
         dateEvent: new Date(Date.UTC(2030, 5, 19)), //Talvez isso deva ser atualizado a depender da data em que está sendo testado
@@ -48,7 +63,7 @@ describe('AppController (e2e)', () => {
         description: "Description 1",
         target: ["target 1", "target2"],
         activities: ["activity 1", "activity 2"],
-        image: "aedaedaae", //ISSO da que deve vir em string, usar o FileRead.readAsDataURL
+        image: mockFile,
         location: locationDto
       }
   
@@ -62,7 +77,6 @@ describe('AppController (e2e)', () => {
               .expectBodyContains(eventDto.title)
               .expectBodyContains(eventDto.description)
               .expectBodyContains(eventDto.dateEvent)
-              .expectBodyContains(eventDto.image)
               .expectBodyContains(eventDto.time)
               .expectBodyContains(eventDto.target[0])
               .expectBodyContains(eventDto.target[1])
@@ -104,6 +118,19 @@ describe('AppController (e2e)', () => {
       number: 1
     }
 
+    const mockFile2: Express.Multer.File = {
+      fieldname: 'file',
+      originalname: 'test-image.png',
+      encoding: '7bit',
+      mimetype: 'image/png',
+      size: 1024,
+      buffer: Buffer.from(''),
+      stream: null, 
+      destination: '',
+      filename: 'test-image.png',
+      path: '',
+    };
+
     const eventDTO2:CreateEventRequestDTO  = {
       title: "Event 2",
       dateEvent: new Date(Date.UTC(2030, 5, 19)),
@@ -111,7 +138,7 @@ describe('AppController (e2e)', () => {
       description: "Description 1",
       target: ["target 1", "target2"],
       activities: ["activity 1", "activity 2"],
-      image: "aedaedaae",
+      image: mockFile2,
       location: locationDto2
     }
 
@@ -1357,10 +1384,23 @@ describe('AppController (e2e)', () => {
         street: "Avenida",
         number: 1
       }
+
+      const mockFile3: Express.Multer.File = {
+        fieldname: 'file',
+        originalname: 'test-image.png',
+        encoding: '7bit',
+        mimetype: 'image/png',
+        size: 1024,
+        buffer: Buffer.from(''), // Conteúdo do arquivo (se necessário)
+        stream: null, // Pode ser omitido se não usado
+        destination: '',
+        filename: 'test-image.png',
+        path: '',
+      };
   
       const eventDTOFORSTATISTICS: CreateEventRequestDTO = {
         title: "Event 1",
-        image: "image",
+        image: mockFile3,
         description: "description",
         time: "18:00",
         dateEvent: new Date("2030-01-01"),

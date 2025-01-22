@@ -84,3 +84,26 @@ align-self: center;
 margin-bottom: 10px;
 margin-top: 10px;
 }
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    align-items: space-between;
+    justify-content: center;
+  
+  }
+  
+  .buttons > button {
+    margin: 0 5px;
+    width: 100px;
+  }
+
+.address > mat-form-field {
+  width: 100%;
+}
+
+
+.locationDiv > mat-form-field {
+  width: 49%;
+  margin-right: 1%;
+}

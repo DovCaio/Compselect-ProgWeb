@@ -9,6 +9,7 @@ import { BlogModule } from './blog/blog.module';
 import { AuthorModule } from './author/author.module';
 import { StatisticsModule } from './statistics/statistics.module';
 import { AuthorsOnPublicationsModule } from './authors-on-publications/authors-on-publications.module';
+import { MinioModule } from './minio/minio.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { AuthorsOnPublicationsModule } from './authors-on-publications/authors-o
      BlogModule,
      AuthorModule,
      StatisticsModule,
-     AuthorsOnPublicationsModule
+     AuthorsOnPublicationsModule,
+     MinioModule
     ],
   controllers: [AppController],
   providers: [AppService],

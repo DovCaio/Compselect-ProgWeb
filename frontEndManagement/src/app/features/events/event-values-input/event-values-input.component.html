@@ -1,15 +1,15 @@
-<div class="inputs">
+<form class="inputs"  (ngSubmit)="getValues()">
     <mat-form-field>
     
         <mat-label>Titulo</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="formData.title" [ngModelOptions]="{standalone: true}">
         
     </mat-form-field>
     
     <div class="dateDiv">
         <mat-form-field class="date">
             <mat-label>Data que acontecerá o evento</mat-label>
-            <input matInput [matDatepicker]="picker">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="formData.date" [ngModelOptions]="{standalone: true}">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -18,7 +18,7 @@
         
         <mat-form-field>
             <mat-label>Horário</mat-label>
-            <input matInput >
+            <input matInput [(ngModel)]="formData.time" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
     
     </div>
@@ -26,20 +26,58 @@
     
     <mat-form-field >
         <mat-label>Descrição</mat-label>
-        <textarea matInput ></textarea>
+        <textarea matInput [(ngModel)]="formData.description" [ngModelOptions]="{standalone: true}"></textarea>
       </mat-form-field>
     
     <mat-form-field>
         <mat-label>Alvo</mat-label>
-        <input matInput >
+        <input matInput [(ngModel)]="formData.target" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
     
     
     <mat-form-field>
         <mat-label>Atividades</mat-label>
-        <input matInput>
+        <input matInput required [(ngModel)]="formData.activities" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
-    <hr>
+
+    <div>
+        <h3>Local</h3>
+        <div class="locationDiv">
+          
+        
+            <mat-form-field>
+                <mat-label>País</mat-label>
+                <input matInput [(ngModel)]="formData.location.coutry" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
     
-    <file-input (fileInputValueEmitter)="sendToParent($event)"></file-input>
-</div>
+            <mat-form-field>
+                <mat-label>Cidade</mat-label>
+                <input matInput [(ngModel)]="formData.location.city" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+    
+            
+        </div>
+    
+        <div class="address">
+            <mat-form-field>
+                <mat-label>Rua e Bairro: </mat-label>
+                <input matInput [(ngModel)]="formData.location.address" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+        
+        </div>
+
+        <mat-form-field>
+            <mat-label>Número: </mat-label>
+            <input matInput [(ngModel)]="formData.location.number" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+    </div>
+
+    
+
+    <file-input (fileInputValueEmitter)="recieveImage($event)"></file-input>
+
+    <div class="buttons">
+        <button mat-raised-button color="primary" type="submit">Enviar</button>
+        <button mat-raised-button routerLink="/events" color="warn">Cancelar</button>
+    </div>
+</form>

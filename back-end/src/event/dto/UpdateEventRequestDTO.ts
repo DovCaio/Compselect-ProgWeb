@@ -26,7 +26,7 @@ export class UpdateEventRequestDTO {
     activities?: string[]
 
     @IsOptional()
-    image?: string
+    image?: Express.Multer.File | string
 
     @IsOptional()
     location?: UpdateLocationRequestDTO

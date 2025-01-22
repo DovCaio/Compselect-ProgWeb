@@ -1,11 +1,16 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateEventRequestDTO, UpdateEventRequestDTO } from './dto';
+import { MinioService } from '../minio/minio.service';
 
 @Injectable()
 export class EventService {
-    constructor(private prisma: PrismaService){}
+    constructor(private prisma: PrismaService, private minio: MinioService){}
 
+
+    private async makeUploadImage(file: Express.Multer.File): Promise<string> {
+        return await this.minio.uploadFile(file)
+    }
 
     async createEvent(event: CreateEventRequestDTO){
 
@@ -13,9 +18,12 @@ export class EventService {
             throw new ForbiddenException("Date must be greater than today");
         }
 
+        const imagePath = await this.makeUploadImage(event.image)
+
         return await this.prisma.event.create({
             data: {
                 ...event,
+                image: imagePath,
                 location: {
                     create: {
                         ...event.location
@@ -56,14 +64,19 @@ export class EventService {
 
         if (event.dateEvent && !this.eventHaveValidDate(event.dateEvent)){
             throw new ForbiddenException("Date must be greater than today")
-
         }
+
+        if( event.image && typeof event.image !== 'string') {
+           event.image = await this.makeUploadImage(event.image) 
+        }
+
         return await this.prisma.event.update({
             where: {
                 id
             },
             data: {
                 ...event,
+                image: event.image as string,
                 location: {
                     update: {
                         ...event.location

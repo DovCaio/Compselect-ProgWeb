@@ -26,7 +26,7 @@ export class CreateEventRequestDTO {
     activities: string[]
 
     @IsNotEmpty()
-    image: string
+    image: Express.Multer.File
 
     @IsNotEmpty()
     location: CreateLocationRequestDTO;

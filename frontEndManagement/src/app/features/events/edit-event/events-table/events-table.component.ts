@@ -3,7 +3,7 @@ import Event  from '../Event';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 
-import { EditService } from '../../../../shared/event/edit.service';
+import { EventService } from '../../../../shared/event/event.service';
 
 const EVENT_DATA: Event[] = [
   {id: 1, title: 'Hydrogen', date: "1.0079"},
@@ -32,7 +32,7 @@ export class EventsTableComponent {
   displayedColumns: string[] = ['id', 'title', 'date', 'edit', "delete"];
   dataSource = EVENT_DATA;
 
-  constructor(private editService: EditService) {}
+  constructor(private EventService: EventService) {}
 
   eventEdited(id: number, title: string, date: string) {
     //TODO
@@ -41,13 +41,13 @@ export class EventsTableComponent {
     const event: Event = {id: id, title: title, date: date};
     this.dataSource.splice(id, 1, event);
     console.log(this.dataSource);
-    this.editService.edit(event);
+    this.EventService.edit(event);
   }
 
   eventDeleted(id: number) {
     //TODO
     //Deve deletar o evento relativo ao id
     this.dataSource.splice(id, 1);
-    this.editService.delete(id);
+    this.EventService.delete(id);
   }
 }
