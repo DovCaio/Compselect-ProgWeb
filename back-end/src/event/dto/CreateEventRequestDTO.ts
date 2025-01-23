@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty,  IsDateString, IsArray} from "class-validator";
+import { IsString, IsNotEmpty,  IsISO8601, IsArray} from "class-validator";
 import { CreateLocationRequestDTO } from "./CreateLocationRequestDTO";
 export class CreateEventRequestDTO {
     @IsString()
@@ -6,7 +6,7 @@ export class CreateEventRequestDTO {
     title: string; 
 
     @IsNotEmpty()
-    @IsDateString()
+    @IsISO8601()
     dateEvent: Date;
 
     @IsNotEmpty()
@@ -24,9 +24,6 @@ export class CreateEventRequestDTO {
     @IsArray()
     @IsNotEmpty()
     activities: string[]
-
-    @IsNotEmpty()
-    image: Express.Multer.File
 
     @IsNotEmpty()
     location: CreateLocationRequestDTO;

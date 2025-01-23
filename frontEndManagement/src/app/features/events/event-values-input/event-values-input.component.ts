@@ -29,12 +29,12 @@ export class EventValuesInputComponent {
 
   formData: EventDTO = {
     title: '',
-    date: "",
+    dateEvent: "",
     time: '',
     description: '',
     target: "",
     activities: "",
-    image: '',
+    image: new File([], ''),
     location: {
       coutry: '',
       city: '',
@@ -60,26 +60,22 @@ export class EventValuesInputComponent {
     this.fileInputValue = file;
   }
 
-  processFile(file : File) :Promise<string>{
-    return new Promise((resolve, reject) => {
-      //MUDAR PARA UMA ABORDAGEM EM QUE SE USA O minio, para armazenar as imagens, enquanto o back
-      //VAi ARMAZENAR OS LINKS DAS IMAGENS, O MINIO ARMAZENA AS IMAGENS.
-    })
-  }
+
 
   async getValues() {
-    if(this.formData.target) this.formData.target = (this.formData.target as string).split(', ');
-    if(this.formData.activities) this.formData.activities = (this.formData.activities as string).split(', ');
-    
-    if(this.formData.date) this.formData.date = new Date(this.formData.date).toISOString();
+    if(this.formData.target && typeof this.formData.target === 'string') this.formData.target = (this.formData.target as string).split(', '); //ESSA FORMA DE TRATAR TARGET E ACTIVIT ESTÁ MUITO PORCA, MUDAR;
+    if(this.formData.activities && typeof this.formData.activities === 'string') this.formData.activities = (this.formData.activities as string).split(', ');
 
-    if(this.fileInputValue) this.formData.image = await this.processFile(this.fileInputValue);
 
+    if(this.formData.dateEvent) this.formData.dateEvent = new Date(this.formData.dateEvent).toISOString();
+
+
+    if(this.fileInputValue) this.formData.image = this.fileInputValue;
+    console.log(this.formData.image);
     this.sendValues()
   }
 
   sendValues() {
-    console.log(this.formData);
     this.eventService.post(this.formData);
   }
 

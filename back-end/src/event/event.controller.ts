@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventRequestDTO, UpdateEventRequestDTO } from './dto';
 import { UpdateExceptionCatches, GetExceptionCatches, DeleteExceptionCatches } from '../decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('events')
 export class EventController {
@@ -9,8 +10,12 @@ export class EventController {
     constructor(private eventService: EventService) {}
 
     @Post()
-    createEvent(@Body() event: CreateEventRequestDTO) {
-        return this.eventService.createEvent(event)
+    @UseInterceptors(FileInterceptor('image'))
+    createEvent(
+        @UploadedFile() image: Express.Multer.File,
+        @Body() event: CreateEventRequestDTO
+    ) {
+        return this.eventService.createEvent(event, image)
     }
 
 

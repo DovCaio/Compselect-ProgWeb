@@ -12,13 +12,13 @@ export class EventService {
         return await this.minio.uploadFile(file)
     }
 
-    async createEvent(event: CreateEventRequestDTO){
+    async createEvent(event: CreateEventRequestDTO, image: Express.Multer.File) {
 
         if(!this.eventHaveValidDate(event.dateEvent)) {
             throw new ForbiddenException("Date must be greater than today");
         }
 
-        const imagePath = await this.makeUploadImage(event.image)
+        const imagePath = await this.makeUploadImage(image)
 
         return await this.prisma.event.create({
             data: {
@@ -26,7 +26,8 @@ export class EventService {
                 image: imagePath,
                 location: {
                     create: {
-                        ...event.location
+                        ...event.location,
+                        number: Number(event.location.number)
                     }
                 }
             }

@@ -1,5 +1,4 @@
-import { IsNotEmpty, IsString, IsNumber, IsInt } from "class-validator";
-
+import { IsNotEmpty, IsString,   IsNumberString } from "class-validator";
 export class CreateLocationRequestDTO {
 
     @IsString()
@@ -15,7 +14,7 @@ export class CreateLocationRequestDTO {
     street: string;
 
     @IsNotEmpty()
-    @IsInt()
+    @IsNumberString()
     number: number;
 
 }

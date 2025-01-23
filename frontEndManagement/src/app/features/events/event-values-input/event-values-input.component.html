@@ -9,7 +9,7 @@
     <div class="dateDiv">
         <mat-form-field class="date">
             <mat-label>Data que acontecerá o evento</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="formData.date" [ngModelOptions]="{standalone: true}">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="formData.dateEvent" [ngModelOptions]="{standalone: true}">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
