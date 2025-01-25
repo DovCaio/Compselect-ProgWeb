@@ -42,28 +42,30 @@ describe('AppController (e2e)', () => {
         number: 1
       }
 
-      const mockFile: Express.Multer.File = {
-        fieldname: 'file',
-        originalname: 'test-image.png',
-        encoding: '7bit',
-        mimetype: 'image/png',
-        size: 1024,
-        buffer: Buffer.from(''), 
-        stream: null, 
-        destination: '',
-        filename: 'test-image.png',
-        path: '',
-      };
+      const mockFile: File = new File(['(⌐□_□)'], 'test-image.png', { type: 'image/png' });
       
+      const event: FormData = new FormData();
+      event.append("title", "Event 1");
+      event.append("dateEvent", "2030-06-19");
+      event.append("time", "10:00");
+      event.append("description", "Description 1");
+      event.append("target", "target 1");
+      event.append("target", "target2");
+      event.append("activities", "activity 1");
+      event.append("activities", "activity 2");
+      event.append("image", mockFile);
+      event.append("location[country]", "Country 1");
+      event.append("location[city]", "City 1");
+      event.append("location[street]", "Street 1");
+      event.append("location[number]", "1");
 
-      const eventDto: CreateEventRequestDTO = {
+      const eventDto : CreateEventRequestDTO = {
         title: "Event 1",
-        dateEvent: new Date(Date.UTC(2030, 5, 19)), //Talvez isso deva ser atualizado a depender da data em que está sendo testado
+        dateEvent: new Date(Date.UTC(2030, 5, 19)),
         time: "10:00",
         description: "Description 1",
         target: ["target 1", "target2"],
         activities: ["activity 1", "activity 2"],
-        image: mockFile,
         location: locationDto
       }
   
@@ -71,17 +73,24 @@ describe('AppController (e2e)', () => {
         return pactum
               .spec()
               .post("/events")
-              .withBody(eventDto)
+              .withBody(event)
               .expectStatus(201)
               .stores("eventId", "id")
-              .expectBodyContains(eventDto.title)
-              .expectBodyContains(eventDto.description)
-              .expectBodyContains(eventDto.dateEvent)
-              .expectBodyContains(eventDto.time)
-              .expectBodyContains(eventDto.target[0])
-              .expectBodyContains(eventDto.target[1])
-              .expectBodyContains(eventDto.activities[0])
-              .expectBodyContains(eventDto.activities[1])
+              .expectBodyContains(event.get("title"))
+              .expectBodyContains(event.get("description"))
+              .expectBodyContains(event.get("target"))
+              .expectBodyContains(event.get("activities"))
+              .expectBodyContains(event.get("dateEvent"))
+              .expectBodyContains(event.get("time"))
+              .expectBodyContains(event.get("image"))
+              .expectBodyContains(event.get("activities[0]"))
+              .expectBodyContains(event.get("activities[1]"))
+              .expectBodyContains(event.get("target[0]"))
+              .expectBodyContains(event.get("target[1]"))
+              .expectBodyContains(event.get("location[country]"))
+              .expectBodyContains(event.get("location[city]"))
+              .expectBodyContains(event.get("location[street]"))
+              .expectBodyContains(event.get("location[number]"))
 
       })
   
@@ -130,6 +139,8 @@ describe('AppController (e2e)', () => {
       filename: 'test-image.png',
       path: '',
     };
+
+    
 
     const eventDTO2:CreateEventRequestDTO  = {
       title: "Event 2",

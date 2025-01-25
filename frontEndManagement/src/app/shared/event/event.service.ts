@@ -3,6 +3,7 @@ import Event from '../../features/events/edit-event/Event';
 import { HttpClient } from '@angular/common/http';
 import { EventDTO } from '../../features/events/EventDTO';
 import { URL } from '../../config/urlBackend';
+import { transformClassIntoFormData } from '../../util/';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +12,9 @@ export class EventService {
   constructor(private http: HttpClient) { }
 
   public post(event: EventDTO): void {
+
+
+    
 
     const formData = new FormData();
     formData.append('title', event.title);
@@ -36,6 +40,8 @@ export class EventService {
     this.http.post(URL + "/events", formData).subscribe();
 
   }
+
+  
 
 
   //Precisa do backend

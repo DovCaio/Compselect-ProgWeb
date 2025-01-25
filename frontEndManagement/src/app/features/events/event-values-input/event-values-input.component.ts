@@ -9,6 +9,7 @@ import { FileInputComponent } from '../../../components/inputs/file-input/file-i
 import { RouterModule } from '@angular/router';
 import { EventService } from '../../../shared/event/event.service';
 import { EventDTO } from '../EventDTO';
+import { transformClassIntoFormData } from '../../../util';
 @Component({
   selector: 'event-values-input',
   standalone: true,
@@ -66,13 +67,11 @@ export class EventValuesInputComponent {
     if(this.formData.target && typeof this.formData.target === 'string') this.formData.target = (this.formData.target as string).split(', '); //ESSA FORMA DE TRATAR TARGET E ACTIVIT ESTÁ MUITO PORCA, MUDAR;
     if(this.formData.activities && typeof this.formData.activities === 'string') this.formData.activities = (this.formData.activities as string).split(', ');
 
-
     if(this.formData.dateEvent) this.formData.dateEvent = new Date(this.formData.dateEvent).toISOString();
 
-
     if(this.fileInputValue) this.formData.image = this.fileInputValue;
-    console.log(this.formData.image);
-    this.sendValues()
+    console.log(transformClassIntoFormData(this.formData));
+    //this.sendValues()
   }
 
   sendValues() {
