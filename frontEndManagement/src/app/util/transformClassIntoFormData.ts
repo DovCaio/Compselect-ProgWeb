@@ -1,19 +1,14 @@
 
-
-
 /**
  * This function transforms a class into a FormData object, but only the values that are not null, undefined, empty,
  * and matrix or some complex object, object with nested objects.
  * 
  * This must be simples, and useful for DTOs requests of this project, so not need to handle complex objects.
- * 
- * @param data value to transform
- * @returns FormData with values of data
  */
-export const transformClassIntoFormData = (data: any) => {
+export const transformClassIntoFormData = (_class: any) => {
     const formData = new FormData();
 
-    Object.entries(data).forEach(([key, value]) => {
+    Object.entries(_class).forEach(([key, value]) => {
         switch(typeof value) {
             case "string":
                 formData.append(key, value);
@@ -28,8 +23,9 @@ export const transformClassIntoFormData = (data: any) => {
                     formData.append(key, value.toISOString());
                 }else if (value !== null && value != undefined) {
                     Object.entries(value).forEach(([subKey, subValue]) => {
+                        if(subValue instanceof Object) throw new Error('A value inside data is  is matrix, or some complex object'); 
                         formData.append(`${key}[${subKey}]`, subValue);
-                    })
+                    })  
                 }else {
                     throw new Error('Object is null or undefined');
                 }

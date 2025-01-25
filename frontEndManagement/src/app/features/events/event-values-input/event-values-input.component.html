@@ -2,14 +2,14 @@
     <mat-form-field>
     
         <mat-label>Titulo</mat-label>
-        <input matInput [(ngModel)]="formData.title" [ngModelOptions]="{standalone: true}">
+        <input matInput [(ngModel)]="eventValuesHandler.title" [ngModelOptions]="{standalone: true}">
         
     </mat-form-field>
     
     <div class="dateDiv">
         <mat-form-field class="date">
             <mat-label>Data que acontecerá o evento</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="formData.dateEvent" [ngModelOptions]="{standalone: true}">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="eventValuesHandler.dateEvent" [ngModelOptions]="{standalone: true}">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -18,7 +18,7 @@
         
         <mat-form-field>
             <mat-label>Horário</mat-label>
-            <input matInput [(ngModel)]="formData.time" [ngModelOptions]="{standalone: true}">
+            <input matInput [(ngModel)]="eventValuesHandler.time" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
     
     </div>
@@ -26,18 +26,18 @@
     
     <mat-form-field >
         <mat-label>Descrição</mat-label>
-        <textarea matInput [(ngModel)]="formData.description" [ngModelOptions]="{standalone: true}"></textarea>
+        <textarea matInput [(ngModel)]="eventValuesHandler.description" [ngModelOptions]="{standalone: true}"></textarea>
       </mat-form-field>
     
     <mat-form-field>
         <mat-label>Alvo</mat-label>
-        <input matInput [(ngModel)]="formData.target" [ngModelOptions]="{standalone: true}">
+        <input matInput [(ngModel)]="eventValuesHandler.target" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
     
     
     <mat-form-field>
         <mat-label>Atividades</mat-label>
-        <input matInput required [(ngModel)]="formData.activities" [ngModelOptions]="{standalone: true}">
+        <input matInput required [(ngModel)]="eventValuesHandler.activities" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
 
     <div>
@@ -47,12 +47,12 @@
         
             <mat-form-field>
                 <mat-label>País</mat-label>
-                <input matInput [(ngModel)]="formData.location.coutry" [ngModelOptions]="{standalone: true}">
+                <input matInput [(ngModel)]="eventValuesHandler.location.country" [ngModelOptions]="{standalone: true}">
             </mat-form-field>
     
             <mat-form-field>
                 <mat-label>Cidade</mat-label>
-                <input matInput [(ngModel)]="formData.location.city" [ngModelOptions]="{standalone: true}">
+                <input matInput [(ngModel)]="eventValuesHandler.location.city" [ngModelOptions]="{standalone: true}">
             </mat-form-field>
     
             
@@ -61,14 +61,14 @@
         <div class="address">
             <mat-form-field>
                 <mat-label>Rua e Bairro: </mat-label>
-                <input matInput [(ngModel)]="formData.location.address" [ngModelOptions]="{standalone: true}">
+                <input matInput [(ngModel)]="eventValuesHandler.location.street" [ngModelOptions]="{standalone: true}">
             </mat-form-field>
         
         </div>
 
         <mat-form-field>
             <mat-label>Número: </mat-label>
-            <input matInput [(ngModel)]="formData.location.number" [ngModelOptions]="{standalone: true}">
+            <input matInput [(ngModel)]="eventValuesHandler.location.number" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
     </div>
 

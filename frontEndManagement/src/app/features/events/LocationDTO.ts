@@ -1,6 +1,6 @@
 export interface LocationDTO {
-    coutry: string;
+    country: string;
     city: string;
-    address: string;
+    street: string;
     number: number;
 }

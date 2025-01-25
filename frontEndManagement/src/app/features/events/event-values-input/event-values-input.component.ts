@@ -28,7 +28,7 @@ import { transformClassIntoFormData } from '../../../util';
 })
 export class EventValuesInputComponent {
 
-  formData: EventDTO = {
+  eventValuesHandler: EventDTO = {
     title: '',
     dateEvent: "",
     time: '',
@@ -37,9 +37,9 @@ export class EventValuesInputComponent {
     activities: "",
     image: new File([], ''),
     location: {
-      coutry: '',
+      country: '',
       city: '',
-      address: '',
+      street: '',
       number: 0
     },
   };
@@ -64,18 +64,17 @@ export class EventValuesInputComponent {
 
 
   async getValues() {
-    if(this.formData.target && typeof this.formData.target === 'string') this.formData.target = (this.formData.target as string).split(', '); //ESSA FORMA DE TRATAR TARGET E ACTIVIT ESTÁ MUITO PORCA, MUDAR;
-    if(this.formData.activities && typeof this.formData.activities === 'string') this.formData.activities = (this.formData.activities as string).split(', ');
+    if(this.eventValuesHandler.target && typeof this.eventValuesHandler.target === 'string') this.eventValuesHandler.target = (this.eventValuesHandler.target as string).split(', '); //ESSA FORMA DE TRATAR TARGET E ACTIVIT ESTÁ MUITO PORCA, MUDAR;
+    if(this.eventValuesHandler.activities && typeof this.eventValuesHandler.activities === 'string') this.eventValuesHandler.activities = (this.eventValuesHandler.activities as string).split(', ');
 
-    if(this.formData.dateEvent) this.formData.dateEvent = new Date(this.formData.dateEvent).toISOString();
+    if(this.eventValuesHandler.dateEvent) this.eventValuesHandler.dateEvent = new Date(this.eventValuesHandler.dateEvent).toISOString();
 
-    if(this.fileInputValue) this.formData.image = this.fileInputValue;
-    console.log(transformClassIntoFormData(this.formData));
-    //this.sendValues()
+    if(this.fileInputValue) this.eventValuesHandler.image = this.fileInputValue;
+    this.sendValues()
   }
 
   sendValues() {
-    this.eventService.post(this.formData);
+    this.eventService.post(transformClassIntoFormData(this.eventValuesHandler));
   }
 
 }
