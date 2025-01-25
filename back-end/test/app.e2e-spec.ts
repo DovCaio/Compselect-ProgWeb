@@ -43,7 +43,7 @@ describe('AppController (e2e)', () => {
       }
 
       const mockFile: File = new File(['(⌐□_□)'], 'test-image.png', { type: 'image/png' });
-      
+      //ESSES TESTES DEVEM SER CONSERTADOS, Tem um função no front do manager que transforma objetos em formdatas, talvez seja útil
       const event: FormData = new FormData();
       event.append("title", "Event 1");
       event.append("dateEvent", "2030-06-19");

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material/input';
@@ -10,6 +10,10 @@ import { RouterModule } from '@angular/router';
 import { EventService } from '../../../shared/event/event.service';
 import { EventDTO } from '../EventDTO';
 import { transformClassIntoFormData } from '../../../util';
+import { MatDialog} from '@angular/material/dialog';
+import { SucessRequestComponent } from '../../../components/dialogs/sucess-request/sucess-request.component';
+import { ErrorRequestComponent } from '../../../components/dialogs/error-request/error-request.component';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'event-values-input',
   standalone: true,
@@ -21,12 +25,16 @@ import { transformClassIntoFormData } from '../../../util';
     MatNativeDateModule,
     MatButtonModule,
     FileInputComponent,
-    RouterModule
-  ],
+    RouterModule,
+    SucessRequestComponent,
+    ErrorRequestComponent
+],
   templateUrl: './event-values-input.component.html',
   styleUrl: './event-values-input.component.css'
 })
 export class EventValuesInputComponent {
+
+  readonly dialog = inject(MatDialog)
 
   eventValuesHandler: EventDTO = {
     title: '',
@@ -70,11 +78,37 @@ export class EventValuesInputComponent {
     if(this.eventValuesHandler.dateEvent) this.eventValuesHandler.dateEvent = new Date(this.eventValuesHandler.dateEvent).toISOString();
 
     if(this.fileInputValue) this.eventValuesHandler.image = this.fileInputValue;
+    //this.handleResponse({
+    //  httpStatus: 400,
+    //  message: 'deu ruim'
+    //})
     this.sendValues()
   }
 
-  sendValues() {
-    this.eventService.post(transformClassIntoFormData(this.eventValuesHandler));
+  async handleResponse(response$: Observable<any>) {
+
+
+    response$.subscribe({
+      next: ({ message }: { message: string }) => {
+        this.dialog.open(SucessRequestComponent, {
+          data: {
+            sucessMessage: message
+          }
+        });
+      },
+      error: ({ message }: { message: string }) => {
+        this.dialog.open(ErrorRequestComponent, {
+          data: {
+            errorMessage: message
+          }
+        });
+      }
+    });
+    
+  }
+
+  async sendValues() {
+    this.handleResponse(await this.eventService.post(transformClassIntoFormData(this.eventValuesHandler)));
   }
 
 }

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import Event from '../../features/events/edit-event/Event';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { EventDTO } from '../../features/events/EventDTO';
 import { URL } from '../../config/urlBackend';
 import { transformClassIntoFormData } from '../../util/';
+import { firstValueFrom, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,9 +12,9 @@ export class EventService {
 
   constructor(private http: HttpClient) { }
 
-  public post(event: FormData): void {
-
-    this.http.post(URL + "/events", event).subscribe();
+  public async post(event: FormData): Promise<Observable<any>>{
+    
+    return this.http.post(URL + "/events", event);
 
   }
 
